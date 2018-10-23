@@ -1,0 +1,50 @@
+<div class="search">
+  <div class="search-form">
+    <span class="search-label">公司名</span>
+    <span class="search-input"><input nz-input></span>
+    <span class="search-button"><button nz-button nzType="primary">查询</button></span>
+  </div>
+  <div class="add">
+    <button nz-button nzType="primary" routerLink="/add-company">创建公司</button>
+  </div>
+</div>
+
+<nz-table
+  #basicTable
+  nzShowSizeChanger
+  nzShowQuickJumper
+  [nzLoading]="tableLoading"
+  [nzData]="pagination.records"
+  [(nzPageSize)]="pagination.size"
+  (nzPageIndexChange)="changePageOrSize()"
+  (nzPageSizeChange)="changePageOrSize(true)">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>公司名</th>
+      <th>联系人</th>
+      <th>联系电话</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let company of basicTable.data, index as i">
+      <td>{{ i + 1 }}</td>
+      <td>{{company.companyFullName}}</td>
+      <td>{{company.contact}}</td>
+      <td>{{company.phone}}</td>
+      <td>
+        <button nz-button nzType="primary" (click)="editCompany(company)">修改</button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除该公司?"
+          (nzOnConfirm)="deleteCompany(company)">
+          删除
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

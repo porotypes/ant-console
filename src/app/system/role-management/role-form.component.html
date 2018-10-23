@@ -1,0 +1,31 @@
+<form nz-form [formGroup]="roleForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="4" nzRequired>角色名</nz-form-label>
+      <nz-form-control [nzSpan]="10">
+        <input nz-input formControlName="roleName">
+        <nz-form-explain *ngIf="roleForm.get('roleName').dirty && roleForm.get('roleName').errors">请输入用户名!</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="4">拥有权限</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <nz-checkbox-wrapper (nzOnChange)="selectPermissions($event)">
+          <div nz-row>
+            <div nz-col nzSpan="12" *ngFor="let permission of permissions">
+              <label nz-checkbox [nzValue]="permission.id" [(ngModel)]="permission.checked" [ngModelOptions]="{standalone: true}">{{ permission.name }}</label>
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzSpan]="10" [nzOffset]="4">
+        <div nz-row>
+          <div nz-col nzSpan="5">
+            <button nz-button nzType="primary" [nzLoading]="isSaving">保存</button>
+          </div>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  

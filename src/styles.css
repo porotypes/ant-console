@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+.search {
+  position: relative;
+  margin-bottom: 15px;
+  width: 100%;
+  height: 32px;
+}
+.search .search-form {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 32px;
+  line-height: 32px;
+}
+.search .search-form span {
+  margin-right: 10px;
+}
+.search .search-form .search-label {
+  height: 32px;
+}
+.search .search-form .search-input {
+  display: inline-block;
+  width: 230px;
+}
+.search .add {
+  position: absolute;
+  right: 0;
+}

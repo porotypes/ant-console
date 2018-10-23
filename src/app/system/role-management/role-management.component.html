@@ -1,0 +1,44 @@
+<div class="search">
+  <div class="add">
+    <button nz-button nzType="primary" routerLink="/add-role">创建角色</button>
+  </div>
+</div>
+
+<nz-table
+  #basicTable
+  nzShowSizeChanger
+  nzShowQuickJumper
+  [nzLoading]="tableLoading"
+  [nzData]="pagination.records"
+  [(nzPageSize)]="pagination.size"
+  (nzPageIndexChange)="changePageOrSize()"
+  (nzPageSizeChange)="changePageOrSize(true)">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>角色名</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let role of basicTable.data, index as i">
+      <td>{{ i + 1 }}</td>
+      <td>{{ role.roleName }}</td>
+      <td>
+        <button
+          nz-button
+          nzType="primary"
+          (click)="editRole(role)">修改</button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除该角色?"
+          (nzOnConfirm)="deleteRole(role)">
+          删除
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

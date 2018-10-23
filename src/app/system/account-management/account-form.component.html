@@ -1,0 +1,78 @@
+<form nz-form [formGroup]="accountForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>用户名</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="nickname">
+      <nz-form-explain *ngIf="accountForm.get('nickname').dirty && accountForm.get('nickname').errors">请输入用户名!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>登录名</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="username">
+      <nz-form-explain *ngIf="accountForm.get('username').dirty && accountForm.get('username').errors">请输入登录名!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>地址</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="address">
+      <nz-form-explain *ngIf="accountForm.get('address').dirty && accountForm.get('address').errors">请输入地址!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>所属公司</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <nz-select formControlName="companyId">
+        <nz-option
+          *ngFor="let company of companies"
+          [nzValue]="company.id" 
+          [nzLabel]="company.companyFullName">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>联系电话</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="phoneNumber">
+      <nz-form-explain *ngIf="accountForm.get('phoneNumber').dirty && accountForm.get('phoneNumber').errors">请输入联系电话!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>邮箱</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="email">
+      <nz-form-explain *ngIf="accountForm.get('email').dirty && accountForm.get('email').errors">请输入邮箱!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>密码</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input type="password" formControlName="password">
+      <nz-form-explain *ngIf="accountForm.get('password').dirty && accountForm.get('password').errors">请输入密码!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>用户身份</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <nz-select nzMode="multiple" formControlName="roles">
+        <nz-option
+          *ngFor="let role of roles"
+          [nzValue]="role.id"
+          [nzLabel]="role.roleName">
+        </nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="accountForm.get('roles').dirty && accountForm.get('roles').errors">请选择用户的身份!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="10" [nzOffset]="4">
+      <div nz-row>
+        <div nz-col nzSpan="5">
+          <button nz-button nzType="primary" [nzLoading]="isSaving">保存</button>
+        </div>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+</form>

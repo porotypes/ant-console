@@ -1,0 +1,62 @@
+<div class="search">
+  <div class="search-form">
+    <span class="search-label">用户名</span>
+    <span class="search-input"><input nz-input></span>
+    <span class="search-button"><button nz-button nzType="primary">查询</button></span>
+  </div>
+  <div class="add">
+    <button nz-button nzType="primary" routerLink="/add-account">创建账号</button>
+  </div>
+</div>
+
+<nz-table
+  #basicTable
+  nzShowSizeChanger
+  nzShowQuickJumper
+  [nzLoading]="tableLoading"
+  [nzData]="pagination.records"
+  [(nzPageSize)]="pagination.size"
+  (nzPageIndexChange)="changePageOrSize()"
+  (nzPageSizeChange)="changePageOrSize(true)">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>登录名</th>
+      <th>用户名</th>
+      <th>联系电话</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let account of basicTable.data, index as i">
+      <td>{{ i + 1 }}</td>
+      <td>{{account.username}}</td>
+      <td>{{account.nickname}}</td>
+      <td>{{account.phoneNumber}}</td>
+      <td>
+        <button
+          nz-button
+          nzType="warning"
+          nz-popconfirm
+          nzTitle="确定重置该账号的密码?"
+          (nzOnConfirm)="resetPassword(account)">重置密码</button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button
+          nz-button
+          nzType="primary"
+          (click)="editAccount(account)">
+          修改
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button
+          nz-button
+          nzType="danger"
+          nz-popconfirm
+          nzTitle="确定删除该账号?"
+          (nzOnConfirm)="deleteAccount(account)">
+          删除
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
