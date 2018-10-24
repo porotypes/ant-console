@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AuthService } from '../../core/auth/auth.service';
 import { CompanyService } from '../../core/system/company.service';
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -20,6 +21,7 @@ export class CompanyManagementComponent implements OnInit {
 
   constructor(
     private router: Router,
+    public authService: AuthService,
     private companyService: CompanyService,
     private messageService: NzMessageService
   ) { }

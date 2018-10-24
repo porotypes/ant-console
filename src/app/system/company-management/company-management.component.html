@@ -4,7 +4,7 @@
     <span class="search-input"><input nz-input></span>
     <span class="search-button"><button nz-button nzType="primary">查询</button></span>
   </div>
-  <div class="add">
+  <div class="add" *ngIf="authService.isCanAddCompany()">
     <button nz-button nzType="primary" routerLink="/add-company">创建公司</button>
   </div>
 </div>
@@ -34,9 +34,16 @@
       <td>{{company.contact}}</td>
       <td>{{company.phone}}</td>
       <td>
-        <button nz-button nzType="primary" (click)="editCompany(company)">修改</button>
-        <nz-divider nzType="vertical"></nz-divider>
         <button
+          *ngIf="authService.isCanUpdateCompany()"
+          nz-button
+          nzType="primary"
+          (click)="editCompany(company)">
+          修改
+        </button>
+        <nz-divider *ngIf="authService.isCanUpdateCompany()" nzType="vertical"></nz-divider>
+        <button
+        *ngIf="authService.isCanDeleteCompany()"
           nz-button
           nzType="danger"
           nz-popconfirm

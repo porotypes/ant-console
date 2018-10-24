@@ -1,10 +1,10 @@
 <div class="search">
-  <div class="search-form">
+  <!-- <div class="search-form">
     <span class="search-label">用户名</span>
     <span class="search-input"><input nz-input></span>
     <span class="search-button"><button nz-button nzType="primary">查询</button></span>
-  </div>
-  <div class="add">
+  </div> -->
+  <div class="add" *ngIf="authService.isCanAddUser()">
     <button nz-button nzType="primary" routerLink="/add-account">创建账号</button>
   </div>
 </div>
@@ -35,20 +35,23 @@
       <td>{{account.phoneNumber}}</td>
       <td>
         <button
+          *ngIf="authService.isCanResetPassword()"
           nz-button
           nzType="warning"
           nz-popconfirm
           nzTitle="确定重置该账号的密码?"
           (nzOnConfirm)="resetPassword(account)">重置密码</button>
-        <nz-divider nzType="vertical"></nz-divider>
+        <nz-divider *ngIf="authService.isCanResetPassword()" nzType="vertical"></nz-divider>
         <button
+          *ngIf="authService.isCanUpdateUser()"
           nz-button
           nzType="primary"
           (click)="editAccount(account)">
           修改
         </button>
-        <nz-divider nzType="vertical"></nz-divider>
+        <nz-divider *ngIf="authService.isCanUpdateUser()" nzType="vertical"></nz-divider>
         <button
+        *ngIf="authService.isCanDeleteUser()"
           nz-button
           nzType="danger"
           nz-popconfirm

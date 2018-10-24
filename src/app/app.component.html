@@ -44,9 +44,9 @@
         <li nz-submenu [nzOpen]="true">
           <span title><i class="anticon anticon-setting"></i>系统管理</span>
           <ul>
-            <li nz-menu-item routerLink="/company-management">公司管理</li>
-            <li nz-menu-item routerLink="/role-management">角色管理</li>
-            <li nz-menu-item routerLink="/account-management">账号管理</li>
+            <li *ngIf="authService.isCanShowCompanyList()" nz-menu-item routerLink="/company-management">公司管理</li>
+            <li *ngIf="authService.isCanShowRoleList()" nz-menu-item routerLink="/role-management">角色管理</li>
+            <li *ngIf="authService.isCanShowUserList()" nz-menu-item routerLink="/account-management">账号管理</li>
             <li nz-menu-item routerLink="/customer-service">在线客服</li>
           </ul>
         </li>

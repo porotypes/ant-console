@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../core/auth/auth.service';
 import { RoleService } from '../../core/system/role.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
@@ -18,6 +19,7 @@ export class RoleManagementComponent implements OnInit {
   tableLoading = false;
 
   constructor(
+    public authService: AuthService,
     private roleService: RoleService,
     private messageService: NzMessageService,
     private router: Router

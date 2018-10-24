@@ -1,4 +1,4 @@
-<div class="search">
+<div class="search" *ngIf="authService.isCanAddRole()">
   <div class="add">
     <button nz-button nzType="primary" routerLink="/add-role">创建角色</button>
   </div>
@@ -26,11 +26,13 @@
       <td>{{ role.roleName }}</td>
       <td>
         <button
+          *ngIf="authService.isCanUpdateRole()"
           nz-button
           nzType="primary"
           (click)="editRole(role)">修改</button>
-        <nz-divider nzType="vertical"></nz-divider>
+        <nz-divider *ngIf="authService.isCanUpdateRole()" nzType="vertical"></nz-divider>
         <button
+          *ngIf="authService.isCanDeleteRole()"
           nz-button
           nzType="danger"
           nz-popconfirm
