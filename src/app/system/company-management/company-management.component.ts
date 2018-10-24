@@ -18,6 +18,7 @@ export class CompanyManagementComponent implements OnInit {
 
   pagination = new Pagination<Company>();
   tableLoading = true;
+  companyName: string;
 
   constructor(
     private router: Router,
@@ -52,6 +53,27 @@ export class CompanyManagementComponent implements OnInit {
     }
     this.tableLoading = true;
     this.getCompanyList();
+  }
+
+  searchCompany() {
+    if (this.companyName.trim() === '') {
+      this.getCompanyList();
+      return;
+    }
+    this.pagination.pages = 1;
+    this.pagination.size = 10;
+    this.companyService.searchCompany(this.pagination, this.companyName).subscribe(
+      (res: HttpResponseData<Pagination<Company>>) => {
+        if (res.status === 200) {
+          this.pagination = res.obj;
+        } else {
+          this.messageService.error(res.msg);
+        }
+      },
+      error => {
+        this.messageService.error(error.error.msg);
+      }
+    );
   }
 
   editCompany(company: Company) {

@@ -13,6 +13,11 @@ export class CompanyService extends HttpService<Company> {
     return super.getPagination(url);
   }
 
+  searchCompany(pagination: Pagination<Company>, companyName: string) {
+    const url = `${this.URL}/get/${companyName}/${pagination.pages}/${pagination.size}`;
+    return super.getPagination(url);
+  }
+
   getCompany(id: number) {
     const url = `${this.URL}/${id}`;
     return super.get(url);
