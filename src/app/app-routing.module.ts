@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+// login
+import { LoginComponent } from './login/login.component';
+// home
 import { HomeComponent } from './home/home.component';
 // account
 import { AccountManagementComponent } from './system/account-management/account-management.component';
@@ -15,7 +18,10 @@ import { RoleFormComponent } from './system/role-management/role-form.component'
 import { CustomerServiceComponent } from './system/customer-service/customer-service.component';
 
 const router: Routes = [
-  // { path: '', redirectTo: 'home', pathMatch: 'full' },
+  // { path: '', redirectTo: 'login', pathMatch: 'full' },
+  // login
+  { path: 'login', component: LoginComponent },
+  // home
   { path: 'home', component: HomeComponent },
   // account
   { path: 'account-management', component: AccountManagementComponent },
