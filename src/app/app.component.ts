@@ -1,10 +1,10 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from './core/auth/auth.service';
 import { StorageService } from './core/storage.service';
 import { LoginService } from './core/auth/login.service';
@@ -32,7 +32,8 @@ export class AppComponent implements OnInit, AfterContentInit {
     public authService: AuthService,
     private storageService: StorageService,
     private loginService: LoginService,
-    private messageService: NzMessageService
+    private messageService: NzMessageService,
+    private router: Router
   ) {}
 
   createForm() {
@@ -48,7 +49,10 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     if (this.storageService.hasStorage('USER_TOKEN')) {
+      this.authService.isLoggedIn = true;
       this.authService.user = this.authService.decodeToken();
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 

@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/home']);
           this.storageService.writeStorage('USER_TOKEN', result.obj);
           this.authService.user = this.authService.decodeToken();
+          this.authService.isLoggedIn = true;
         } else {
           this.messageService.error(result.msg);
         }

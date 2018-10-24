@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../app/core/auth/auth.guard';
 
 // login
 import { LoginComponent } from './login/login.component';
@@ -22,21 +23,21 @@ const router: Routes = [
   // login
   { path: 'login', component: LoginComponent },
   // home
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   // account
-  { path: 'account-management', component: AccountManagementComponent },
-  { path: 'add-account', component: AccountFormComponent },
-  { path: 'edit-account/:id', component: AccountFormComponent },
+  { path: 'account-management', component: AccountManagementComponent, canActivate: [AuthGuard] },
+  { path: 'add-account', component: AccountFormComponent, canActivate: [AuthGuard] },
+  { path: 'edit-account/:id', component: AccountFormComponent, canActivate: [AuthGuard] },
   // company
-  { path: 'company-management', component: CompanyManagementComponent },
-  { path: 'add-company', component: CompanyFormComponent },
-  { path: 'edit-company/:id', component: CompanyFormComponent },
+  { path: 'company-management', component: CompanyManagementComponent, canActivate: [AuthGuard] },
+  { path: 'add-company', component: CompanyFormComponent, canActivate: [AuthGuard] },
+  { path: 'edit-company/:id', component: CompanyFormComponent, canActivate: [AuthGuard] },
   // role
-  { path: 'role-management', component: RoleManagementComponent },
-  { path: 'add-role', component: RoleFormComponent },
-  { path: 'edit-role/:id', component: RoleFormComponent },
+  { path: 'role-management', component: RoleManagementComponent, canActivate: [AuthGuard] },
+  { path: 'add-role', component: RoleFormComponent, canActivate: [AuthGuard] },
+  { path: 'edit-role/:id', component: RoleFormComponent, canActivate: [AuthGuard] },
   // customer-service
-  { path: 'customer-service', component: CustomerServiceComponent }
+  { path: 'customer-service', component: CustomerServiceComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

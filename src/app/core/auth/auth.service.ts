@@ -8,6 +8,8 @@ export class AuthService extends HttpService<any> {
   private URL = 'password';
   public user: object;
   private helper = new JwtHelperService();
+  redirectUrl: string;
+  isLoggedIn: boolean;
 
   private getToken(): string {
     return window.localStorage.getItem('USER_TOKEN');
