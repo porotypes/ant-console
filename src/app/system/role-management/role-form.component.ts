@@ -116,7 +116,7 @@ export class RoleFormComponent implements OnInit {
           this.isSaving = false;
           if (res.status === 200) {
             this.messageService.success(res.msg);
-            this.router.navigate(['/role-management']);
+            this.router.navigate(['/dashboard/role-management']);
           } else {
             this.messageService.error(res.msg);
           }
@@ -137,7 +137,7 @@ export class RoleFormComponent implements OnInit {
           this.isSaving = false;
           if (res.status === 200) {
             this.messageService.success(res.msg);
-            this.router.navigate(['/role-management']);
+            this.router.navigate(['/dashboard/role-management']);
           } else {
             this.messageService.error(res.msg);
           }

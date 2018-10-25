@@ -9,7 +9,7 @@ export class RoleService extends HttpService<Role> {
   private URL = 'role';
 
   getRoleList(pagination: Pagination<Role>) {
-    const url = `${this.URL}/${pagination.pages}/${pagination.size}`;
+    const url = `${this.URL}/${pagination.current}/${pagination.size}`;
     return super.getPagination(url);
   }
 

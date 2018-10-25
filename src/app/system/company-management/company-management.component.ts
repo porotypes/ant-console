@@ -49,7 +49,7 @@ export class CompanyManagementComponent implements OnInit {
 
   changePageOrSize(resetPageIndex = false) {
     if (resetPageIndex) {
-      this.pagination.pages = 1;
+      this.pagination.current = 1;
     }
     this.tableLoading = true;
     this.getCompanyList();
@@ -60,7 +60,7 @@ export class CompanyManagementComponent implements OnInit {
       this.getCompanyList();
       return;
     }
-    this.pagination.pages = 1;
+    this.pagination.current = 1;
     this.pagination.size = 10;
     this.companyService.searchCompany(this.pagination, this.companyName).subscribe(
       (res: HttpResponseData<Pagination<Company>>) => {
@@ -77,7 +77,7 @@ export class CompanyManagementComponent implements OnInit {
   }
 
   editCompany(company: Company) {
-    this.router.navigate([`edit-company/${company.id}`]);
+    this.router.navigate([`/dashboardedit-company/${company.id}`]);
   }
 
   deleteCompany(company: Company) {

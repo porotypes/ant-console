@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -20,12 +20,13 @@ import { Pagination } from '../common/pagination';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit, AfterContentInit {
+export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
 
   isShowChangePswDialog = false;
   changePswForm: FormGroup;
   isSaving = false;
   unreadInformationNum = 0;
+  sub: any;
 
   get loginStatus(): boolean {
     return this.storageService.hasStorage('USER_TOKEN')
@@ -52,6 +53,9 @@ export class DashboardComponent implements OnInit, AfterContentInit {
   ngOnInit() {
     this.createForm();
     this.getUnreadChatInformationNum();
+    this.sub = this.chatInformationService.getList.subscribe((total: number) => {
+      this.getUnreadChatInformationNum();
+    });
   }
 
   ngAfterContentInit() {
@@ -60,6 +64,10 @@ export class DashboardComponent implements OnInit, AfterContentInit {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   getUnreadChatInformationNum() {

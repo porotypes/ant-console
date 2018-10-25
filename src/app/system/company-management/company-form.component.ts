@@ -94,7 +94,7 @@ export class CompanyFormComponent implements OnInit {
         this.isSaving = false;
         if (res.status === 200) {
           this.messageService.success(res.msg);
-          this.router.navigate(['/company-management']);
+          this.router.navigate(['/dashboard/company-management']);
         } else {
           this.messageService.error(res.msg);
         }
@@ -113,7 +113,7 @@ export class CompanyFormComponent implements OnInit {
         this.isSaving = false;
         if (res.status === 200) {
           this.messageService.success(res.msg);
-          this.router.navigate(['/company-management']);
+          this.router.navigate(['/dashboard/company-management']);
         } else {
           this.messageService.error(res.msg);
         }

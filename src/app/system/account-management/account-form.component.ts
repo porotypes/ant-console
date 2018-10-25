@@ -148,7 +148,7 @@ export class AccountFormComponent implements OnInit {
           this.isSaving = false;
           if (res.status === 200) {
             this.messageService.success(res.msg);
-            this.router.navigate(['/account-management']);
+            this.router.navigate(['/dashboard/account-management']);
           } else {
             this.messageService.error(res.msg);
           }
@@ -169,7 +169,7 @@ export class AccountFormComponent implements OnInit {
           this.isSaving = false;
           if (res.status === 200) {
             this.messageService.success(res.msg);
-            this.router.navigate(['/account-management']);
+            this.router.navigate(['/dashboard/account-management']);
           } else {
             this.messageService.error(res.msg);
           }

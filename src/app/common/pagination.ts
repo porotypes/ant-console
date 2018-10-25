@@ -3,8 +3,8 @@ export class Pagination<T> {
   limit: number;
   total: number;
   size = 10;
-  pages = 1;
-  current: number;
+  pages: string;
+  current = 1;
   searchCount: boolean;
   openSort: boolean;
   ascs: any;

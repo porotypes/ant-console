@@ -26,6 +26,13 @@ export class AuthService extends HttpService<any> {
   }
 
   /**
+   * is admin
+   */
+  public isAdmin() {
+    return this.decodeToken().userId === 1;
+  }
+
+  /**
    * isExpired
    */
   public isExpired() {

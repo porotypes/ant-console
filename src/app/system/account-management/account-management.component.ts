@@ -47,7 +47,7 @@ export class AccountManagementComponent implements OnInit {
 
   private changePageOrSize(resetPageIndex = false) {
     if (resetPageIndex) {
-      this.pagination.pages = 1;
+      this.pagination.current = 1;
     }
     this.tableLoading = true;
     this.getAccountList();
@@ -69,7 +69,7 @@ export class AccountManagementComponent implements OnInit {
   }
 
   private editAccount(account: Account) {
-    this.router.navigate([`/edit-account/${account.id}`]);
+    this.router.navigate([`/dashboard/edit-account/${account.id}`]);
   }
 
   private deleteAccount(account: Account) {

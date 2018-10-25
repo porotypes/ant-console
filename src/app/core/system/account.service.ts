@@ -10,7 +10,7 @@ export class AccountService extends HttpService<HttpResponseData<Pagination<Acco
   private URL = 'user';
 
   getAccountList(pagination: Pagination<Account>) {
-    const url = `${this.URL}/${pagination.pages}/${pagination.size}`;
+    const url = `${this.URL}/${pagination.current}/${pagination.size}`;
     return super.getPagination(url);
   }
 

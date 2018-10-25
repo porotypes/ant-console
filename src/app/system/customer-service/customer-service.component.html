@@ -1,10 +1,63 @@
-<div class="chat-information">
-    <div class="header">
-      <span class="title">This is a title!</span>
-      <span class="time">2018-06-01 00:00:00</span>
+<nz-tabset [nzTabPosition]="'left'" [nzType]="'card'">
+  <nz-tab [nzTitle]="'消息列表'">
+    <div class="send-information" *ngIf="!authService.isAdmin()">
+      <button nz-button nzType="primary" nzSize="large" (click)="openDialog()">联系客服</button>
     </div>
-    <div class="content">This is a little content!</div>
-    <div class="footer">
-      <button nzType="primary" nzSize="small" nz-button>回复</button>
+    <div class="chat-information" *ngFor="let information of receivePagination.records">
+      <div class="header">
+        <span class="title">
+          {{ information.senderName }}
+          <i class="unread" *ngIf="!information.isRead">新</i>
+        </span>
+        <span class="time">{{ information.sendTime | date: 'yyyy-MM-dd HH:SS:ss' }}</span>
+      </div>
+      <div class="content">{{ information.content }}</div>
+      <div class="footer">
+        <button nzType="primary" nzSize="small" nz-button (click)="patchChatInformation(information)">标为已读</button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button nzType="primary" nzSize="small" nz-button (click)="openDialog(information)">回复</button>
+      </div>
     </div>
-  </div>
+    <div class="pagination">
+      <nz-pagination
+        [nzPageIndex]="receivePagination.current"
+        [nzTotal]="receivePagination.total"
+        nzShowQuickJumper
+        nzShowSizeChanger
+        [nzShowTotal]="totalTemplate"
+        [nzPageSize]="receivePagination.size"
+        (nzPageIndexChange)="receivePageChange($event)"
+        (nzPageSizeChange)="receivePageSizeChange($event)">
+      </nz-pagination>
+    </div>
+  </nz-tab>
+  <nz-tab [nzTitle]="'已发消息'">
+    <div class="chat-information" *ngFor="let information of sendPagination.records">
+      <div class="header">
+        <span class="title">{{ information.senderName }}</span>
+        <span class="time">{{ information.sendTime | date: 'yyyy-MM-dd HH:SS:ss' }}</span>
+      </div>
+      <div class="content">{{ information.content }}</div>
+    </div>
+    <div class="pagination">
+      <nz-pagination
+        [nzPageIndex]="sendPagination.current"
+        [nzTotal]="sendPagination.total"
+        nzShowQuickJumper
+        nzShowSizeChanger
+        [nzShowTotal]="totalTemplate"
+        [nzPageSize]="sendPagination.size"
+        (nzPageIndexChange)="sendPageChange($event)"
+        (nzPageSizeChange)="sendPageSizeChange($event)">
+      </nz-pagination>
+    </div>
+  </nz-tab>
+</nz-tabset>
+
+<nz-modal [(nzVisible)]="isShowDialog" nzTitle="联系客服" (nzOnCancel)="closeDialog()" (nzOnOk)="send()">
+  <textarea rows="4" nz-input [(ngModel)]="content"></textarea>
+</nz-modal>
+
+<ng-template #totalTemplate let-total>
+  共 {{ total }} 条
+</ng-template>

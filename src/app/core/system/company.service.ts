@@ -9,12 +9,12 @@ export class CompanyService extends HttpService<Company> {
   private URL = 'company';
 
   getCompanyList(pagination: Pagination<Company>) {
-    const url = `${this.URL}/listAllCompanies/${pagination.pages}/${pagination.size}`;
+    const url = `${this.URL}/listAllCompanies/${pagination.current}/${pagination.size}`;
     return super.getPagination(url);
   }
 
   searchCompany(pagination: Pagination<Company>, companyName: string) {
-    const url = `${this.URL}/get/${companyName}/${pagination.pages}/${pagination.size}`;
+    const url = `${this.URL}/get/${companyName}/${pagination.current}/${pagination.size}`;
     return super.getPagination(url);
   }
 
