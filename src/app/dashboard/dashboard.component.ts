@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   isSaving = false;
   unreadInformationNum = 0;
   sub: any;
+  timer: any;
 
   get loginStatus(): boolean {
     return this.storageService.hasStorage('USER_TOKEN')
@@ -68,13 +69,18 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    clearInterval(this.timer);
   }
 
   getUnreadChatInformationNum() {
+    clearInterval(this.timer);
     this.chatInformationService.getUnreadChatInformation(new Pagination()).subscribe(
       (res: HttpResponseData<Pagination<any>>) => {
         if (res.status === 200) {
           this.unreadInformationNum = res.obj.total;
+          this.timer = setInterval(() => {
+            this.getUnreadChatInformationNum();
+          }, 60000);
         } else {
           this.messageService.error(res.msg);
         }
