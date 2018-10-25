@@ -41,7 +41,7 @@ export class RoleManagementComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg);
+        this.messageService.error(error.error.msg || '响应超时！');
       }
     );
   }
@@ -61,7 +61,7 @@ export class RoleManagementComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg);
+        this.messageService.error(error.error.msg || '响应超时！');
       }
     );
   }

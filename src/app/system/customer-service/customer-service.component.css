@@ -1,0 +1,36 @@
+.chat-information {
+  margin: 0 auto 18px;;
+  width: 80%;
+  height: auto;
+  background-color: #fafafa;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.chat-information .header {
+  position: relative;
+  padding: 5px 8px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.chat-information .header .title {
+  color: #000;
+  font-size: 16px;
+}
+.chat-information .header .time {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  font-size: 14px;
+}
+.chat-information .content {
+  padding: 5px 8px;
+  width: 100%;
+  min-height: 50px;
+  font-size: 14px;
+  background: #ffffff;
+  border-bottom: 1px solid #e8e8e8;
+}
+.chat-information .footer {
+  padding: 5px 8px;
+  text-align: right;
+}

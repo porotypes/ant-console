@@ -11,6 +11,7 @@ import { PermissionService } from './system/permission.service';
 import { AccountService } from './system/account.service';
 import { CompanyService } from './system/company.service';
 import { RoleService } from './system/role.service';
+import { ChatInformationService } from './system/chat-information.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { RoleService } from './system/role.service';
     PermissionService,
     AccountService,
     CompanyService,
-    RoleService
+    RoleService,
+    ChatInformationService
   ],
   declarations: []
 })

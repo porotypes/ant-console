@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../app/core/auth/auth.guard';
 
 // login
 import { LoginComponent } from './login/login.component';
+
+// dashboard
+import { DashboardComponent } from './dashboard/dashboard.component';
 // home
 import { HomeComponent } from './home/home.component';
 // account
@@ -19,25 +21,31 @@ import { RoleFormComponent } from './system/role-management/role-form.component'
 import { CustomerServiceComponent } from './system/customer-service/customer-service.component';
 
 const router: Routes = [
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   // login
   { path: 'login', component: LoginComponent },
-  // home
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  // account
-  { path: 'account-management', component: AccountManagementComponent, canActivate: [AuthGuard] },
-  { path: 'add-account', component: AccountFormComponent, canActivate: [AuthGuard] },
-  { path: 'edit-account/:id', component: AccountFormComponent, canActivate: [AuthGuard] },
-  // company
-  { path: 'company-management', component: CompanyManagementComponent, canActivate: [AuthGuard] },
-  { path: 'add-company', component: CompanyFormComponent, canActivate: [AuthGuard] },
-  { path: 'edit-company/:id', component: CompanyFormComponent, canActivate: [AuthGuard] },
-  // role
-  { path: 'role-management', component: RoleManagementComponent, canActivate: [AuthGuard] },
-  { path: 'add-role', component: RoleFormComponent, canActivate: [AuthGuard] },
-  { path: 'edit-role/:id', component: RoleFormComponent, canActivate: [AuthGuard] },
-  // customer-service
-  { path: 'customer-service', component: CustomerServiceComponent, canActivate: [AuthGuard] }
+  // dashboard
+  { path: 'dashboard',
+    component: DashboardComponent,
+    children: [
+      // home
+      { path: 'home', component: HomeComponent },
+      // account
+      { path: 'account-management', component: AccountManagementComponent },
+      { path: 'add-account', component: AccountFormComponent },
+      { path: 'edit-account/:id', component: AccountFormComponent },
+      // company
+      { path: 'company-management', component: CompanyManagementComponent },
+      { path: 'add-company', component: CompanyFormComponent },
+      { path: 'edit-company/:id', component: CompanyFormComponent },
+      // role
+      { path: 'role-management', component: RoleManagementComponent },
+      { path: 'add-role', component: RoleFormComponent },
+      { path: 'edit-role/:id', component: RoleFormComponent },
+      // customer-service
+      { path: 'customer-service', component: CustomerServiceComponent }
+    ]
+  }
 ];
 
 @NgModule({

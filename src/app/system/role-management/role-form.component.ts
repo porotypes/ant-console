@@ -65,7 +65,7 @@ export class RoleFormComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg);
+        this.messageService.error(error.error.msg || '响应超时！');
       }
     );
   }
@@ -80,7 +80,7 @@ export class RoleFormComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg);
+        this.messageService.error(error.error.msg || '响应超时！');
       }
     );
   }
@@ -123,7 +123,7 @@ export class RoleFormComponent implements OnInit {
         },
         error => {
           this.isSaving = false;
-          this.messageService.error(error.error.msg);
+          this.messageService.error(error.error.msg || '响应超时！');
         }
       );
     }
@@ -144,7 +144,7 @@ export class RoleFormComponent implements OnInit {
         },
         error => {
           this.isSaving = false;
-          this.messageService.error(error.error.msg);
+          this.messageService.error(error.error.msg || '响应超时！');
         }
       );
     }

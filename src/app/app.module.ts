@@ -17,6 +17,7 @@ import zh from '@angular/common/locales/zh';
 
 // component
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { AccountManagementComponent } from './system/account-management/account-management.component';
 import { AccountFormComponent } from './system/account-management/account-form.component';
@@ -32,6 +33,7 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     LoginComponent,
+    DashboardComponent,
     HomeComponent,
     AccountManagementComponent,
     AccountFormComponent,
