@@ -1,0 +1,45 @@
+<div class="search">
+  <div class="search-form">
+    <span class="search-label">交易流水号</span>
+    <span class="search-input"><input nz-input [(ngModel)]="transactionId"></span>
+    <span class="search-button"><button nz-button nzType="primary" (click)="searchTradingRecord()">查询</button></span>
+  </div>
+  <div class="add">
+    <button (click)="exportExcel()" nzType="primary" nz-button>导出当前数据为Excel</button>
+  </div>
+</div>
+
+<nz-table
+  #basicTable
+  nzShowSizeChanger
+  nzShowQuickJumper
+  [nzLoading]="tableLoading"
+  [nzData]="pagination.records"
+  [(nzPageSize)]="pagination.size"
+  (nzPageIndexChange)="changePageOrSize()"
+  (nzPageSizeChange)="changePageOrSize(true)">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>设备ID</th>
+      <th>交易流水号</th>
+      <th>交易数量</th>
+      <th>交易币种</th>
+      <th>交易金额($)</th>
+      <th>交易类型</th>
+      <th>交易时间</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let trading of basicTable.data, index as i">
+      <td>{{ i + 1 }}</td>
+      <td>{{ trading.equipmentId }}</td>
+      <td>{{ trading.transactionId }}</td>
+      <td>{{ trading.transactionNum }}</td>
+      <td>{{ trading.currency }}</td>
+      <td>{{ trading.currentPrice }}</td>
+      <td>{{ trading.transactionType | transactionType }}</td>
+      <td>{{ trading.transactionTime }}</td>
+    </tr>
+  </tbody>
+</nz-table>

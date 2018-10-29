@@ -69,4 +69,12 @@ export abstract class HttpService<T> {
     return this.http.delete(url, {headers: this.getHttpHeaders()});
   }
 
+  /**
+   * download file
+   */
+  public download(apiUrl: string, data: any): Observable<Blob> {
+    const url = environment.base_url + apiUrl;
+    return this.http.post(url, data, {headers: this.getHttpHeaders(), responseType: 'blob'});
+  }
+
 }

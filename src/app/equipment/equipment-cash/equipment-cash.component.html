@@ -1,0 +1,87 @@
+<nz-collapse nzAccordion [nzBordered]="false">
+  <nz-collapse-panel [nzHeader]="'现金量满'" [nzActive]="true" [ngStyle]="panelStyle">
+    <nz-table
+      #basicTable
+      nzShowSizeChanger
+      nzShowQuickJumper
+      [nzLoading]="fullTableLoading"
+      [nzData]="fullPagination.records"
+      [(nzPageSize)]="fullPagination.size"
+      (nzPageIndexChange)="changeFullPageOrSize()"
+      (nzPageSizeChange)="changeFullPageOrSize(true)">
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>设备ID</th>
+          <th>公司</th>
+          <th>现金量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipment of basicTable.data, index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ equipment.equipmentId }}</td>
+          <td>{{ equipment.owner }}</td>
+          <td>{{ equipment.status }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-collapse-panel>
+  <nz-collapse-panel [nzHeader]="'现金量空'" [ngStyle]="panelStyle">
+    <nz-table
+      #basicTable
+      nzShowSizeChanger
+      nzShowQuickJumper
+      [nzLoading]="emptyTableLoading"
+      [nzData]="emptyPagination.records"
+      [(nzPageSize)]="emptyPagination.size"
+      (nzPageIndexChange)="changeEmptyPageOrSize()"
+      (nzPageSizeChange)="changeEmptyPageOrSize(true)">
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>设备ID</th>
+          <th>公司</th>
+          <th>现金量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipment of basicTable.data, index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ equipment.equipmentId }}</td>
+          <td>{{ equipment.owner }}</td>
+          <td>{{ equipment.status }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-collapse-panel>
+  <nz-collapse-panel [nzHeader]="'现金量正常'"[ngStyle]="panelStyle">
+    <nz-table
+      #basicTable
+      nzShowSizeChanger
+      nzShowQuickJumper
+      [nzLoading]="tableLoading"
+      [nzData]="pagination.records"
+      [(nzPageSize)]="pagination.size"
+      (nzPageIndexChange)="changePageOrSize()"
+      (nzPageSizeChange)="changePageOrSize(true)">
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>设备ID</th>
+          <th>公司</th>
+          <th>现金量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipment of basicTable.data, index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ equipment.equipmentId }}</td>
+          <td>{{ equipment.owner }}</td>
+          <td>{{ equipment.status }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-collapse-panel>
+</nz-collapse>
+  

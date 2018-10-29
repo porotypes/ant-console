@@ -26,6 +26,10 @@ import { RoleManagementComponent } from './system/role-management/role-managemen
 import { CompanyFormComponent } from './system/company-management/company-form.component';
 import { CustomerServiceComponent } from './system/customer-service/customer-service.component';
 import { RoleFormComponent } from './system/role-management/role-form.component';
+import { EquipmentListComponent } from './equipment/equipment-list/equipment-list.component';
+import { EquipmentMapComponent } from './equipment/equipment-map/equipment-map.component';
+import { EquipmentCashComponent } from './equipment/equipment-cash/equipment-cash.component';
+import { TradingRecordComponent } from './trading-record/trading-record.component';
 
 registerLocaleData(zh);
 
@@ -41,7 +45,11 @@ registerLocaleData(zh);
     RoleManagementComponent,
     CompanyFormComponent,
     CustomerServiceComponent,
-    RoleFormComponent
+    RoleFormComponent,
+    EquipmentListComponent,
+    EquipmentMapComponent,
+    EquipmentCashComponent,
+    TradingRecordComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,12 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 // home
 import { HomeComponent } from './home/home.component';
+// equipment
+import { EquipmentListComponent } from './equipment/equipment-list/equipment-list.component';
+import { EquipmentMapComponent } from './equipment/equipment-map/equipment-map.component';
+import { EquipmentCashComponent } from './equipment/equipment-cash/equipment-cash.component';
+// trading record
+import { TradingRecordComponent } from './trading-record/trading-record.component';
 // account
 import { AccountManagementComponent } from './system/account-management/account-management.component';
 import { AccountFormComponent } from './system/account-management/account-form.component';
@@ -30,6 +36,12 @@ const router: Routes = [
     children: [
       // home
       { path: 'home', component: HomeComponent },
+      // equipment
+      { path: 'equipment-list', component: EquipmentListComponent },
+      { path: 'equipment-map', component: EquipmentMapComponent },
+      { path: 'equipment-cash', component: EquipmentCashComponent },
+      // trading record
+      { path: 'trading-record', component: TradingRecordComponent },
       // account
       { path: 'account-management', component: AccountManagementComponent },
       { path: 'add-account', component: AccountFormComponent },
