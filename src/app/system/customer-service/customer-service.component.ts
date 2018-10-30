@@ -63,21 +63,33 @@ export class CustomerServiceComponent implements OnInit {
   }
 
   receivePageChange(page: number) {
+    if (page === 0) {
+      return;
+    }
     this.receivePagination.current = page;
     this.getChatInformationList();
   }
 
   receivePageSizeChange(size: number) {
+    if (size === 0) {
+      return;
+    }
     this.receivePagination.size = size;
     this.getChatInformationList();
   }
 
   sendPageChange(page: number) {
+    if (page === 0) {
+      return;
+    }
     this.sendPagination.current = page;
     this.getSendChatInformationList();
   }
 
   sendPageSizeChange(size: number) {
+    if (size === 0) {
+      return;
+    }
     this.sendPagination.size = size;
     this.getSendChatInformationList();
   }

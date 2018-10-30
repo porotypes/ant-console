@@ -13,6 +13,7 @@ export class Equipment {
   hasPrinter: boolean;
   highThreshold: number;
   amountOfCash: number;
+  address: string;
   status: number;
   display: string;
   state: boolean;

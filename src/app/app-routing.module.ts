@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 // equipment
 import { EquipmentListComponent } from './equipment/equipment-list/equipment-list.component';
+import { EquipmentFormComponent } from './equipment/equipment-form/equipment-form.component';
 import { EquipmentMapComponent } from './equipment/equipment-map/equipment-map.component';
 import { EquipmentCashComponent } from './equipment/equipment-cash/equipment-cash.component';
 // trading record
@@ -38,6 +39,8 @@ const router: Routes = [
       { path: 'home', component: HomeComponent },
       // equipment
       { path: 'equipment-list', component: EquipmentListComponent },
+      { path: 'add-equipment', component: EquipmentFormComponent },
+      { path: 'edit-equipment/:id', component: EquipmentFormComponent },
       { path: 'equipment-map', component: EquipmentMapComponent },
       { path: 'equipment-cash', component: EquipmentCashComponent },
       // trading record

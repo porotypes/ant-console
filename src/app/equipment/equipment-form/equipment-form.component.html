@@ -1,0 +1,126 @@
+<form nz-form [formGroup]="equipmentForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>设备ID</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="equipmentId">
+      <nz-form-explain *ngIf="equipmentForm.get('equipmentId').dirty && equipmentForm.get('equipmentId').errors">请输入设备ID!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>设备名称</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="equipmentName">
+      <nz-form-explain *ngIf="equipmentForm.get('equipmentName').dirty && equipmentForm.get('equipmentName').errors">请输入设备名称!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">设备地址</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="address">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>设备类型</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="equipmentType">
+      <nz-form-explain *ngIf="equipmentForm.get('equipmentType').dirty && equipmentForm.get('equipmentType').errors">请输入设备类型!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>当前钞票数量</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="amountOfCash">
+      <nz-form-explain *ngIf="equipmentForm.get('amountOfCash').dirty && equipmentForm.get('amountOfCash').errors">请输入当前钞票数量!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>所属公司</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <nz-select style="width: 230px;" formControlName="owner">
+        <nz-option
+          *ngFor="let company of companies"
+          [nzValue]="company.id"
+          [nzLabel]="company.companyFullName">
+        </nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="equipmentForm.get('equipmentId').dirty && equipmentForm.get('equipmentId').errors">请选择所属公司!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>是否有钞箱</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <nz-select style="width: 230px;" formControlName="hasBanknoteBox">
+        <nz-option [nzValue]="true" [nzLabel]="'有'"></nz-option>
+        <nz-option [nzValue]="false" [nzLabel]="'无'"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="equipmentForm.get('hasBanknoteBox').dirty && equipmentForm.get('hasBanknoteBox').errors">请选择钞箱!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>是否有摄像头</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <nz-select style="width: 230px;" formControlName="hasCamera">
+        <nz-option [nzValue]="true" [nzLabel]="'有'"></nz-option>
+        <nz-option [nzValue]="false" [nzLabel]="'无'"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="equipmentForm.get('hasCamera').dirty && equipmentForm.get('hasCamera').errors">请选择摄像头!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>是否有读卡器</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <nz-select style="width: 230px;" formControlName="hasCardReader">
+        <nz-option [nzValue]="true" [nzLabel]="'有'"></nz-option>
+        <nz-option [nzValue]="false" [nzLabel]="'无'"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="equipmentForm.get('hasCardReader').dirty && equipmentForm.get('hasCardReader').errors">请选择读卡器!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>是否有打印机</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <nz-select style="width: 230px;" formControlName="hasPrinter">
+        <nz-option [nzValue]="true" [nzLabel]="'有'"></nz-option>
+        <nz-option [nzValue]="false" [nzLabel]="'无'"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="equipmentForm.get('hasPrinter').dirty && equipmentForm.get('hasPrinter').errors">请选择打印机!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>高阈值</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="highThreshold">
+      <nz-form-explain *ngIf="equipmentForm.get('highThreshold').dirty && equipmentForm.get('highThreshold').errors">请输入高阈值!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>低阈值</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="lowThreshold">
+      <nz-form-explain *ngIf="equipmentForm.get('lowThreshold').dirty && equipmentForm.get('lowThreshold').errors">请输入低阈值!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>容纳钞票数</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="maximumCashAmount">
+      <nz-form-explain *ngIf="equipmentForm.get('maximumCashAmount').dirty && equipmentForm.get('maximumCashAmount').errors">请输入容纳钞票数!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>序列号</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="serialNumber">
+      <nz-form-explain *ngIf="equipmentForm.get('serialNumber').dirty && equipmentForm.get('serialNumber').errors">请输入序列号!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="10" [nzOffset]="4">
+      <div nz-row>
+        <div nz-col nzSpan="5">
+          <button nz-button nzType="primary" [nzLoading]="isSaving">保存</button>
+        </div>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+</form>

@@ -77,4 +77,12 @@ export abstract class HttpService<T> {
     return this.http.post(url, data, {headers: this.getHttpHeaders(), responseType: 'blob'});
   }
 
+  /**
+   * downloadTemplate
+   */
+  public downloadTemplate(apiUrl: string) {
+    const url = environment.base_url + apiUrl;
+    return this.http.get(url, {headers: this.getHttpHeaders(), responseType: 'blob'});
+  }
+
 }

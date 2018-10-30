@@ -16,8 +16,8 @@
   [nzLoading]="tableLoading"
   [nzData]="pagination.records"
   [(nzPageSize)]="pagination.size"
-  (nzPageIndexChange)="changePageOrSize()"
-  (nzPageSizeChange)="changePageOrSize(true)">
+  (nzPageIndexChange)="changePageOrSize($evnet, false)"
+  (nzPageSizeChange)="changePageOrSize($evnet, true)">
   <thead>
     <tr>
       <th>序号</th>

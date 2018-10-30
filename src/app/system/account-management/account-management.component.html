@@ -16,8 +16,8 @@
   [nzLoading]="tableLoading"
   [nzData]="pagination.records"
   [(nzPageSize)]="pagination.size"
-  (nzPageIndexChange)="changePageOrSize()"
-  (nzPageSizeChange)="changePageOrSize(true)">
+  (nzPageIndexChange)="changePageOrSize($event)"
+  (nzPageSizeChange)="changePageOrSize($event, true)">
   <thead>
     <tr>
       <th>序号</th>
@@ -51,7 +51,7 @@
         </button>
         <nz-divider *ngIf="authService.isCanUpdateUser()" nzType="vertical"></nz-divider>
         <button
-        *ngIf="authService.isCanDeleteUser()"
+          *ngIf="authService.isCanDeleteUser()"
           nz-button
           nzType="danger"
           nz-popconfirm

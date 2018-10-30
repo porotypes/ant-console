@@ -46,6 +46,17 @@ export class RoleManagementComponent implements OnInit {
     );
   }
 
+  changePageOrSize(event, resetPageIndex = false) {
+    if (event === 0) {
+      return;
+    }
+    if (resetPageIndex) {
+      this.pagination.current = event;
+    }
+    this.tableLoading = true;
+    this.getRoleList();
+  }
+
   editRole(role: Role) {
     this.router.navigate([`/dashboard/edit-role/${role.id}`]);
   }

@@ -56,7 +56,10 @@ export class TradingRecordComponent implements OnInit {
     }
   }
 
-  changePageOrSize(resetPageIndex = false) {
+  changePageOrSize(event, resetPageIndex = false) {
+    if (event === 0) {
+      return;
+    }
     if (resetPageIndex) {
       this.pagination.current = 1;
     }

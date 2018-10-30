@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, UploadXHRArgs  } from 'ng-zorro-antd';
+import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 import { EquipmentService } from '../../core/equipment/equipment.service';
+import { AuthService } from '../../core/auth/auth.service';
 
 import { Pagination } from 'src/app/common/pagination';
 import { Equipment } from 'src/app/common/equipment';
+import { HttpResponseData } from 'src/app/common/http-response-data';
 
 @Component({
   selector: 'app-equipment-list',
@@ -21,20 +25,22 @@ export class EquipmentListComponent implements OnInit {
   };
   pagination = new Pagination<Equipment>();
   tableLoading = false;
-  selectedStatus = '0';
+  selectedStatus = 'all';
 
   constructor(
     private equipmentService: EquipmentService,
-    private messageService: NzMessageService
-  ) { }
+    private messageService: NzMessageService,
+    private router: Router,
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.getEquipmentList();
   }
 
-  getEquipmentList(status: number = 0) {
+  getEquipmentList() {
     const query = {
-      status: status
+      status: this.selectedStatus
     };
     this.tableLoading = true;
     this.equipmentService.getEquipmetList(this.pagination, query).subscribe(
@@ -49,16 +55,76 @@ export class EquipmentListComponent implements OnInit {
     );
   }
 
-  changePageOrSize(resetPageIndex = false) {
+  changePageOrSize(event, resetPageIndex = false) {
+    if (event === 0) {
+      return;
+    }
     if (resetPageIndex) {
-      this.pagination.current = 1;
+      this.pagination.current = event;
     }
     this.getEquipmentList();
-    console.log(1);
   }
 
   changeStatus(status) {
-    this.getEquipmentList(+status);
+    if (status === 'all') {
+      this.getEquipmentList();
+    } else {
+      this.getEquipmentList();
+    }
+  }
+
+  downloadExcel() {
+    this.equipmentService.downloadExcel().subscribe(
+      (res: Blob) => {
+        const file = new Blob([res], {type: 'application/vnd.ms-excel'});
+        const url = URL.createObjectURL(file);
+        window.open(url);
+      }
+    );
+  }
+
+  uploadExcel = (item: UploadXHRArgs) => {
+    // 构建一个 FormData 对象，用于存储文件或其他参数
+    const formData = new FormData();
+    // tslint:disable-next-line:no-any
+    formData.append('file', item.file as any);
+    // 始终返回一个 `Subscription` 对象，nz-upload 会在适当时机自动取消订阅
+    return this.equipmentService.uploadExcel(formData).subscribe(
+      (res: HttpResponseData<any>) => {
+        if (res.status === 200) {
+          this.messageService.success(res.msg);
+        } else {
+          this.messageService.error(res.msg);
+        }
+      },
+      error => {
+        this.messageService.error(error.error.msg);
+      }
+    );
+  }
+
+  addEquipment() {
+    this.router.navigate(['/dashboard/add-equipment']);
+  }
+
+  editEquipment(equipment: Equipment) {
+    this.router.navigate([`/dashboard/edit-equipment/${equipment.id}`]);
+  }
+
+  deleteEquipment(equipment: Equipment) {
+    this.equipmentService.deleteEquipment(equipment).subscribe(
+      (res: HttpResponseData<Equipment>) => {
+        if (res.status === 200) {
+          this.messageService.success('删除成功');
+          this.getEquipmentList();
+        } else {
+          this.messageService.error(res.msg);
+        }
+      },
+      error => {
+        this.messageService.error(error.error.msg || '响应超时!');
+      }
+    );
   }
 
 }

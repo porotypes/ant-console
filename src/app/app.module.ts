@@ -30,6 +30,7 @@ import { EquipmentListComponent } from './equipment/equipment-list/equipment-lis
 import { EquipmentMapComponent } from './equipment/equipment-map/equipment-map.component';
 import { EquipmentCashComponent } from './equipment/equipment-cash/equipment-cash.component';
 import { TradingRecordComponent } from './trading-record/trading-record.component';
+import { EquipmentFormComponent } from './equipment/equipment-form/equipment-form.component';
 
 registerLocaleData(zh);
 
@@ -49,7 +50,8 @@ registerLocaleData(zh);
     EquipmentListComponent,
     EquipmentMapComponent,
     EquipmentCashComponent,
-    TradingRecordComponent
+    TradingRecordComponent,
+    EquipmentFormComponent
   ],
   imports: [
     BrowserModule,

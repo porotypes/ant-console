@@ -47,9 +47,12 @@ export class CompanyManagementComponent implements OnInit {
     );
   }
 
-  changePageOrSize(resetPageIndex = false) {
+  changePageOrSize(event, resetPageIndex = false) {
+    if (event === 0) {
+      return;
+    }
     if (resetPageIndex) {
-      this.pagination.current = 1;
+      this.pagination.current = event;
     }
     this.tableLoading = true;
     this.getCompanyList();

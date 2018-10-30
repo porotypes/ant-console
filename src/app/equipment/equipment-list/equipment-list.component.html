@@ -3,11 +3,26 @@
     <span class="search-label">设备状态</span>
     <span class="search-input">
       <nz-select style="width: 230px;" [(ngModel)]="selectedStatus" (ngModelChange)="changeStatus($event)">
+        <nz-option nzValue="all"  nzLabel="全部"></nz-option>
         <nz-option nzValue="0"  nzLabel="正常"></nz-option>
         <nz-option nzValue="1"  nzLabel="断网"></nz-option>
         <nz-option nzValue="2"  nzLabel="故障"></nz-option>
       </nz-select>
     </span>
+  </div>
+  <div class="add">
+    <button *ngIf="authService.isCanDownEquipmentTemplate()" nzType="primary" nz-button (click)="downloadExcel()">下载Excel模板</button>
+    <span style="margin-right: 10px;"></span>
+    <nz-upload
+      *ngIf="authService.isCanUploadEquipment()"
+      [nzAction]="''"
+      [nzFileType]="'application/vnd.ms-excel'"
+      [nzShowUploadList]="false"
+      [nzCustomRequest]="uploadExcel">
+      <button nz-button nzType="primary">导入设备</button>
+    </nz-upload>
+    <span style="margin-right: 10px;"></span>
+    <button *ngIf="authService.isCanAddEquipment()" nzType="primary" nz-button (click)="addEquipment()">新增设备</button>
   </div>
 </div>
 
@@ -17,15 +32,17 @@
   nzShowQuickJumper
   [nzLoading]="tableLoading"
   [nzData]="pagination.records"
+  [(nzPageIndex)]="pagination.current"
   [(nzPageSize)]="pagination.size"
-  (nzPageIndexChange)="changePageOrSize()"
-  (nzPageSizeChange)="changePageOrSize(true)">
+  (nzPageIndexChange)="changePageOrSize($event, false)"
+  (nzPageSizeChange)="changePageOrSize($event, true)">
   <thead>
     <tr>
       <th>序号</th>
       <th>设备ID</th>
       <th>公司</th>
       <th>问题</th>
+      <th>操作</th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +51,26 @@
       <td>{{ equipment.equipmentId }}</td>
       <td>{{ equipment.owner }}</td>
       <td>{{ equipment.status }}</td>
+      <td>
+        <button
+          *ngIf="authService.isCanUpdateEquipment()"
+          (click)="editEquipment(equipment)"
+          nz-button nzType="primary"
+          nzSize="small">
+          修改
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button
+          *ngIf="authService.isCanDeleteEquipment()"
+          nz-button
+          nzType="danger"
+          nzSize="small"
+          nz-popconfirm
+          nzTitle="确定删除该设备?"
+          (nzOnConfirm)="deleteEquipment(equipment)">
+          删除
+        </button>
+      </td>
     </tr>
   </tbody>
 </nz-table>

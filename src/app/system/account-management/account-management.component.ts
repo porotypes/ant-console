@@ -45,9 +45,12 @@ export class AccountManagementComponent implements OnInit {
     );
   }
 
-  private changePageOrSize(resetPageIndex = false) {
+  private changePageOrSize(event, resetPageIndex = false) {
+    if (event === 0) {
+      return;
+    }
     if (resetPageIndex) {
-      this.pagination.current = 1;
+      this.pagination.current = event;
     }
     this.tableLoading = true;
     this.getAccountList();

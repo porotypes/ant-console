@@ -14,6 +14,11 @@ export class EquipmentService extends HttpService<Equipment> {
     return super.post(url, data);
   }
 
+  getEquipment(id: number) {
+    const url = `${this.URL}/${id}`;
+    return super.get(url);
+  }
+
   addEquipment(data: Equipment) {
     const url = `${this.URL}/add/equipment`;
     return super.post(url, data);
@@ -25,8 +30,18 @@ export class EquipmentService extends HttpService<Equipment> {
   }
 
   deleteEquipment(data: Equipment) {
-    const url = `${this.URL}/delete/equipment`;
-    return super.post(url, data);
+    const url = `${this.URL}`;
+    return super.deleted(url, data);
+  }
+
+  downloadExcel() {
+    const url = `${this.URL}/download`;
+    return super.downloadTemplate(url);
+  }
+
+  uploadExcel(file: FormData) {
+    const url = `${this.URL}/upload/equipments`;
+    return super.post(url, file);
   }
 
 }
