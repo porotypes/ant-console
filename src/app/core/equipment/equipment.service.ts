@@ -9,9 +9,9 @@ export class EquipmentService extends HttpService<Equipment> {
 
   private URL = 'equipment';
 
-  getEquipmetList(pagination: Pagination<Equipment>) {
-    const url = `${this.URL}/list/equipments/${pagination.current}/${pagination.size}`;
-    return super.getPagination(url);
+  getEquipmetList(pagination: Pagination<Equipment>, data: any) {
+    const url = `${this.URL}/getEquipments/${pagination.current}/${pagination.size}`;
+    return super.post(url, data);
   }
 
   addEquipment(data: Equipment) {

@@ -1,58 +1,39 @@
-<nz-collapse nzAccordion [nzBordered]="false">
-  <nz-collapse-panel [nzHeader]="'正常设备'" [nzActive]="true" [ngStyle]="panelStyle">
-    <nz-table
-      #basicTable
-      nzShowSizeChanger
-      nzShowQuickJumper
-      [nzLoading]="tableLoading"
-      [nzData]="pagination.records"
-      [(nzPageSize)]="pagination.size"
-      (nzPageIndexChange)="changePageOrSize()"
-      (nzPageSizeChange)="changePageOrSize(true)">
-      <thead>
-        <tr>
-          <th>序号</th>
-          <th>设备ID</th>
-          <th>公司</th>
-          <th>问题</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let equipment of basicTable.data, index as i">
-          <td>{{ i + 1 }}</td>
-          <td>{{ equipment.equipmentId }}</td>
-          <td>{{ equipment.owner }}</td>
-          <td>{{ equipment.status }}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </nz-collapse-panel>
-  <nz-collapse-panel [nzHeader]="'异常设备'" [ngStyle]="panelStyle">
-    <nz-table
-      #basicTable
-      nzShowSizeChanger
-      nzShowQuickJumper
-      [nzLoading]="abnormalTableLoading"
-      [nzData]="abnormalPagination.records"
-      [(nzPageSize)]="abnormalPagination.size"
-      (nzPageIndexChange)="changeAbnormalPageOrSize()"
-      (nzPageSizeChange)="changeAbnormalPageOrSize(true)">
-      <thead>
-        <tr>
-          <th>序号</th>
-          <th>设备ID</th>
-          <th>公司</th>
-          <th>问题</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let equipment of basicTable.data, index as i">
-          <td>{{ i + 1 }}</td>
-          <td>{{ equipment.equipmentId }}</td>
-          <td>{{ equipment.owner }}</td>
-          <td>{{ equipment.status }}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </nz-collapse-panel>
-</nz-collapse>
+<div class="search">
+  <div class="search-form">
+    <span class="search-label">设备状态</span>
+    <span class="search-input">
+      <nz-select style="width: 230px;" [(ngModel)]="selectedStatus" (ngModelChange)="changeStatus($event)">
+        <nz-option nzValue="0"  nzLabel="正常"></nz-option>
+        <nz-option nzValue="1"  nzLabel="断网"></nz-option>
+        <nz-option nzValue="2"  nzLabel="故障"></nz-option>
+      </nz-select>
+    </span>
+  </div>
+</div>
+
+<nz-table
+  #basicTable
+  nzShowSizeChanger
+  nzShowQuickJumper
+  [nzLoading]="tableLoading"
+  [nzData]="pagination.records"
+  [(nzPageSize)]="pagination.size"
+  (nzPageIndexChange)="changePageOrSize()"
+  (nzPageSizeChange)="changePageOrSize(true)">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>设备ID</th>
+      <th>公司</th>
+      <th>问题</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let equipment of basicTable.data, index as i">
+      <td>{{ i + 1 }}</td>
+      <td>{{ equipment.equipmentId }}</td>
+      <td>{{ equipment.owner }}</td>
+      <td>{{ equipment.status }}</td>
+    </tr>
+  </tbody>
+</nz-table>
