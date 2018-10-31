@@ -35,7 +35,7 @@ export class EquipmentListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getEquipmentList();
+    // this.getEquipmentList();
   }
 
   getEquipmentList() {
@@ -76,7 +76,7 @@ export class EquipmentListComponent implements OnInit {
   downloadExcel() {
     this.equipmentService.downloadExcel().subscribe(
       (res: Blob) => {
-        const file = new Blob([res], {type: 'application/vnd.ms-excel'});
+        const file = new Blob([res], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
         const url = URL.createObjectURL(file);
         window.open(url);
       }

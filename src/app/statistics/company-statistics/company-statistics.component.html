@@ -1,0 +1,64 @@
+<div class="search">
+  <div class="search-form">
+    <span class="label">时间范围</span>
+    <span class="input">
+      <nz-date-picker
+        [nzDisabledDate]="disabledStartDate"
+        nzShowTime
+        nzFormat="yyyy-MM-dd HH:mm:ss"
+        [(ngModel)]="startTimeValue"
+        nzPlaceHolder="开始时间">
+      </nz-date-picker>
+      <nz-date-picker
+        [nzDisabledDate]="disabledEndDate"
+        nzShowTime
+        nzFormat="yyyy-MM-dd HH:mm:ss"
+        [(ngModel)]="endTimeValue"
+        nzPlaceHolder="结束时间">
+      </nz-date-picker>
+    </span>
+    <span class="label">公司</span>
+    <span class="input">
+      <nz-select style="width: 230px;" [(ngModel)]="selectedCompany">
+        <nz-option
+          *ngFor="let company of companies"
+          [nzValue]="company.id" 
+          [nzLabel]="company.companyFullName">
+        </nz-option>
+      </nz-select>
+    </span>
+    <span class="button">
+      <button nz-button nzType="primary" (click)="search()">查询</button>
+    </span>
+  </div>
+</div>
+
+<nz-table
+  #basicTable
+  [nzShowPagination]="false"
+  [nzLoading]="tableLoading"
+  [nzData]="statisticsList">
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>交易类型</th>
+      <th>交易总数</th>
+      <th>虚拟币种</th>
+      <th>虚拟币交易数</th>
+      <th>货币类型</th>
+      <th>货币交易数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let statistics of basicTable.data, index as i">
+      <td>{{ i + 1 }}</td>
+      <td>{{statistics.transactionType | transactionType }}</td>
+      <td>{{statistics.numOfTransactions}}</td>
+      <td>{{statistics.coinType}}</td>
+      <td>{{statistics.transactionNum}}</td>
+      <td>{{statistics.currencyType}}</td>
+      <td>{{statistics.transactionAmount}}</td>
+    </tr>
+  </tbody>
+</nz-table>
+

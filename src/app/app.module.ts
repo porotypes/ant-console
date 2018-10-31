@@ -31,6 +31,8 @@ import { EquipmentMapComponent } from './equipment/equipment-map/equipment-map.c
 import { EquipmentCashComponent } from './equipment/equipment-cash/equipment-cash.component';
 import { TradingRecordComponent } from './trading-record/trading-record.component';
 import { EquipmentFormComponent } from './equipment/equipment-form/equipment-form.component';
+import { EquipmentStatisticsComponent } from './statistics/equipment-statistics/equipment-statistics.component';
+import { CompanyStatisticsComponent } from './statistics/company-statistics/company-statistics.component';
 
 registerLocaleData(zh);
 
@@ -51,7 +53,9 @@ registerLocaleData(zh);
     EquipmentMapComponent,
     EquipmentCashComponent,
     TradingRecordComponent,
-    EquipmentFormComponent
+    EquipmentFormComponent,
+    EquipmentStatisticsComponent,
+    CompanyStatisticsComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,9 @@ import { EquipmentListComponent } from './equipment/equipment-list/equipment-lis
 import { EquipmentFormComponent } from './equipment/equipment-form/equipment-form.component';
 import { EquipmentMapComponent } from './equipment/equipment-map/equipment-map.component';
 import { EquipmentCashComponent } from './equipment/equipment-cash/equipment-cash.component';
+// statistics
+import { EquipmentStatisticsComponent } from './statistics/equipment-statistics/equipment-statistics.component';
+import { CompanyStatisticsComponent } from './statistics/company-statistics/company-statistics.component';
 // trading record
 import { TradingRecordComponent } from './trading-record/trading-record.component';
 // account
@@ -43,6 +46,9 @@ const router: Routes = [
       { path: 'edit-equipment/:id', component: EquipmentFormComponent },
       { path: 'equipment-map', component: EquipmentMapComponent },
       { path: 'equipment-cash', component: EquipmentCashComponent },
+      // statistics
+      { path: 'equipment-statistics', component: EquipmentStatisticsComponent },
+      { path: 'company-statistics', component: CompanyStatisticsComponent },
       // trading record
       { path: 'trading-record', component: TradingRecordComponent },
       // account

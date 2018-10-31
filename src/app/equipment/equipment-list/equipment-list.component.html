@@ -16,7 +16,7 @@
     <nz-upload
       *ngIf="authService.isCanUploadEquipment()"
       [nzAction]="''"
-      [nzFileType]="'application/vnd.ms-excel'"
+      [nzFileType]="'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
       [nzShowUploadList]="false"
       [nzCustomRequest]="uploadExcel">
       <button nz-button nzType="primary">导入设备</button>

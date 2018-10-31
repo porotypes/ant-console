@@ -34,7 +34,7 @@
           <ul>
             <li nz-menu-item routerLink="/dashboard/equipment-list">设备列表</li>
             <li nz-menu-item routerLink="/dashboard/equipment-cash">设备现金量</li>
-            <li nz-menu-item routerLink="/dashboard/equipment-map">设备位置</li>
+            <!-- <li nz-menu-item routerLink="/dashboard/equipment-map">设备位置</li> -->
           </ul>
         </li>
         <li *ngIf="authService.isCanTansactionStatistice()" nz-submenu [nzOpen]="true">
@@ -46,11 +46,11 @@
         <li nz-submenu [nzOpen]="true">
           <span title><i class="anticon anticon-laptop"></i>统计分析</span>
           <ul>
-            <li nz-menu-item>设备流水</li>
-            <li nz-menu-item>数字资产流水</li>
-            <li nz-menu-item>公司流水</li>
-            <li nz-menu-item>区域分布统计</li>
-            <li nz-menu-item>设备故障统计</li>
+            <li nz-menu-item routerLink="/dashboard/equipment-statistics">设备流水</li>
+            <!-- <li nz-menu-item>数字资产流水</li> -->
+            <li nz-menu-item routerLink="/dashboard/company-statistics">公司流水</li>
+            <!-- <li nz-menu-item>区域分布统计</li> -->
+            <!-- <li nz-menu-item>设备故障统计</li> -->
           </ul>
         </li>
         <li nz-submenu [nzOpen]="true">
