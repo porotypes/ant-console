@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       result => {
         if (result.status === 200) {
           this.messageService.success(result.msg);
-          this.router.navigate(['/dashboard/home']);
+          this.router.navigate(['/dashboard']);
           this.storageService.writeStorage('USER_TOKEN', result.obj);
           this.authService.user = this.authService.decodeToken();
         } else {

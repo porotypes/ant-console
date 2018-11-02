@@ -25,7 +25,7 @@ export class EquipmentListComponent implements OnInit {
   };
   pagination = new Pagination<Equipment>();
   tableLoading = false;
-  selectedStatus = 'all';
+  selectedStatus = '';
 
   constructor(
     private equipmentService: EquipmentService,
@@ -35,7 +35,7 @@ export class EquipmentListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.getEquipmentList();
+    this.getEquipmentList();
   }
 
   getEquipmentList() {
@@ -76,7 +76,8 @@ export class EquipmentListComponent implements OnInit {
   downloadExcel() {
     this.equipmentService.downloadExcel().subscribe(
       (res: Blob) => {
-        const file = new Blob([res], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+        console.log(res);
+        const file = new Blob([res], {type: 'application/vnd.ms-excel'});
         const url = URL.createObjectURL(file);
         window.open(url);
       }

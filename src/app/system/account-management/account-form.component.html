@@ -30,6 +30,7 @@
           [nzLabel]="company.companyFullName">
         </nz-option>
       </nz-select>
+      <nz-form-explain *ngIf="accountForm.get('companyId').dirty && accountForm.get('companyId').errors">请选择公司!</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>

@@ -17,8 +17,8 @@
         nzPlaceHolder="结束时间">
       </nz-date-picker>
     </span>
-    <span class="label">公司</span>
-    <span class="input">
+    <span class="label" *ngIf="authService.isAdmin()">公司</span>
+    <span class="input" *ngIf="authService.isAdmin()">
       <nz-select style="width: 230px;" [(ngModel)]="selectedCompany">
         <nz-option [nzValue]="''" [nzLabel]="'不限'"></nz-option>
         <nz-option
@@ -48,7 +48,7 @@
       <th>虚拟币种</th>
       <th>虚拟币交易数</th>
       <th>货币类型</th>
-      <th>货币交易数</th>
+      <th>货币交易额</th>
     </tr>
   </thead>
   <tbody>

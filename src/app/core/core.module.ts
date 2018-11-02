@@ -15,6 +15,7 @@ import { ChatInformationService } from './system/chat-information.service';
 import { EquipmentService } from './equipment/equipment.service';
 import { TradingRecordService } from './trading-record/trading-record.service';
 import { StatisticsService } from './statistics/statistics.service';
+import { ExchangeService } from './exchange/exchange.service';
 
 // pipe
 import { TransactionTypePipe } from './pipe/transaction-type.pipe';
@@ -39,7 +40,9 @@ import { TransactionTypePipe } from './pipe/transaction-type.pipe';
 
     TradingRecordService,
 
-    StatisticsService
+    StatisticsService,
+
+    ExchangeService
   ],
   declarations: [
     TransactionTypePipe

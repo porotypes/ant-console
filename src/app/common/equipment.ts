@@ -15,6 +15,7 @@ export class Equipment {
   amountOfCash: number;
   address: string;
   status: number;
+  detailed: string;
   display: string;
   state: boolean;
   createTime: Date;

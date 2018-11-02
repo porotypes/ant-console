@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { StatisticsService } from '../../core/statistics/statistics.service';
 import { DateTimeUtil } from '../../shared/date-time-util';
 import { CompanyService } from '../../core/system/company.service';
+import { AuthService } from '../../core/auth/auth.service';
 
 import { EquipmentStatistics } from '../../common/Equipment-statistics';
 import { HttpResponseData } from 'src/app/common/http-response-data';
@@ -42,11 +43,14 @@ export class EquipmentStatisticsComponent implements OnInit {
   constructor(
     private statisticsService: StatisticsService,
     private messageService: NzMessageService,
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    public authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.getAllCompanies();
+    if (this.authService.isAdmin()) {
+      this.getAllCompanies();
+    }
   }
 
   getEquipmentStatisticsList() {

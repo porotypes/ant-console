@@ -3,7 +3,7 @@
     <span class="search-label">设备状态</span>
     <span class="search-input">
       <nz-select style="width: 230px;" [(ngModel)]="selectedStatus" (ngModelChange)="changeStatus($event)">
-        <nz-option nzValue="all"  nzLabel="全部"></nz-option>
+        <nz-option [nzValue]="''"  nzLabel="全部"></nz-option>
         <nz-option nzValue="0"  nzLabel="正常"></nz-option>
         <nz-option nzValue="1"  nzLabel="断网"></nz-option>
         <nz-option nzValue="2"  nzLabel="故障"></nz-option>
@@ -16,7 +16,7 @@
     <nz-upload
       *ngIf="authService.isCanUploadEquipment()"
       [nzAction]="''"
-      [nzFileType]="'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"
+      [nzFileType]="'application/vnd.ms-excel'"
       [nzShowUploadList]="false"
       [nzCustomRequest]="uploadExcel">
       <button nz-button nzType="primary">导入设备</button>
@@ -50,13 +50,12 @@
       <td>{{ i + 1 }}</td>
       <td>{{ equipment.equipmentId }}</td>
       <td>{{ equipment.owner }}</td>
-      <td>{{ equipment.status }}</td>
+      <td>{{ equipment.detailed }}</td>
       <td>
         <button
           *ngIf="authService.isCanUpdateEquipment()"
           (click)="editEquipment(equipment)"
-          nz-button nzType="primary"
-          nzSize="small">
+          nz-button nzType="primary">
           修改
         </button>
         <nz-divider nzType="vertical"></nz-divider>
@@ -64,7 +63,6 @@
           *ngIf="authService.isCanDeleteEquipment()"
           nz-button
           nzType="danger"
-          nzSize="small"
           nz-popconfirm
           nzTitle="确定删除该设备?"
           (nzOnConfirm)="deleteEquipment(equipment)">

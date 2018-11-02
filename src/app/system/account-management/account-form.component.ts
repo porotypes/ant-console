@@ -158,6 +158,13 @@ export class AccountFormComponent implements OnInit {
           this.messageService.error(error.error.msg || '响应超时！');
         }
       );
+    } else {
+      for (const i in this.accountForm.controls) {
+        if (this.accountForm.controls.hasOwnProperty(i)) {
+          this.accountForm.controls[ i ].markAsDirty();
+          this.accountForm.controls[ i ].updateValueAndValidity();
+        }
+      }
     }
   }
 
@@ -179,6 +186,13 @@ export class AccountFormComponent implements OnInit {
           this.messageService.error(error.error.msg || '响应超时！');
         }
       );
+    } else {
+      for (const i in this.accountForm.controls) {
+        if (this.accountForm.controls.hasOwnProperty(i)) {
+          this.accountForm.controls[ i ].markAsDirty();
+          this.accountForm.controls[ i ].updateValueAndValidity();
+        }
+      }
     }
   }
 

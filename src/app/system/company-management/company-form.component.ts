@@ -36,7 +36,7 @@ export class CompanyFormComponent implements OnInit {
       address: [null],
       contact: [null],
       phone: [null],
-      email: [null, [Validators.email]],
+      email: [null, [Validators.required, Validators.email]],
       port: [null, [Validators.required]]
     });
   }
@@ -78,6 +78,12 @@ export class CompanyFormComponent implements OnInit {
 
   submitForm() {
     if (!this.companyForm.valid) {
+      for (const i in this.companyForm.controls) {
+        if (this.companyForm.controls.hasOwnProperty(i)) {
+          this.companyForm.controls[ i ].markAsDirty();
+          this.companyForm.controls[ i ].updateValueAndValidity();
+        }
+      }
       return;
     }
     this.isSaving = true;

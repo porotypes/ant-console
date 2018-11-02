@@ -17,6 +17,7 @@ import { EquipmentCashComponent } from './equipment/equipment-cash/equipment-cas
 import { EquipmentStatisticsComponent } from './statistics/equipment-statistics/equipment-statistics.component';
 import { CompanyStatisticsComponent } from './statistics/company-statistics/company-statistics.component';
 // trading record
+import { ExchangeComponent } from './exchange/exchange.component';
 import { TradingRecordComponent } from './trading-record/trading-record.component';
 // account
 import { AccountManagementComponent } from './system/account-management/account-management.component';
@@ -50,6 +51,7 @@ const router: Routes = [
       { path: 'equipment-statistics', component: EquipmentStatisticsComponent },
       { path: 'company-statistics', component: CompanyStatisticsComponent },
       // trading record
+      { path: 'exchange', component: ExchangeComponent },
       { path: 'trading-record', component: TradingRecordComponent },
       // account
       { path: 'account-management', component: AccountManagementComponent },

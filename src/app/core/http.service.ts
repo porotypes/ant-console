@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageService } from './storage.service';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export abstract class HttpService<T> {
@@ -14,8 +13,6 @@ export abstract class HttpService<T> {
     private http: HttpClient,
     private storageService: StorageService
   ) {}
-
-  // protected abstract getApiUrl(): string;
 
   private getHttpHeaders(): HttpHeaders {
     return this.httpHeader.set('Authorization', this.storageService.readStorage('USER_TOKEN'));

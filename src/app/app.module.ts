@@ -33,6 +33,7 @@ import { TradingRecordComponent } from './trading-record/trading-record.componen
 import { EquipmentFormComponent } from './equipment/equipment-form/equipment-form.component';
 import { EquipmentStatisticsComponent } from './statistics/equipment-statistics/equipment-statistics.component';
 import { CompanyStatisticsComponent } from './statistics/company-statistics/company-statistics.component';
+import { ExchangeComponent } from './exchange/exchange.component';
 
 registerLocaleData(zh);
 
@@ -55,7 +56,8 @@ registerLocaleData(zh);
     TradingRecordComponent,
     EquipmentFormComponent,
     EquipmentStatisticsComponent,
-    CompanyStatisticsComponent
+    CompanyStatisticsComponent,
+    ExchangeComponent
   ],
   imports: [
     BrowserModule,

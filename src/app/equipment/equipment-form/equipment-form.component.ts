@@ -35,20 +35,20 @@ export class EquipmentFormComponent implements OnInit {
 
   createForm() {
     this.equipmentForm = this.fb.group({
-      equipmentId: [null, Validators.required],
-      equipmentType: [null, Validators.required],
-      owner: [null, Validators.required],
+      equipmentId: [null, [Validators.required]],
+      equipmentType: [null, [Validators.required]],
+      owner: [null, [Validators.required]],
       address: [null],
-      amountOfCash: [0, Validators.required],
-      equipmentName: [null, Validators.required],
-      hasBanknoteBox: [false, Validators.required],
-      hasCamera: [false, Validators.required],
-      hasCardReader: [false, Validators.required],
-      hasPrinter: [false, Validators.required],
-      highThreshold: [null, Validators.required],
-      lowThreshold: [null, Validators.required],
-      maximumCashAmount: [null, Validators.required],
-      serialNumber: [null, Validators.required]
+      amountOfCash: [0, [Validators.required]],
+      equipmentName: [null, [Validators.required]],
+      hasBanknoteBox: [true, [Validators.required]],
+      hasCamera: [true, [Validators.required]],
+      hasCardReader: [true, [Validators.required]],
+      hasPrinter: [true, [Validators.required]],
+      highThreshold: [null, [Validators.required]],
+      lowThreshold: [null, [Validators.required]],
+      maximumCashAmount: [null, [Validators.required]],
+      serialNumber: [null, [Validators.required]]
     });
   }
 
@@ -110,6 +110,12 @@ export class EquipmentFormComponent implements OnInit {
 
   submitForm() {
     if (!this.equipmentForm.valid) {
+      for (const i in this.equipmentForm.controls) {
+        if (this.equipmentForm.controls.hasOwnProperty(i)) {
+          this.equipmentForm.controls[ i ].markAsDirty();
+          this.equipmentForm.controls[ i ].updateValueAndValidity();
+        }
+      }
       return;
     }
     if (!this.currentEquipmentId) {

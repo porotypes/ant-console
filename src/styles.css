@@ -13,7 +13,7 @@
   height: 32px;
   line-height: 32px;
 }
-.search .search-form span {
+.search .search-form > span {
   margin-right: 10px;
 }
 .search .search-form .search-label {

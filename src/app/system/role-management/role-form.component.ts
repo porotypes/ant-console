@@ -126,6 +126,13 @@ export class RoleFormComponent implements OnInit {
           this.messageService.error(error.error.msg || '响应超时！');
         }
       );
+    } else {
+      for (const i in this.roleForm.controls) {
+        if (this.roleForm.controls.hasOwnProperty(i)) {
+          this.roleForm.controls[ i ].markAsDirty();
+          this.roleForm.controls[ i ].updateValueAndValidity();
+        }
+      }
     }
   }
 
@@ -147,6 +154,13 @@ export class RoleFormComponent implements OnInit {
           this.messageService.error(error.error.msg || '响应超时！');
         }
       );
+    } else {
+      for (const i in this.roleForm.controls) {
+        if (this.roleForm.controls.hasOwnProperty(i)) {
+          this.roleForm.controls[ i ].markAsDirty();
+          this.roleForm.controls[ i ].updateValueAndValidity();
+        }
+      }
     }
   }
 

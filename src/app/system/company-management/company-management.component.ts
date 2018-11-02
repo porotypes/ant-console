@@ -80,7 +80,7 @@ export class CompanyManagementComponent implements OnInit {
   }
 
   editCompany(company: Company) {
-    this.router.navigate([`/dashboardedit-company/${company.id}`]);
+    this.router.navigate([`/dashboard/edit-company/${company.id}`]);
   }
 
   deleteCompany(company: Company) {
