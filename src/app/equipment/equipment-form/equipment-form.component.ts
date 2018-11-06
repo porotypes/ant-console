@@ -36,15 +36,10 @@ export class EquipmentFormComponent implements OnInit {
   createForm() {
     this.equipmentForm = this.fb.group({
       equipmentId: [null, [Validators.required]],
-      equipmentType: [null, [Validators.required]],
       owner: [null, [Validators.required]],
       address: [null],
       amountOfCash: [0, [Validators.required]],
       equipmentName: [null, [Validators.required]],
-      hasBanknoteBox: [true, [Validators.required]],
-      hasCamera: [true, [Validators.required]],
-      hasCardReader: [true, [Validators.required]],
-      hasPrinter: [true, [Validators.required]],
       highThreshold: [null, [Validators.required]],
       lowThreshold: [null, [Validators.required]],
       maximumCashAmount: [null, [Validators.required]],
@@ -92,15 +87,10 @@ export class EquipmentFormComponent implements OnInit {
   populateForm(equipment: Equipment) {
     this.equipmentForm.patchValue({
       equipmentId: equipment.equipmentId,
-      equipmentType: equipment.equipmentType,
       owner: equipment.owner,
       address: equipment.address,
       amountOfCash: equipment.amountOfCash,
       equipmentName: equipment.equipmentName,
-      hasBanknoteBox: equipment.hasBanknoteBox,
-      hasCamera: equipment.hasCamera,
-      hasCardReader: equipment.hasCardReader,
-      hasPrinter: equipment.hasPrinter,
       highThreshold: equipment.highThreshold,
       lowThreshold: equipment.lowThreshold,
       maximumCashAmount: equipment.maximumCashAmount,

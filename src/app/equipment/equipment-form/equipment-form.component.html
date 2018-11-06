@@ -20,13 +20,6 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>设备类型</nz-form-label>
-    <nz-form-control [nzSpan]="10">
-      <input nz-input formControlName="equipmentType">
-      <nz-form-explain *ngIf="equipmentForm.get('equipmentType').dirty && equipmentForm.get('equipmentType').errors">请输入设备类型!</nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>当前钞票数量</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input formControlName="amountOfCash">
@@ -44,46 +37,6 @@
         </nz-option>
       </nz-select>
       <nz-form-explain *ngIf="equipmentForm.get('owner').dirty && equipmentForm.get('owner').errors">请选择所属公司!</nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>是否有钞箱</nz-form-label>
-    <nz-form-control [nzSpan]="10">
-      <nz-select style="width: 230px;" formControlName="hasBanknoteBox">
-        <nz-option [nzValue]="true" [nzLabel]="'有'"></nz-option>
-        <nz-option [nzValue]="false" [nzLabel]="'无'"></nz-option>
-      </nz-select>
-      <nz-form-explain *ngIf="equipmentForm.get('hasBanknoteBox').dirty && equipmentForm.get('hasBanknoteBox').errors">请选择钞箱!</nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>是否有摄像头</nz-form-label>
-    <nz-form-control [nzSpan]="10">
-      <nz-select style="width: 230px;" formControlName="hasCamera">
-        <nz-option [nzValue]="true" [nzLabel]="'有'"></nz-option>
-        <nz-option [nzValue]="false" [nzLabel]="'无'"></nz-option>
-      </nz-select>
-      <nz-form-explain *ngIf="equipmentForm.get('hasCamera').dirty && equipmentForm.get('hasCamera').errors">请选择摄像头!</nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>是否有读卡器</nz-form-label>
-    <nz-form-control [nzSpan]="10">
-      <nz-select style="width: 230px;" formControlName="hasCardReader">
-        <nz-option [nzValue]="true" [nzLabel]="'有'"></nz-option>
-        <nz-option [nzValue]="false" [nzLabel]="'无'"></nz-option>
-      </nz-select>
-      <nz-form-explain *ngIf="equipmentForm.get('hasCardReader').dirty && equipmentForm.get('hasCardReader').errors">请选择读卡器!</nz-form-explain>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>是否有打印机</nz-form-label>
-    <nz-form-control [nzSpan]="10">
-      <nz-select style="width: 230px;" formControlName="hasPrinter">
-        <nz-option [nzValue]="true" [nzLabel]="'有'"></nz-option>
-        <nz-option [nzValue]="false" [nzLabel]="'无'"></nz-option>
-      </nz-select>
-      <nz-form-explain *ngIf="equipmentForm.get('hasPrinter').dirty && equipmentForm.get('hasPrinter').errors">请选择打印机!</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
