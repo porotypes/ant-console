@@ -1,7 +1,7 @@
 <div class="login-wrap" *ngIf="!loginStatus">
   <div class="login" nz-row nzType="flex" nzJustify="space-around" nzAlign="middle">
     <div nz-col nzSpan="6">
-      <h1>ATM数字资产兑换系统</h1>
+      <h1>{{ title | translate }}</h1>
 
       <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
         <nz-form-item>

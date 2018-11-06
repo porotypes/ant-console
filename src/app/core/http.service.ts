@@ -7,15 +7,24 @@ import { Observable } from 'rxjs';
 @Injectable()
 export abstract class HttpService<T> {
 
-  private httpHeader = new HttpHeaders();
-
   constructor(
     private http: HttpClient,
     private storageService: StorageService
   ) {}
 
   private getHttpHeaders(): HttpHeaders {
-    return this.httpHeader.set('Authorization', this.storageService.readStorage('USER_TOKEN'));
+    if (this.storageService.readStorage('Language') === 'en_US') {
+      return new HttpHeaders({
+        'language': 'en_US',
+        'Authorization': this.storageService.readStorage('USER_TOKEN')
+      });
+    } else {
+      return new HttpHeaders({
+        'language': 'zh_CN',
+        'Authorization': this.storageService.readStorage('USER_TOKEN')
+      });
+    }
+
   }
 
   /**

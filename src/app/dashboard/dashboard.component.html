@@ -7,9 +7,9 @@
       <div nz-col nzOffset="10" nzSpan="6">
         <div nz-row>
           <div nz-col nzSpan="8">
-            <nz-select style="width: 100px;" [ngModel]="'zh'">
-              <nz-option nzValue="zh" nzLabel="简体中文"></nz-option>
-              <nz-option nzValue="en" nzLabel="English"></nz-option>
+            <nz-select style="width: 100px;" [ngModel]="selectedLanguage" (ngModelChange)="selectLanguage($event)">
+              <nz-option nzValue="zh_CN" nzLabel="简体中文"></nz-option>
+              <nz-option nzValue="en_US" nzLabel="English"></nz-option>
             </nz-select>
           </div>
           <div nz-col nzSpan="8" nzOffset="2">

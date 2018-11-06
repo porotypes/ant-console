@@ -11,6 +11,7 @@ import { AuthService } from '../core/auth/auth.service';
 import { StorageService } from '../core/storage.service';
 import { LoginService } from '../core/auth/login.service';
 import { ChatInformationService } from '../core/system/chat-information.service';
+import { LanguageService } from '../core/language.service';
 
 import { HttpResponseData } from '../common/http-response-data';
 import { Pagination } from '../common/pagination';
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   unreadInformationNum = 0;
   sub: any;
   timer: any;
+  selectedLanguage = 'zh_CN';
 
   get loginStatus(): boolean {
     return this.storageService.hasStorage('USER_TOKEN')
@@ -41,7 +43,8 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
     private loginService: LoginService,
     private messageService: NzMessageService,
     private router: Router,
-    private chatInformationService: ChatInformationService
+    private chatInformationService: ChatInformationService,
+    private languageService: LanguageService
   ) {}
 
   createForm() {
@@ -89,6 +92,11 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
         this.messageService.error(error.error.msg || '响应超时！');
       }
     );
+  }
+
+  selectLanguage(lang: string) {
+    this.storageService.writeStorage('language', lang);
+    this.languageService.langEvent.emit();
   }
 
   openDialog() {

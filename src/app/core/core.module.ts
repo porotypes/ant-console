@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { LanguageService } from './language.service';
+
 // auth
 import { LoginService } from './auth/login.service';
 import { AuthService } from './auth/auth.service';
@@ -26,6 +28,8 @@ import { TransactionTypePipe } from './pipe/transaction-type.pipe';
   ],
   providers: [
     // service
+    LanguageService,
+
     LoginService,
     AuthService,
     StorageService,

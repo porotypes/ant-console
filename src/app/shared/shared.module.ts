@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { DateTimeUtil } from './date-time-util';
 
@@ -12,10 +10,6 @@ import { DateTimeUtil } from './date-time-util';
   providers: [
     DateTimeUtil
   ],
-  declarations: [],
-  exports: [
-    // TranslateHttpLoader,
-    TranslateModule
-  ]
+  declarations: []
 })
 export class SharedModule { }
