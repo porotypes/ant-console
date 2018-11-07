@@ -1,3 +1,152 @@
 {
-  "title": "ATM-CONSOLE"
+  "system_title": "ATM-CONSOLE",
+  "edit_password": "change password",
+  "old_password": "old password",
+  "old_password_tip": "Please input old password!",
+  "new_password": "new password",
+  "new_password_tip": "Please input new password!",
+  "index": "index",
+  "ok": "ok",
+  "cancel": "cancel",
+  "save": "save",
+  "edit": "edit",
+  "delete": "delete",
+  "search": "search",
+  "operation": "operation",
+  "login_out": "login out",
+  "menu": {
+    "equipment": {
+      "equipment_management": "management",
+      "equipment_list": "list",
+      "equipment_cash_amount": "cash amount"
+    },
+    "transaction": {
+      "transaction_management": "management",
+      "transaction_exchange": "exchange",
+      "transaction_record": "record"
+    },
+    "statistics": {
+      "statistics": "statistics",
+      "equipment_statistics": "equipment",
+      "company_statistics": "company"
+    },
+    "setting": {
+      "setting": "setting",
+      "company": "company",
+      "role": "role",
+      "account": "account",
+      "coustomer_service": "coustomer service"
+    }
+  },
+  "login": {
+    "username": "username",
+    "username_input_tip": "Please input your username!",
+    "password": "password",
+    "password_input_tip": "Please input your password!",
+    "login": "log in"
+  },
+  "trading": {
+    "transaction_flow_number": "transaction flow number",
+    "export_excel": "export excel",
+    "equipment_id": "equipment id",
+    "number_of_transaction": "number of transaction",
+    "transaction_currency": "transaction currency",
+    "transaction_amount": "transaction amount($)",
+    "transaction_type": "transaction type",
+    "transaction_time": "transaction time"
+  },
+  "account": {
+    "login_name": "login name",
+    "login_name_tip": "Please input login name!",
+    "address": "address",
+    "address_tip": "Please input address!",
+    "company": "company",
+    "company_tip": "Please select company!",
+    "phone_number": "phone number",
+    "phone_number_tip": "Please input phone number!",
+    "email": "email",
+    "email_tip": "Please input email!",
+    "role": "role",
+    "role_tip": "Please select role!",
+    "reset_password": "reset password",
+    "reset_password_tip": "Make sure to reset the password for this account？",
+    "delete_password_tip": "Are you sure you want to delete this account?",
+    "create_account": "create_account"
+  },
+  "company": {
+    "create_company": "create company",
+    "company_name": "company name",
+    "company_full_name": "company full name",
+    "company_full_name_tip": "Please input company full name!",
+    "company_short_name": "company short name",
+    "address": "company address",
+    "contact": "contact",
+    "phone": "phone",
+    "email": "email",
+    "email_tip": "Please input company email!",
+    "port": "port",
+    "port_tip": "Please input company port!",
+    "delete_company_tip": "Make sure to delete the company?"
+  },
+  "custom_service": {
+    "contact_customer_service": "contact customer service",
+    "information_list": "information list",
+    "new": "new",
+    "mark_as_read": "mark as read",
+    "reply": "reply",
+    "has_been_sent": "has been sent",
+    "total": "total"
+  },
+  "role": {
+    "role_name": "role name",
+    "role_name_tip": "Please input role name!",
+    "permission": "permission",
+    "create_role": "create role",
+    "delete_role_tip": "Make sure to delete the role?"
+  },
+  "statistics": {
+    "company": {
+      "date_rang": "date rang",
+      "start_time": "start time",
+      "end_time": "end time",
+      "company": "company",
+      "equipment_id": "equipment ID",
+      "transaction_type": "transaction type",
+      "num_of_transactions": "num of transactions",
+      "coin_type": "coin type",
+      "transaction_num": "transaction num",
+      "currency_type": "currency type",
+      "transaction_amount": "transaction amount",
+      "unlimited": "unlimited"
+    }
+  },
+  "equipment": {
+    "equipment_status": "equipment status",
+    "all": "all",
+    "normal": "normal",
+    "borken_netword": "borken netword",
+    "fault": "fault",
+    "download_excel_template": "download excel template",
+    "import_equipment": "import equipment",
+    "create_equipment": "create equipment",
+    "equipment_id": "equipment ID",
+    "company": "company",
+    "problem": "problem",
+    "delete_tip": "Are you sure you want to delete this device?",
+    "equipment_id_tip": "Please input equipment id!",
+    "equipment_name": "equipment name",
+    "equipment_name_tip": "Please input equipment name!",
+    "equipment_address": "equipment address",
+    "amount_of_cash": "amount of cash",
+    "amount_of_cash_tip": "Please input amount of cash!",
+    "company_tip": "Please select company!",
+    "high_threshold": "high threshold",
+    "high_threshold_tip": "Please input high threshold!",
+    "low_threshold": "low threshold",
+    "low_threshold_tip": "Please input low threshold!",
+    "maximum_cash_amount": "maximum cash amount",
+    "maximum_cash_amount_tip": "Please input maximum cash amount!",
+    "serial_number": "serial number",
+    "serial_number_tip": "Please input serial number!"
+  }
 }

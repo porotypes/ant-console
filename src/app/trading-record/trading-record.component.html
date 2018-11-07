@@ -1,11 +1,11 @@
 <div class="search">
   <div class="search-form">
-    <span class="search-label">交易流水号</span>
+    <span class="search-label">{{ 'trading.transaction_flow_number' | translate }}</span>
     <span class="search-input"><input nz-input [(ngModel)]="transactionId"></span>
-    <span class="search-button"><button nz-button nzType="primary" (click)="searchTradingRecord()">查询</button></span>
+    <span class="search-button"><button nz-button nzType="primary" (click)="searchTradingRecord()">{{ 'search' | translate }}</button></span>
   </div>
   <div class="add">
-    <button (click)="exportExcel()" nzType="primary" nz-button>导出当前数据为Excel</button>
+    <button (click)="exportExcel()" nzType="primary" nz-button>{{ 'trading.export_excel' | translate }}</button>
   </div>
 </div>
 
@@ -20,14 +20,14 @@
   (nzPageSizeChange)="changePageOrSize($event, true)">
   <thead>
     <tr>
-      <th>序号</th>
-      <th>设备ID</th>
-      <th>交易流水号</th>
-      <th>交易数量</th>
-      <th>交易币种</th>
-      <th>交易金额($)</th>
-      <th>交易类型</th>
-      <th>交易时间</th>
+      <th>{{ 'index' | translate }}</th>
+      <th>{{ 'trading.equipment_id' | translate }}</th>
+      <th>{{ 'trading.transaction_flow_number' | translate }}</th>
+      <th>{{ 'trading.number_of_transaction' | translate }}</th>
+      <th>{{ 'trading.transaction_currency' | translate }}</th>
+      <th>{{ 'trading.transaction_amount' | translate }}</th>
+      <th>{{ 'trading.transaction_type' | translate }}</th>
+      <th>{{ 'trading.transaction_time' | translate }}</th>
     </tr>
   </thead>
   <tbody>
@@ -39,7 +39,7 @@
       <td>{{ trading.currency }}</td>
       <td>{{ trading.currentPrice }}</td>
       <td>{{ trading.transactionType | transactionType }}</td>
-      <td>{{ trading.transactionTime }}</td>
+      <td>{{ trading.transactionTime | date: 'yyyy-MM-dd HH:SS:ss' }}</td>
     </tr>
   </tbody>
 </nz-table>

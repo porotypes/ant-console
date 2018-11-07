@@ -1,6 +1,6 @@
 <div class="search" *ngIf="authService.isCanAddRole()">
   <div class="add">
-    <button nz-button nzType="primary" routerLink="/dashboard/add-role">创建角色</button>
+    <button nz-button nzType="primary" routerLink="/dashboard/add-role">{{ 'role.create_role' | translate }}</button>
   </div>
 </div>
 
@@ -15,9 +15,9 @@
   (nzPageSizeChange)="changePageOrSize($event, true)">
   <thead>
     <tr>
-      <th>序号</th>
-      <th>角色名</th>
-      <th>操作</th>
+      <th>{{ 'index' | translate }}</th>
+      <th>{{ 'role.role_name' | translate }}</th>
+      <th>{{ 'operation' | translate }}</th>
     </tr>
   </thead>
   <tbody>
@@ -29,16 +29,18 @@
           *ngIf="authService.isCanUpdateRole()"
           nz-button
           nzType="primary"
-          (click)="editRole(role)">修改</button>
+          (click)="editRole(role)">{{ 'edit' | translate }}</button>
         <nz-divider *ngIf="authService.isCanUpdateRole()" nzType="vertical"></nz-divider>
         <button
           *ngIf="authService.isCanDeleteRole()"
           nz-button
           nzType="danger"
           nz-popconfirm
-          nzTitle="确定删除该角色?"
+          [nzOkText]="'ok' | translate"
+          [nzCancelText]="'cancel' | translate"
+          [nzTitle]="'role.delete_role_tip' | translate"
           (nzOnConfirm)="deleteRole(role)">
-          删除
+          {{ 'delete' | translate }}
         </button>
       </td>
     </tr>

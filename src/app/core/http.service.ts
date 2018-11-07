@@ -13,7 +13,7 @@ export abstract class HttpService<T> {
   ) {}
 
   private getHttpHeaders(): HttpHeaders {
-    if (this.storageService.readStorage('Language') === 'en_US') {
+    if (this.storageService.readStorage('language') === 'en_US') {
       return new HttpHeaders({
         'language': 'en_US',
         'Authorization': this.storageService.readStorage('USER_TOKEN')
@@ -24,7 +24,6 @@ export abstract class HttpService<T> {
         'Authorization': this.storageService.readStorage('USER_TOKEN')
       });
     }
-
   }
 
   /**

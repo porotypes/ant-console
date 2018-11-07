@@ -3,6 +3,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { RoleService } from '../../core/system/role.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
+import { LanguageService } from '../../core/language.service';
 
 import { HttpResponseData } from '../../common/http-response-data';
 import { Pagination } from '../../common/pagination';
@@ -22,7 +23,8 @@ export class RoleManagementComponent implements OnInit {
     public authService: AuthService,
     private roleService: RoleService,
     private messageService: NzMessageService,
-    private router: Router
+    private router: Router,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit() {
@@ -41,7 +43,11 @@ export class RoleManagementComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -72,7 +78,11 @@ export class RoleManagementComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }

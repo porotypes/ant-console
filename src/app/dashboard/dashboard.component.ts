@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   isSaving = false;
   unreadInformationNum = 0;
   sub: any;
+  langSub: any;
   timer: any;
   selectedLanguage = 'zh_CN';
 
@@ -57,8 +58,12 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   ngOnInit() {
     this.createForm();
     this.getUnreadChatInformationNum();
+    this.selectedLanguage = this.storageService.readStorage('language');
     this.sub = this.chatInformationService.getList.subscribe((total: number) => {
       this.getUnreadChatInformationNum();
+    });
+    this.langSub = this.languageService.lang.subscribe((lang: string) => {
+      this.languageService.currentLang = lang;
     });
   }
 
@@ -72,6 +77,7 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.langSub.unsubscribe();
     clearInterval(this.timer);
   }
 
@@ -89,7 +95,11 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -115,7 +125,11 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
         this.isSaving = false;
         if (res.status === 200) {
           this.isShowChangePswDialog = false;
-          this.messageService.success('账号信息变更，请重新登录!');
+          if (this.languageService.currentLang === 'zh_CN') {
+            this.messageService.success('账号信息变更，请重新登录!');
+          } else {
+            this.messageService.success('Change of account information, please login again!');
+          }
           this.storageService.removeStorage('USER_TOKEN');
           this.router.navigate(['/login']);
         } else {
@@ -124,7 +138,11 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
       },
       error => {
         this.isSaving = false;
-        this.messageService.error(error.error.msg);
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }

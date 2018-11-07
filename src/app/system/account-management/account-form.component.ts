@@ -9,6 +9,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { RoleService } from '../../core/system/role.service';
 import { CompanyService } from '../../core/system/company.service';
 import { AccountService } from '../../core/system/account.service';
+import { LanguageService } from '../../core/language.service';
 
 import { HttpResponseData } from 'src/app/common/http-response-data';
 import { Pagination } from '../../common/pagination';
@@ -38,7 +39,8 @@ export class AccountFormComponent implements OnInit {
     private roleService: RoleService,
     private accountService: AccountService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private languageService: LanguageService
   ) { }
 
   private createForm() {
@@ -78,7 +80,11 @@ export class AccountFormComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -94,7 +100,11 @@ export class AccountFormComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -110,7 +120,11 @@ export class AccountFormComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -155,7 +169,11 @@ export class AccountFormComponent implements OnInit {
         },
         error => {
           this.isSaving = false;
-          this.messageService.error(error.error.msg || '响应超时！');
+          if (this.languageService.currentLang === 'zh_CN') {
+            this.messageService.error(error.error.msg || '响应超时！');
+          } else {
+            this.messageService.error(error.error.msg || 'Server response timeout!');
+          }
         }
       );
     } else {
@@ -183,7 +201,11 @@ export class AccountFormComponent implements OnInit {
         },
         error => {
           this.isSaving = false;
-          this.messageService.error(error.error.msg || '响应超时！');
+          if (this.languageService.currentLang === 'zh_CN') {
+            this.messageService.error(error.error.msg || '响应超时！');
+          } else {
+            this.messageService.error(error.error.msg || 'Server response timeout!');
+          }
         }
       );
     } else {

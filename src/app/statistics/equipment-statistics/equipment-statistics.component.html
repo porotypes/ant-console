@@ -1,26 +1,27 @@
 <div class="search">
   <div class="search-form">
-    <span class="label">时间范围</span>
+    <span class="label">{{ 'statistics.company.date_rang' | translate }}</span>
     <span class="input">
       <nz-date-picker
         [nzDisabledDate]="disabledStartDate"
         nzShowTime
         nzFormat="yyyy-MM-dd HH:mm:ss"
         [(ngModel)]="startTimeValue"
-        nzPlaceHolder="开始时间">
+        [nzPlaceHolder]="'statistics.company.start_time' | translate">
       </nz-date-picker>
+      -
       <nz-date-picker
         [nzDisabledDate]="disabledEndDate"
         nzShowTime
         nzFormat="yyyy-MM-dd HH:mm:ss"
         [(ngModel)]="endTimeValue"
-        nzPlaceHolder="结束时间">
+        [nzPlaceHolder]="'statistics.company.end_time' | translate">
       </nz-date-picker>
     </span>
-    <span class="label" *ngIf="authService.isAdmin()">公司</span>
+    <span class="label" *ngIf="authService.isAdmin()">{{ 'statistics.company.company' | translate }}</span>
     <span class="input" *ngIf="authService.isAdmin()">
       <nz-select style="width: 230px;" [(ngModel)]="selectedCompany">
-        <nz-option [nzValue]="''" [nzLabel]="'不限'"></nz-option>
+        <nz-option [nzValue]="''" [nzLabel]="'statistics.company.unlimited' | translate"></nz-option>
         <nz-option
           *ngFor="let company of companies"
           [nzValue]="company.id" 
@@ -29,7 +30,7 @@
       </nz-select>
     </span>
     <span class="button">
-      <button nz-button nzType="primary" (click)="search()">查询</button>
+      <button nz-button nzType="primary" (click)="search()">{{ 'search' | translate }}</button>
     </span>
   </div>
 </div>
@@ -41,14 +42,14 @@
   [nzData]="statisticsList">
   <thead>
     <tr>
-      <th>序号</th>
-      <th>设备ID</th>
-      <th>交易类型</th>
-      <th>交易总数</th>
-      <th>虚拟币种</th>
-      <th>虚拟币交易数</th>
-      <th>货币类型</th>
-      <th>货币交易额</th>
+      <th>{{ 'index' | translate }}</th>
+      <th>{{ 'statistics.company.equipment_id' | translate }}</th>
+      <th>{{ 'statistics.company.transaction_type' | translate }}</th>
+      <th>{{ 'statistics.company.num_of_transactions' | translate }}</th>
+      <th>{{ 'statistics.company.coin_type' | translate }}</th>
+      <th>{{ 'statistics.company.transaction_num' | translate }}</th>
+      <th>{{ 'statistics.company.currency_type' | translate }}</th>
+      <th>{{ 'statistics.company.transaction_amount' | translate }}</th>
     </tr>
   </thead>
   <tbody>

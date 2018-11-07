@@ -2,7 +2,7 @@
   <nz-header>
     <div nz-row>
       <div nz-col nzSpan="8">
-        <h1 class="title">ATM数字资产兑换系统</h1>
+        <h1 class="title">{{ 'system_title' | translate }}</h1>
       </div>
       <div nz-col nzOffset="10" nzSpan="6">
         <div nz-row>
@@ -16,8 +16,8 @@
             <nz-dropdown-button>
               {{ authService.user.username }}
               <ul nz-menu>
-                <li nz-menu-item (click)="openDialog()">修改密码</li>
-                <li nz-menu-item (click)="loginOut()">退出</li>
+                <li nz-menu-item (click)="openDialog()">{{ 'edit_password' | translate }}</li>
+                <li nz-menu-item (click)="loginOut()">{{ 'login_out' | translate }}</li>
               </ul>
             </nz-dropdown-button>
           </div>
@@ -30,38 +30,38 @@
       <ul nz-menu [nzMode]="'inline'" style="height: calc(100vh - 64px)" [nzTheme]="'dark'">
         <!-- <li nz-menu-item routerLink="/dashboard/home"><i class="anticon anticon-home"></i>首页</li> -->
         <li *ngIf="authService.isCanShowEquipmentList()" nz-submenu [nzOpen]="true">
-          <span title><i class="anticon anticon-desktop"></i>设备管理</span>
+          <span title><i class="anticon anticon-desktop"></i>{{ 'menu.equipment.equipment_management' | translate }}</span>
           <ul>
-            <li nz-menu-item routerLink="/dashboard/equipment-list">设备列表</li>
-            <li nz-menu-item routerLink="/dashboard/equipment-cash">设备现金量</li>
+            <li nz-menu-item routerLink="/dashboard/equipment-list">{{ 'menu.equipment.equipment_list' | translate }}</li>
+            <li nz-menu-item routerLink="/dashboard/equipment-cash">{{ 'menu.equipment.equipment_cash_amount' | translate }}</li>
             <!-- <li nz-menu-item routerLink="/dashboard/equipment-map">设备位置</li> -->
           </ul>
         </li>
         <li *ngIf="authService.isCanTansactionStatistice()" nz-submenu [nzOpen]="true">
-          <span title><i class="anticon anticon-laptop"></i>交易管理</span>
+          <span title><i class="anticon anticon-shopping-cart"></i>{{ 'menu.transaction.transaction_management' | translate }}</span>
           <ul>
-            <li nz-menu-item routerLink="/dashboard/exchange">交易所</li>
-            <li nz-menu-item routerLink="/dashboard/trading-record">交易流水</li>
+            <li nz-menu-item routerLink="/dashboard/exchange">{{ 'menu.transaction.transaction_exchange' | translate }}</li>
+            <li nz-menu-item routerLink="/dashboard/trading-record">{{ 'menu.transaction.transaction_record' | translate }}</li>
           </ul>
         </li>
         <li nz-submenu [nzOpen]="true">
-          <span title><i class="anticon anticon-laptop"></i>统计分析</span>
+          <span title><i class="anticon anticon-laptop"></i>{{ 'menu.statistics.statistics' | translate }}</span>
           <ul>
-            <li nz-menu-item routerLink="/dashboard/equipment-statistics">设备流水</li>
+            <li nz-menu-item routerLink="/dashboard/equipment-statistics">{{ 'menu.statistics.equipment_statistics' | translate }}</li>
             <!-- <li nz-menu-item>数字资产流水</li> -->
-            <li nz-menu-item routerLink="/dashboard/company-statistics">公司流水</li>
+            <li nz-menu-item routerLink="/dashboard/company-statistics">{{ 'menu.statistics.company_statistics' | translate }}</li>
             <!-- <li nz-menu-item>区域分布统计</li> -->
             <!-- <li nz-menu-item>设备故障统计</li> -->
           </ul>
         </li>
         <li nz-submenu [nzOpen]="true">
-          <span title><i class="anticon anticon-setting"></i>系统管理</span>
+          <span title><i class="anticon anticon-setting"></i>{{ 'menu.setting.setting' | translate }}</span>
           <ul>
-            <li *ngIf="authService.isCanShowCompanyList()" nz-menu-item routerLink="/dashboard/company-management">公司管理</li>
-            <li *ngIf="authService.isCanShowRoleList()" nz-menu-item routerLink="/dashboard/role-management">角色管理</li>
-            <li *ngIf="authService.isCanShowUserList()" nz-menu-item routerLink="/dashboard/account-management">账号管理</li>
+            <li *ngIf="authService.isCanShowCompanyList()" nz-menu-item routerLink="/dashboard/company-management">{{ 'menu.setting.company' | translate }}</li>
+            <li *ngIf="authService.isCanShowRoleList()" nz-menu-item routerLink="/dashboard/role-management">{{ 'menu.setting.role' | translate }}</li>
+            <li *ngIf="authService.isCanShowUserList()" nz-menu-item routerLink="/dashboard/account-management">{{ 'menu.setting.account' | translate }}</li>
             <li nz-menu-item routerLink="/dashboard/customer-service">
-              <span style="margin-right: 5px;">在线客服</span>
+              <span style="margin-right: 5px;">{{ 'menu.setting.coustomer_service' | translate }}</span>
               <nz-badge [nzCount]="unreadInformationNum"></nz-badge>
             </li>
           </ul>
@@ -78,23 +78,25 @@
 
 <nz-modal
   [(nzVisible)]="isShowChangePswDialog"
-  nzTitle="修改密码"
+  [nzTitle]=" 'edit_password' | translate "
+  [nzCancelText]="'cancel' | translate"
+  [nzOkText]="'ok' | translate"
   (nzOnCancel)="closeDialog()"
   (nzOnOk)="changePassword()"
   [nzOkLoading]="isSaving">
   <form nz-form [formGroup]="changePswForm" (ngSubmit)="submitForm()">
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>原密码</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>{{ 'old_password' | translate }}</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
         <input type="password" nz-input formControlName="oldPassword">
-        <nz-form-explain *ngIf="changePswForm.get('oldPassword').dirty && changePswForm.get('oldPassword').errors">请输入原密码!</nz-form-explain>
+        <nz-form-explain *ngIf="changePswForm.get('oldPassword').dirty && changePswForm.get('oldPassword').errors">{{ 'old_password_tip' | translate }}</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>新密码</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>{{ 'new_password' | translate }}</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
         <input type="password" nz-input formControlName="newPassword">
-        <nz-form-explain *ngIf="changePswForm.get('newPassword').dirty && changePswForm.get('newPassword').errors">请输入新密码!</nz-form-explain>
+        <nz-form-explain *ngIf="changePswForm.get('newPassword').dirty && changePswForm.get('newPassword').errors">{{ 'new_password_tip' | translate }}</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
   </form>

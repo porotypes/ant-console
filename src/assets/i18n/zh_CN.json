@@ -1,3 +1,152 @@
 {
-  "title": "ATM数字资产兑换系统"
+  "system_title": "ATM数字资产兑换系统",
+  "edit_password": "修改密码",
+  "old_password": "原密码",
+  "old_password_tip": "请输入原密码!",
+  "new_password": "新密码",
+  "new_password_tip": "请输入新密码!",
+  "index": "序号",
+  "ok": "确认",
+  "cancel": "取消",
+  "edit": "修改",
+  "delete": "删除",
+  "save": "保存",
+  "search": "查询",
+  "operation": "操作",
+  "login_out": "退出",
+  "menu": {
+    "equipment": {
+      "equipment_management": "设备管理",
+      "equipment_list": "设备列表",
+      "equipment_cash_amount": "设备现金量"
+    },
+    "transaction": {
+      "transaction_management": "交易管理",
+      "transaction_exchange": "交易所",
+      "transaction_record": "交易流水"
+    },
+    "statistics": {
+      "statistics": "统计分析",
+      "equipment_statistics": "设备流水",
+      "company_statistics": "公司流水"
+    },
+    "setting": {
+      "setting": "系统管理",
+      "company": "公司管理",
+      "role": "角色管理",
+      "account": "账号管理",
+      "coustomer_service": "在线客服"
+    }
+  },
+  "login": {
+    "username": "用户名",
+    "username_input_tip": "请输入用户名!",
+    "password": "密码",
+    "password_input_tip": "请输入密码!",
+    "login": "登录"
+  },
+  "trading": {
+    "transaction_flow_number": "交易流水号",
+    "export_excel": "导出当前数据为Excel",
+    "equipment_id": "设备ID",
+    "number_of_transaction": "交易数量",
+    "transaction_currency": "交易币种",
+    "transaction_amount": "交易金额($)",
+    "transaction_type": "交易类型",
+    "transaction_time": "交易时间"
+  },
+  "account": {
+    "login_name": "登录名",
+    "login_name_tip": "请输入的登录名!",
+    "address": "地址",
+    "address_tip": "请输入地址!",
+    "company": "所属公司",
+    "company_tip": "请选择所属公司!",
+    "phone_number": "联系电话",
+    "phone_number_tip": "请输入联系电话!",
+    "email": "邮箱",
+    "email_tip": "请输入邮箱!",
+    "role": "用户身份",
+    "role_tip": "请选择用户身份!",
+    "reset_password": "重置密码",
+    "reset_password_tip": "确定重置该账号的密码？",
+    "delete_password_tip": "确定删除该账号？",
+    "create_account": "创建账号"
+  },
+  "company": {
+    "create_company": "创建公司",
+    "company_name": "公司名",
+    "company_full_name": "公司全称",
+    "company_full_name_tip": "请输入公司全称!",
+    "company_short_name": "公司简称",
+    "address": "地址",
+    "contact": "联系人",
+    "phone": "联系电话",
+    "email": "邮箱",
+    "email_tip": "请输入公司邮箱!",
+    "port": "端口",
+    "port_tip": "请输入端口号!",
+    "delete_company_tip": "确定删除该公司？"
+  },
+  "custom_service": {
+    "contact_customer_service": "联系客服",
+    "information_list": "消息列表",
+    "new": "新",
+    "mark_as_read": "标为已读",
+    "reply": "回复",
+    "has_been_sent": "已发消息",
+    "total": "共"
+  },
+  "role": {
+    "role_name": "角色名",
+    "role_name_tip": "请输入角色名!",
+    "permission": "拥有权限",
+    "create_role": "创建角色",
+    "delete_role_tip": "确定删除该角色?"
+  },
+  "statistics": {
+    "company": {
+      "date_rang": "时间范围",
+      "start_time": "开始时间",
+      "end_time": "结束时间",
+      "company": "公司",
+      "equipment_id": "设备ID",
+      "transaction_type": "交易类型",
+      "num_of_transactions": "交易总数",
+      "coin_type": "虚拟币种",
+      "transaction_num": "虚拟币交易数",
+      "currency_type": "货币类型",
+      "transaction_amount": "交易金额",
+      "unlimited": "不限"
+    }
+  },
+  "equipment": {
+    "equipment_status": "设备状态",
+    "all": "全部",
+    "normal": "正常",
+    "borken_netword": "断网",
+    "fault": "故障",
+    "download_excel_template": "下载exce模板",
+    "import_equipment": "导入设备",
+    "create_equipment": "新增设备",
+    "equipment_id": "设备ID",
+    "company": "公司",
+    "problem": "问题",
+    "delete_tip": "确定删除该设备?",
+    "equipment_id_tip": "请输入设备ID",
+    "equipment_name": "设备名称",
+    "equipment_name_tip": "请输入设备名称!",
+    "equipment_address": "设备所在地",
+    "amount_of_cash": "当前现金量",
+    "amount_of_cash_tip": "请输入当前现金量!",
+    "company_tip": "请选择所属公司!",
+    "high_threshold": "高阈值",
+    "high_threshold_tip": "请输入高阈值!",
+    "low_threshold": "低阈值",
+    "low_threshold_tip": "请输入低阈值!",
+    "maximum_cash_amount": "容纳钞票数",
+    "maximum_cash_amount_tip": "请输入容纳钞票数!",
+    "serial_number": "序列号",
+    "serial_number_tip": "请输入序列号!"
+  }
 }

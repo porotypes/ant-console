@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../../core/system/account.service';
 import { AuthService } from '../../core/auth/auth.service';
+import { LanguageService } from '../../core/language.service';
 import { NzMessageService } from 'ng-zorro-antd';
 
 import { Pagination } from '../../common/pagination';
@@ -22,7 +23,8 @@ export class AccountManagementComponent implements OnInit {
     private accountService: AccountService,
     private messageService: NzMessageService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit() {
@@ -40,7 +42,11 @@ export class AccountManagementComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -60,13 +66,17 @@ export class AccountManagementComponent implements OnInit {
     this.authService.resetPassword(account.id).subscribe(
       (res: HttpResponseData<any>) => {
         if (res.status === 200) {
-          this.messageService.success('重置密码成功');
+          this.messageService.success(res.msg);
         } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -86,7 +96,11 @@ export class AccountManagementComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../core/auth/login.service';
 import { AuthService } from '../core/auth/auth.service';
 import { StorageService } from '../core/storage.service';
+import { LanguageService } from '../core/language.service';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
     private messageService: NzMessageService,
     private loginService: LoginService,
     private authService: AuthService,
+    private languageService: LanguageService,
     private storageService: StorageService
   ) { }
 
@@ -52,7 +54,11 @@ export class LoginComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }

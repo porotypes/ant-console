@@ -7,6 +7,8 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { CompanyService } from '../../core/system/company.service';
+import { LanguageService } from '../../core/language.service';
+
 import { HttpResponseData } from '../../common/http-response-data';
 import { Company } from '../../common/company';
 
@@ -26,7 +28,8 @@ export class CompanyFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private companyService: CompanyService,
-    private messageService: NzMessageService
+    private messageService: NzMessageService,
+    private languageService: LanguageService
   ) { }
 
   private createForm() {
@@ -59,7 +62,11 @@ export class CompanyFormComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -107,7 +114,11 @@ export class CompanyFormComponent implements OnInit {
       },
       error => {
         this.isSaving = false;
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -126,7 +137,11 @@ export class CompanyFormComponent implements OnInit {
       },
       error => {
         this.isSaving = false;
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }

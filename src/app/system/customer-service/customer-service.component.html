@@ -1,21 +1,21 @@
 <nz-tabset [nzTabPosition]="'left'" [nzType]="'card'">
-  <nz-tab [nzTitle]="'消息列表'">
+  <nz-tab [nzTitle]="'custom_service.information_list' | translate">
     <div class="send-information" *ngIf="!authService.isAdmin()">
-      <button nz-button nzType="primary" nzSize="large" (click)="openDialog()">联系客服</button>
+      <button nz-button nzType="primary" nzSize="large" (click)="openDialog()">{{ 'custom_service.contact_customer_service' | translate }}</button>
     </div>
     <div class="chat-information" *ngFor="let information of receivePagination.records">
       <div class="header">
         <span class="title">
           {{ information.senderName }}
-          <i class="unread" *ngIf="!information.isRead">新</i>
+          <i class="unread" *ngIf="!information.isRead">{{ 'custom_service.new' | translate }}</i>
         </span>
         <span class="time">{{ information.sendTime | date: 'yyyy-MM-dd HH:SS:ss' }}</span>
       </div>
       <div class="content">{{ information.content }}</div>
       <div class="footer">
-        <button nzType="primary" nzSize="small" nz-button (click)="patchChatInformation(information)">标为已读</button>
+        <button nzType="primary" nzSize="small" nz-button (click)="patchChatInformation(information)">{{ 'custom_service.mark_as_read' | translate }}</button>
         <nz-divider nzType="vertical"></nz-divider>
-        <button nzType="primary" nzSize="small" nz-button (click)="openDialog(information)">回复</button>
+        <button nzType="primary" nzSize="small" nz-button (click)="openDialog(information)">{{ 'custom_service.reply' | translate }}</button>
       </div>
     </div>
     <div class="pagination">
@@ -31,7 +31,7 @@
       </nz-pagination>
     </div>
   </nz-tab>
-  <nz-tab [nzTitle]="'已发消息'">
+  <nz-tab [nzTitle]="'custom_service.has_been_sent' | translate">
     <div class="chat-information" *ngFor="let information of sendPagination.records">
       <div class="header">
         <span class="title">{{ information.senderName }}</span>
@@ -54,10 +54,10 @@
   </nz-tab>
 </nz-tabset>
 
-<nz-modal [(nzVisible)]="isShowDialog" nzTitle="联系客服" (nzOnCancel)="closeDialog()" (nzOnOk)="send()">
+<nz-modal [(nzVisible)]="isShowDialog" nzTitle="'custom_service.contact_customer_service' | translate" (nzOnCancel)="closeDialog()" (nzOnOk)="send()">
   <textarea rows="4" nz-input [(ngModel)]="content"></textarea>
 </nz-modal>
 
 <ng-template #totalTemplate let-total>
-  共 {{ total }} 条
+  {{ 'custom_service.total' | translate }} {{ total }} {{ isLangOfZh ? '条' : '' }}
 </ng-template>

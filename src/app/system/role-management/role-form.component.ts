@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { PermissionService } from '../../core/system/permission.service';
 import { RoleService } from '../../core/system/role.service';
+import { LanguageService } from '../../core/language.service';
 
 import { HttpResponseData } from 'src/app/common/http-response-data';
 import { Permission } from '../../common/Permission';
@@ -31,7 +32,8 @@ export class RoleFormComponent implements OnInit {
     private messageService: NzMessageService,
     private roleService: RoleService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private languageService: LanguageService
   ) { }
 
   private createForm() {
@@ -65,7 +67,11 @@ export class RoleFormComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -80,7 +86,11 @@ export class RoleFormComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -123,7 +133,11 @@ export class RoleFormComponent implements OnInit {
         },
         error => {
           this.isSaving = false;
-          this.messageService.error(error.error.msg || '响应超时！');
+          if (this.languageService.currentLang === 'zh_CN') {
+            this.messageService.error(error.error.msg || '响应超时！');
+          } else {
+            this.messageService.error(error.error.msg || 'Server response timeout!');
+          }
         }
       );
     } else {
@@ -151,7 +165,11 @@ export class RoleFormComponent implements OnInit {
         },
         error => {
           this.isSaving = false;
-          this.messageService.error(error.error.msg || '响应超时！');
+          if (this.languageService.currentLang === 'zh_CN') {
+            this.messageService.error(error.error.msg || '响应超时！');
+          } else {
+            this.messageService.error(error.error.msg || 'Server response timeout!');
+          }
         }
       );
     } else {

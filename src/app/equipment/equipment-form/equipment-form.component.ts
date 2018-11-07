@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { EquipmentService } from '../../core/equipment/equipment.service';
 import { CompanyService } from '../../core/system/company.service';
+import { LanguageService } from '../../core/language.service';
 
 import { HttpResponseData } from 'src/app/common/http-response-data';
 import { Pagination } from 'src/app/common/pagination';
@@ -30,7 +31,8 @@ export class EquipmentFormComponent implements OnInit {
     private companyService: CompanyService,
     private messageService: NzMessageService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private languageService: LanguageService
   ) { }
 
   createForm() {
@@ -64,7 +66,11 @@ export class EquipmentFormComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -79,7 +85,11 @@ export class EquipmentFormComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -119,14 +129,18 @@ export class EquipmentFormComponent implements OnInit {
     this.equipmentService.addEquipment(this.equipmentForm.value).subscribe(
       (res: HttpResponseData<Pagination<Equipment>>) => {
         if (res.status === 200) {
-          this.messageService.success('添加成功');
+          this.messageService.success(res.msg);
           this.router.navigate(['/dashboard/equipment-list']);
         } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -136,14 +150,18 @@ export class EquipmentFormComponent implements OnInit {
     this.equipmentService.updateEquipment(this.equipmentForm.value).subscribe(
       (res: HttpResponseData<Pagination<Equipment>>) => {
         if (res.status === 200) {
-          this.messageService.success('修改成功');
+          this.messageService.success(res.msg);
           this.router.navigate(['/dashboard/equipment-list']);
         } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }

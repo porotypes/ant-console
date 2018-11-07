@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 
 import { EquipmentService } from '../../core/equipment/equipment.service';
 import { AuthService } from '../../core/auth/auth.service';
+import { LanguageService } from '../../core/language.service';
 
 import { Pagination } from 'src/app/common/pagination';
 import { Equipment } from 'src/app/common/equipment';
@@ -31,7 +32,8 @@ export class EquipmentListComponent implements OnInit {
     private equipmentService: EquipmentService,
     private messageService: NzMessageService,
     private router: Router,
-    public authService: AuthService
+    public authService: AuthService,
+    private languageService: LanguageService
   ) {}
 
   ngOnInit() {
@@ -116,14 +118,18 @@ export class EquipmentListComponent implements OnInit {
     this.equipmentService.deleteEquipment(equipment).subscribe(
       (res: HttpResponseData<Equipment>) => {
         if (res.status === 200) {
-          this.messageService.success('删除成功');
+          this.messageService.success(res.msg);
           this.getEquipmentList();
         } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时!');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
