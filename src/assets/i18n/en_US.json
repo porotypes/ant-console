@@ -28,7 +28,8 @@
     "statistics": {
       "statistics": "statistics",
       "equipment_statistics": "equipment",
-      "company_statistics": "company"
+      "company_statistics": "company",
+      "fault_statistics": "fault"
     },
     "setting": {
       "setting": "setting",
@@ -118,6 +119,14 @@
       "currency_type": "currency type",
       "transaction_amount": "transaction amount",
       "unlimited": "unlimited"
+    },
+    "fault": {
+      "search_type": "search type",
+      "query_by_device": "query by device",
+      "query_by_company": "query by company",
+      "company": "company name",
+      "equipment_type": "equipment type",
+      "error_count": "error count"
     }
   },
   "equipment": {

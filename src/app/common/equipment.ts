@@ -14,6 +14,7 @@ export class Equipment {
   highThreshold: number;
   amountOfCash: number;
   address: string;
+  companyName: string;
   status: number;
   detailed: string;
   display: string;

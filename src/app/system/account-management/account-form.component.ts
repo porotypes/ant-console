@@ -10,6 +10,7 @@ import { RoleService } from '../../core/system/role.service';
 import { CompanyService } from '../../core/system/company.service';
 import { AccountService } from '../../core/system/account.service';
 import { LanguageService } from '../../core/language.service';
+import { AuthService } from '../../core/auth/auth.service';
 
 import { HttpResponseData } from 'src/app/common/http-response-data';
 import { Pagination } from '../../common/pagination';
@@ -39,6 +40,7 @@ export class AccountFormComponent implements OnInit {
     private roleService: RoleService,
     private accountService: AccountService,
     private route: ActivatedRoute,
+    public authService: AuthService,
     private router: Router,
     private languageService: LanguageService
   ) { }
@@ -51,7 +53,7 @@ export class AccountFormComponent implements OnInit {
       address: [null, [Validators.required]],
       email: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      companyId: [null, [Validators.required]],
+      companyId: [this.authService.decodeToken().companyId, [Validators.required]],
       roles: [[], Validators.required]
     });
   }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
 
 import { HttpService } from '../http.service';
 
@@ -12,6 +13,11 @@ export class StatisticsService extends HttpService<EquipmentStatistics> {
 
   getEquipmentStatisticsList(condition: Object) {
     return super.post(this.URL, condition);
+  }
+
+  getFaultStatisticsList(condition: Object) {
+    const url = `${this.URL}/getByEquipmentError`;
+    return super.post(url, condition);
   }
 
 }

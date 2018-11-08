@@ -7,25 +7,26 @@ import { CompanyService } from '../../core/system/company.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { LanguageService } from '../../core/language.service';
 
-import { EquipmentStatistics } from '../../common/Equipment-statistics';
+import { Company } from 'src/app/common/company';
+import { FaultStatistics } from 'src/app/common/fault-statistics';
 import { HttpResponseData } from 'src/app/common/http-response-data';
 import { Pagination } from 'src/app/common/pagination';
-import { Company } from 'src/app/common/company';
 
 @Component({
-  selector: 'app-company-statistics',
-  templateUrl: './company-statistics.component.html',
-  styleUrls: ['./company-statistics.component.css']
+  selector: 'app-fault-statistics',
+  templateUrl: './fault-statistics.component.html',
+  styleUrls: ['./fault-statistics.component.css']
 })
-export class CompanyStatisticsComponent implements OnInit {
+export class FaultStatisticsComponent implements OnInit {
 
   startTimeValue = DateTimeUtil.getStartTimeString(new Date());
   endTimeValue = DateTimeUtil.getEndTimeString(new Date());
-  selectedCompany: number;
-  statisticsList: EquipmentStatistics[];
+  selectedType = '0';
+  selectedCompany = '';
   tableLoading = false;
-  pagination = new Pagination<Company>();
   companies: Company[];
+  statisticsList: FaultStatistics[];
+  pagination = new Pagination<Company>();
 
   disabledStartDate = (startTimeValue: Date): boolean => {
     if (!startTimeValue || !this.endTimeValue) {
@@ -50,25 +51,19 @@ export class CompanyStatisticsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.authService.isAdmin()) {
-      this.getAllCompanies();
-    }
+    this.getAllCompanies();
   }
 
-  getEquipmentStatisticsList() {
-    // if (!this.selectedCompany) {
-    //   this.messageService.warning('请选择公司');
-    //   return;
-    // }
+  getFaultStatisticsList() {
     const condition = {
       companyId: this.selectedCompany,
       startTime: DateTimeUtil.formatDateTimeToString(this.startTimeValue),
       endTime: DateTimeUtil.formatDateTimeToString(this.endTimeValue),
-      statisticsType: 0
+      statisticsType: +this.selectedType
     };
     this.tableLoading = true;
-    this.statisticsService.getEquipmentStatisticsList(condition).subscribe(
-      (res: HttpResponseData<EquipmentStatistics[]>) => {
+    this.statisticsService.getFaultStatisticsList(condition).subscribe(
+      (res: HttpResponseData<FaultStatistics[]>) => {
         this.tableLoading = false;
         if (res.status === 200) {
           this.statisticsList = res.obj;
@@ -108,7 +103,7 @@ export class CompanyStatisticsComponent implements OnInit {
   }
 
   search() {
-    this.getEquipmentStatisticsList();
+    this.getFaultStatisticsList();
   }
 
 }

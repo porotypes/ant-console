@@ -9,7 +9,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'account.login_name' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
-      <input nz-input formControlName="username">
+      <input nz-input formControlName="username" [attr.disabled]="currentAccountId">
       <nz-form-explain *ngIf="accountForm.get('username').dirty && accountForm.get('username').errors">{{ 'account.login_name_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
@@ -20,7 +20,7 @@
       <nz-form-explain *ngIf="accountForm.get('address').dirty && accountForm.get('address').errors">{{ 'account.address_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item>
+  <nz-form-item *ngIf="authService.isAdmin()">
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'account.company' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <nz-select formControlName="companyId">
@@ -48,7 +48,7 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>{{ 'login.passowrd' | translate }}</nz-form-label>
+    <nz-form-label [nzSpan]="4" nzRequired>{{ 'login.password' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input type="password" formControlName="password">
       <nz-form-explain *ngIf="accountForm.get('password').dirty && accountForm.get('password').errors">{{ 'login.password_input_tip' | translate }}</nz-form-explain>

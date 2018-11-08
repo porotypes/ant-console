@@ -28,7 +28,8 @@
     "statistics": {
       "statistics": "统计分析",
       "equipment_statistics": "设备流水",
-      "company_statistics": "公司流水"
+      "company_statistics": "公司流水",
+      "fault_statistics": "设备故障统计"
     },
     "setting": {
       "setting": "系统管理",
@@ -118,6 +119,14 @@
       "currency_type": "货币类型",
       "transaction_amount": "交易金额",
       "unlimited": "不限"
+    },
+    "fault": {
+      "search_type": "查询类型",
+      "query_by_device": "按设备查询",
+      "query_by_company": "按公司查询",
+      "company": "公司名称",
+      "equipment_type": "设备类型",
+      "error_count": "故障次数"
     }
   },
   "equipment": {

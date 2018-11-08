@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
 import { CompanyService } from '../../core/system/company.service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { LanguageService } from '../../core/language.service';
 
 import { Company } from '../../common/company';
 import { Pagination } from '../../common/pagination';
@@ -24,7 +25,8 @@ export class CompanyManagementComponent implements OnInit {
     private router: Router,
     public authService: AuthService,
     private companyService: CompanyService,
-    private messageService: NzMessageService
+    private messageService: NzMessageService,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit() {
@@ -42,7 +44,11 @@ export class CompanyManagementComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -74,7 +80,11 @@ export class CompanyManagementComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }
@@ -94,7 +104,11 @@ export class CompanyManagementComponent implements OnInit {
         }
       },
       error => {
-        this.messageService.error(error.error.msg || '响应超时！');
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
       }
     );
   }

@@ -19,8 +19,8 @@ import { Company } from 'src/app/common/company';
 })
 export class EquipmentStatisticsComponent implements OnInit {
 
-  startTimeValue: Date;
-  endTimeValue: Date;
+  startTimeValue = DateTimeUtil.getStartTimeString(new Date());
+  endTimeValue = DateTimeUtil.getEndTimeString(new Date());
   selectedCompany = '';
   statisticsList: EquipmentStatistics[];
   tableLoading = false;

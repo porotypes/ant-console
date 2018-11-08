@@ -96,13 +96,16 @@ export class RoleFormComponent implements OnInit {
   }
 
   populateForm(role: Role) {
-    this.roleForm.patchValue({
-      roleName: role.roleName
-    });
+    const ids = [];
     this.permissions.forEach(permission => {
       if (role.permissions.some(item => permission.id === item['id'])) {
         permission['checked'] = true;
+        ids.push(permission.id);
       }
+    });
+    this.roleForm.patchValue({
+      roleName: role.roleName,
+      permissions: ids
     });
   }
 
