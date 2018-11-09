@@ -11,4 +11,9 @@ export class ExchangeService extends HttpService<any> {
     return super.get(url);
   }
 
+  getHuobiBalance() {
+    const url = `${this.URL}/balance`;
+    return super.get(url);
+  }
+
 }

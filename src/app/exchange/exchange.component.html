@@ -1,12 +1,18 @@
 <h3>火币网</h3>
 
 <div class="item">
-  <p>
-    <span style="margin-right: 20px;">账号：1324798</span>
-    <span>ID：1324798</span>
+  <p *ngFor="let account of accounts">
+    <span style="margin-right: 20px;">ID：{{ account.id }}</span>
+    <span style="margin-right: 20px;">状态：{{ account.state }}</span>
+    <span>类型：{{ account.type }}</span>
   </p>
   <div class="title">资产</div>
-  <nz-table #nzTable [nzData]="" [nzPageSize]="10">
+  <nz-table
+    #basicTable
+    [nzData]="balancesList"
+    [nzLoading]="balanceTableLoading"
+    [nzShowPagination]="false"
+    [nzFrontPagination]="false">
     <thead>
       <tr>
         <th>币种</th>
@@ -15,13 +21,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let i of nzTable.data">
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
+      <tr *ngFor="let i of basicTable.data">
+        <td>{{i.currency}}</td>
+        <td>{{i.balance}}</td>
+        <td>{{i.type}}</td>
       </tr>
     </tbody>
   </nz-table>
+  <div class="pagination">
+    <nz-pagination
+      [nzPageIndex]="balancePageIndex"
+      [nzTotal]="balances.length"
+      (nzPageIndexChange)="changeBalanceIndex($event)">
+   </nz-pagination>
+  </div>
 </div>
 
 <div class="item">

@@ -17,3 +17,8 @@ h3 {
 .search-form {
   width: 100%;
 }
+
+.pagination {
+  margin-top: 10px;
+  text-align: right;
+}
