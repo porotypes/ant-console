@@ -15,11 +15,44 @@ import { HttpResponseData } from '../common/http-response-data';
 export class ExchangeComponent implements OnInit {
 
   accounts: Account[];
+
   balances: Balance[] = [];
   balancesList: Balance[];
   balanceTableLoading = false;
   balancePageIndex = 1;
   balanceTotal: number;
+
+  selectedCurrencyType1: string;
+  selectedCurrencyType2: string;
+
+  currencyType = [
+    { name: 'USDT', en: 'USDT', value: 'usdt' },
+    { name: 'BTC', en: 'BTC', value: 'btc' },
+    { name: 'ETH', en: 'ETH', value: 'eth' },
+    { name: '人民币', en: 'CNY', value: 'cny' },
+    { name: '美元', en: 'USD', value: 'usd' },
+    { name: '新元', en: 'SGD', value: 'sgd' },
+    { name: '卢比', en: 'INR', value: 'inr' },
+    { name: '越南盾', en: 'VND', value: 'vnd' },
+    { name: '加元', en: 'CAD', value: 'cad' },
+    { name: '澳元', en: 'AUD', value: 'aud' },
+    { name: '韩元', en: 'KRW', value: 'krw' },
+    { name: '瑞郎', en: 'CHF', value: 'chf' },
+    { name: '新台币', en: 'TWD', value: 'twd' },
+    { name: '卢布', en: 'RUB', value: 'rub' },
+    { name: '英镑', en: 'GBP', value: 'gbp' },
+    { name: '港元', en: 'HKD', value: 'hkd' },
+    { name: '欧元', en: 'EUR', value: 'eur' },
+    { name: '奈拉', en: 'NGN', value: 'ngn' },
+    { name: '印尼卢比', en: 'IDR', value: 'idr' },
+    { name: '菲律宾比索', en: 'PHP', value: 'php' },
+    { name: '瑞尔', en: 'KHR', value: 'khr' },
+    { name: '巴西雷亚尔', en: 'BRL', value: 'brl' },
+    { name: '沙特里亚尔', en: 'SAR', value: 'sar' },
+    { name: '迪拉姆', en: 'AED', value: 'aed' },
+    { name: '马来西亚令吉', en: 'MYR', value: 'myr' },
+    { name: '新土耳其里拉', en: 'TRY', value: 'try' }
+  ];
 
   constructor(
     private exchangeService: ExchangeService,
@@ -81,6 +114,10 @@ export class ExchangeComponent implements OnInit {
     }
     this.balancesList = this.balances.slice((index - 1) * 10, 10 * index);
     this.balancePageIndex = index;
+  }
+
+  searchOrders() {
+    console.log(1234);
   }
 
 }

@@ -17,7 +17,7 @@
       <tr>
         <th>币种</th>
         <th>余额</th>
-        <th>冻结</th>
+        <th>状态</th>
       </tr>
     </thead>
     <tbody>
@@ -55,6 +55,27 @@
         <button nzType="primary" nz-button>买入</button>
         <span style="margin-right: 10px;"></span>
         <button nzType="primary" nz-button>卖出</button>
+      </span>
+      <span style="margin-left: 20px;"></span>
+      <span class="search-input">
+        <nz-select style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyType1">
+          <nz-option
+            *ngFor="let item of currencyType"
+            [nzLabel]="item.name"
+            [nzValue]="item.value"></nz-option>
+        </nz-select>
+      </span>
+      <span>-</span>
+      <span class="search-input">
+        <nz-select style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyType2">
+            <nz-option
+              *ngFor="let item of currencyType"
+              [nzLabel]="item.name"
+              [nzValue]="item.value"></nz-option>
+        </nz-select>
+      </span>
+      <span class="search-button">
+        <button nzType="primary" nz-button (click)="searchOrders()">查询</button>
       </span>
     </div>
   </div>
