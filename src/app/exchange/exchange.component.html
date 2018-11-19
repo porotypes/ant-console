@@ -6,18 +6,16 @@
     <span style="margin-right: 20px;">状态：{{ account.state }}</span>
     <span>类型：{{ account.type }}</span>
   </p>
-  <div class="title">资产</div>
-  <nz-table
-    #basicTable
-    [nzData]="balancesList"
-    [nzLoading]="balanceTableLoading"
-    [nzShowPagination]="false"
+  
+  <!--资产-->
+  <div class="title">{{'exchange.assets' | translate}}</div>
+  <nz-table #basicTable [nzData]="balancesList" [nzLoading]="balanceTableLoading" [nzShowPagination]="false"
     [nzFrontPagination]="false">
     <thead>
       <tr>
-        <th>币种</th>
-        <th>余额</th>
-        <th>状态</th>
+        <th>{{'exchange.symbol' | translate}}</th>
+        <th>{{'exchange.balance' | translate}}</th>
+        <th>{{'exchange.state' | translate}}</th>
       </tr>
     </thead>
     <tbody>
@@ -29,134 +27,178 @@
     </tbody>
   </nz-table>
   <div class="pagination">
-    <nz-pagination
-      [nzPageIndex]="balancePageIndex"
-      [nzTotal]="balances.length"
-      (nzPageIndexChange)="changeBalanceIndex($event)">
-   </nz-pagination>
+    <nz-pagination [nzPageIndex]="balancePageIndex" [nzTotal]="balances.length" (nzPageIndexChange)="changeBalanceIndex($event)">
+    </nz-pagination>
   </div>
 </div>
 
+<!--交易-->
 <div class="item">
-  <div class="title">交易</div>
-  <div class="search">
-    <div class="search-form">
-      <span class="search-input">
-        <nz-select style="width: 230px;" nzPlaceHolder="请选择交易币种">
-          <nz-option [nzLabel]="'USDT'" [nzValue]="'USDT'"></nz-option>
-          <nz-option [nzLabel]="'BTC'" [nzValue]="'BTC'"></nz-option>
-          <nz-option [nzLabel]="'ETH'" [nzValue]="'ETH'"></nz-option>
-        </nz-select>
-      </span>
-      <span class="search-input">
-        <nz-input-number style="width: 230px;" [nzStep]="0.1" [nzPlaceHolder]="'请输入交易数量'"></nz-input-number>
-      </span>
-      <span class="search-button">
-        <button nzType="primary" nz-button>买入</button>
-        <span style="margin-right: 10px;"></span>
-        <button nzType="primary" nz-button>卖出</button>
-      </span>
-      <span style="margin-left: 20px;"></span>
-      <span class="search-input">
-        <nz-select style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyType1">
-          <nz-option
-            *ngFor="let item of currencyType"
-            [nzLabel]="item.name"
-            [nzValue]="item.value"></nz-option>
-        </nz-select>
-      </span>
-      <span>-</span>
-      <span class="search-input">
-        <nz-select style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyType2">
-            <nz-option
-              *ngFor="let item of currencyType"
-              [nzLabel]="item.name"
-              [nzValue]="item.value"></nz-option>
-        </nz-select>
-      </span>
-      <span class="search-button">
-        <button nzType="primary" nz-button (click)="searchOrders()">查询</button>
-      </span>
-    </div>
+  <div class="title">{{'exchange.transaction' | translate}}</div>
+  <div class="search search-form" style="height:auto">
+    <span class="search-input">
+      <nz-select #symbol1 style="width: 200px;" nzPlaceHolder="请选择交易币种">
+        <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option>
+        <nz-option [nzLabel]="'BTC'" [nzValue]="'btc'"></nz-option>
+        <nz-option [nzLabel]="'ETH'" [nzValue]="'eth'"></nz-option>
+      </nz-select>
+    </span>
+    ->
+    <span class="search-input">
+      <nz-select #symbol2 style="width: 200px;" nzPlaceHolder="请选择交易币种">
+        <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option>
+        <nz-option [nzLabel]="'BTC'" [nzValue]="'btc'"></nz-option>
+        <nz-option [nzLabel]="'ETH'" [nzValue]="'eth'"></nz-option>
+      </nz-select>
+    </span>
+    <span class="search-input">
+      <nz-input-number #order_amount style="width: 230px;" [nzStep]="0.1" [nzPlaceHolder]="'请输入交易数量'"></nz-input-number>
+    </span>
+    <span class="search-button">
+      <button nzType="primary" nz-button (click)="buyMarket(symbol1.value+symbol2.value,order_amount.value)">买入</button>
+      <span style="margin-right: 10px;"></span>
+      <button nzType="primary" nz-button (click)="sellMarket(symbol1.value+symbol2.value,order_amount.value)">卖出</button>
+    </span>
+    <br /><span style="margin-left: 20px;height: 10px;"></span>
+    <br />
+    <span class="search-input">
+      <nz-select style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyType1">
+        <nz-option *ngFor="let item of currencyType" [nzLabel]="item.name" [nzValue]="item.value"></nz-option>
+      </nz-select>
+    </span>
+    <span>-</span>
+    <span class="search-input">
+      <nz-select style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyType2">
+        <nz-option *ngFor="let item of currencyType" [nzLabel]="item.name" [nzValue]="item.value"></nz-option>
+      </nz-select>
+    </span>
+
+    <span class="label">{{ 'statistics.company.date_rang' | translate }}</span>
+    <span class="input">
+      <nz-date-picker [nzDisabledDate]="disabledStartDate" nzShowTime nzFormat="yyyy-MM-dd" [(ngModel)]="startTimeValue"
+        [nzPlaceHolder]="'statistics.company.start_time' | translate">
+      </nz-date-picker>
+      -
+      <nz-date-picker [nzDisabledDate]="disabledEndDate" nzShowTime nzFormat="yyyy-MM-dd" [(ngModel)]="endTimeValue"
+        [nzPlaceHolder]="'statistics.company.end_time' | translate">
+      </nz-date-picker>
+    </span>
+
+    <span class="label">{{ 'statistics.asset.size' | translate }}</span>
+    <span class="input">
+      <nz-input-number style="width: 230px;" [nzStep]="1" [nzMax]="100" [nzPlaceHolder]="'请输入查找条数'" [(ngModel)]="sizeNum"></nz-input-number>
+    </span>
+
+    <span class="search-button">
+      <button nzType="primary" nz-button (click)="searchOrders()">{{'exchange.search' | translate}}</button>
+    </span>
   </div>
-  <nz-table #nzTable [nzData]="" [nzPageSize]="10">
+  <nz-table #orderTable [nzData]="orders" [nzPageSize]="10">
     <thead>
       <tr>
-        <th>序号</th>
-        <th>订单ID</th>
-        <th>币种</th>
-        <th>数量</th>
-        <th>金额</th>
-        <th>类型</th>
-        <th>交易时间</th>
-        <th>状态</th>
-        <th>操作</th>
+        <th>{{'exchange.transactions.id' | translate}}</th>
+        <th>{{'exchange.symbol' | translate}}</th>
+        <th>{{'exchange.transactions.fieldAmount' | translate}}</th>
+        <th>{{'exchange.transactions.amount' | translate}}</th>
+        <th>{{'exchange.transactions.type' | translate}}</th>
+        <th>{{'exchange.transactions.finishedAt' | translate}}</th>
+        <th>{{'exchange.transactions.state' | translate}}</th>
+        <th>{{'action' | translate}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let i of nzTable.data">
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
+      <tr *ngFor="let i of orderTable.data">
+        <td>{{i.id}}</td>
+        <td>{{i.symbol}}</td>
+        <td>{{i.fieldAmount}}</td>
+        <td>{{i.amount}}</td>
+        <td>{{i.type}}</td>
+        <td>{{i.finishedAt | date:"yyyy-MM-dd HH:mm:ss ZZZZ"}}</td>
+        <td>{{i.state}}</td>
         <td>
-          <button nzType="primary" nz-button>撤销</button>
+          <button nzType="primary" nz-button (click)="cancelOrder(i.id)">{{'exchange.cancel' | translate}}</button>
         </td>
       </tr>
     </tbody>
   </nz-table>
 </div>
 
+<!--提币-->
 <div class="item">
-  <div class="title">提币</div>
-  <div class="search">
-    <div class="search-form">
-      <span class="search-input">
-        <nz-select style="width: 230px;" nzPlaceHolder="请选择交易币种">
-          <nz-option [nzLabel]="'USDT'" [nzValue]="'USDT'"></nz-option>
-          <nz-option [nzLabel]="'BTC'" [nzValue]="'BTC'"></nz-option>
-          <nz-option [nzLabel]="'ETH'" [nzValue]="'ETH'"></nz-option>
-        </nz-select>
-      </span>
-      <span class="search-input">
-        <nz-input-number style="width: 230px;" [nzStep]="0.1" [nzPlaceHolder]="'请输入交易数量'"></nz-input-number>
-      </span>
-      <span class="search-input">
-        <input nz-input placeholder="请输入钱包提取地址">
-      </span>
-      <span class="search-button">
-        <button nzType="primary" nz-button>提取</button>
-      </span>
-    </div>
+  <div class="title">{{'exchange.withdrawals' | translate}}</div>
+  <div class="search search-form" style="height:auto">
+    <span class="search-input">
+      <nz-select #coin style="width: 200px;" nzPlaceHolder="请选择交易币种">
+        <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option>
+        <nz-option [nzLabel]="'BTC'" [nzValue]="'btc'"></nz-option>
+        <nz-option [nzLabel]="'ETH'" [nzValue]="'eth'"></nz-option>
+      </nz-select>
+    </span>
+    <span class="search-input">
+      <nz-input-number #drawal_amount style="width: 230px;" [nzStep]="0.1" [nzPlaceHolder]="'请输入交易数量'"></nz-input-number>
+    </span>
+    <span class="search-input">
+      <input #address nz-input style="width: 230px;" placeholder="请输入钱包提取地址">
+    </span>
+    <span class="search-button">
+      <button nzType="primary" nz-button (click)="withdrawal(coin.value,drawal_amount.value,address.value)">提取</button>
+    </span>
   </div>
-  <nz-table #nzTable [nzData]="" [nzPageSize]="10">
+
+  <div class="search search-form" style="height: auto;">
+    <span class="label">{{ 'statistics.asset.currency' | translate }}</span>
+    <span class="input">
+      <nz-select #coinW style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyW">
+        <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option>
+        <nz-option [nzLabel]="'BTC'" [nzValue]="'btc'"></nz-option>
+        <nz-option [nzLabel]="'ETH'" [nzValue]="'eth'"></nz-option>
+      </nz-select>
+    </span>
+
+    <span class="label">{{ 'statistics.asset.start_id' | translate }}</span>
+    <span class="input">
+      <nz-input-number #fromW style="width: 230px;" [nzStep]="1" [nzPlaceHolder]="'请输入起始id'" [(ngModel)]="fromNumW"></nz-input-number>
+    </span>
+
+    <span class="label">{{ 'statistics.asset.size' | translate }}</span>
+    <span class="input">
+      <nz-input-number #sizeW style="width: 230px;" [nzStep]="1" [nzMax]="100" [nzPlaceHolder]="'请输入查找条数'" [(ngModel)]="sizeNumW"></nz-input-number>
+    </span>
+
+    <span class="button">
+      <button nz-button nzType="primary" (click)="withdrawalsSearch(coinW.value,fromW.value,sizeW.value)">{{ 'search' |
+        translate }}</button>
+    </span>
+  </div>
+
+  <nz-table #withdrawalsTable [nzLoading]="tableLoading" [nzData]="withdrawalsList">
     <thead>
-      <tr>
-        <th>序号</th>
-        <th>订单ID</th>
-        <th>币种</th>
-        <th>数量</th>
-        <th>钱包地址</th>
-        <th>交易时间</th>
-        <th>状态</th>
-        <th>操作</th>
+      <tr class="table_tr">
+        <th style="min-width: 100px;">{{ 'statistics.asset.id' | translate }}</th>
+        <th>{{ 'statistics.asset.address' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.amount' | translate }}</th>
+        <th>{{ 'statistics.asset.created_at' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.currency' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.fee' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.state' | translate }}</th>
+        <!--<th>{{ 'statistics.asset.tx_hash' | translate }}</th>-->
+        <th>{{ 'statistics.asset.updated_at' | translate }}</th>
+        <th>{{ 'action' | translate }}</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let i of nzTable.data">
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
-        <td>{{i.title}}</td>
+      <tr class="table_tr" *ngFor="let statistics of withdrawalsTable.data, index as i">
+        <td>{{statistics.id }}</td>
+        <td>{{statistics.address }}</td>
+        <td>{{statistics.amount}}</td>
+        <td>{{statistics.createdAt | date:"yyyy-MM-dd HH:mm:ss ZZZZ"}}</td>
+        <td>{{statistics.currency}}</td>
+        <td>{{statistics.fee}}</td>
+        <td>{{statistics.state}}</td>
+        <!--<td>{{statistics.txHash}}</td>-->
+        <td>{{statistics.updatedAt | date:"yyyy-MM-dd HH:mm:ss ZZZZ"}}</td>
         <td>
-          <button nzType="primary" nz-button>撤销</button>
+          <button nzType="primary" nz-button (click)="cancelWithdraw(statistics.id)">撤销</button>
         </td>
       </tr>
     </tbody>

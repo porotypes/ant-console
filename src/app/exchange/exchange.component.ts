@@ -2,8 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 
 import { ExchangeService } from '../core/exchange/exchange.service';
+import { DateTimeUtil } from '../shared/date-time-util';
+import { format, subDays } from 'date-fns';
+
+import { StatisticsService } from '../core/statistics/statistics.service';
+import { AssetStatistics } from '../common/asset-statistics';
+import { LanguageService } from '../core/language.service';
 
 import { Account } from '../common/exchange/account';
+import { Order } from '../common/exchange/order';
 import { Balance } from '../common/exchange/balance';
 import { HttpResponseData } from '../common/http-response-data';
 
@@ -15,6 +22,7 @@ import { HttpResponseData } from '../common/http-response-data';
 export class ExchangeComponent implements OnInit {
 
   accounts: Account[];
+  orders: Order[] = [];
 
   balances: Balance[] = [];
   balancesList: Balance[];
@@ -24,6 +32,15 @@ export class ExchangeComponent implements OnInit {
 
   selectedCurrencyType1: string;
   selectedCurrencyType2: string;
+  startTimeValue: Date = new Date();
+  endTimeValue: Date = new Date();
+  sizeNum = 100;
+
+  selectedCurrencyW = 'btc';
+  fromNumW = 0;
+  sizeNumW = 100;
+
+  withdrawalsList: AssetStatistics[] = [];
 
   currencyType = [
     { name: 'USDT', en: 'USDT', value: 'usdt' },
@@ -55,8 +72,10 @@ export class ExchangeComponent implements OnInit {
   ];
 
   constructor(
+    private statisticsService: StatisticsService,
     private exchangeService: ExchangeService,
-    private messageService: NzMessageService
+    private messageService: NzMessageService,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit() {
@@ -80,6 +99,7 @@ export class ExchangeComponent implements OnInit {
     );
   }
 
+  // 查询资产
   getHuobiBalance() {
     this.balanceTableLoading = true;
     this.exchangeService.getHuobiBalance().subscribe(
@@ -90,7 +110,9 @@ export class ExchangeComponent implements OnInit {
           this.messageService.error('获取数据失败');
         } else {
           obj.list.forEach(balance => {
-            this.balances.push(balance);
+            if (balance.balance !== '0') {
+              this.balances.push(balance);
+            }
           });
           this.paginationBalances();
         }
@@ -99,7 +121,9 @@ export class ExchangeComponent implements OnInit {
         this.balanceTableLoading = false;
         this.messageService.error(error.error.msg || '响应超时');
       }
+
     );
+
   }
 
   paginationBalances() {
@@ -116,8 +140,193 @@ export class ExchangeComponent implements OnInit {
     this.balancePageIndex = index;
   }
 
+  // 查询订单
   searchOrders() {
-    console.log(1234);
+    const currncyPair = {
+      symbol: this.selectedCurrencyType1 + this.selectedCurrencyType2,
+      start: format(this.startTimeValue, 'YYYY-MM-DD'),
+      end: format(this.endTimeValue, 'YYYY-MM-DD'),
+      size: this.sizeNum
+    };
+    this.exchangeService.getHuobiOrders(currncyPair).subscribe(
+      (res: HttpResponseData<string>) => {
+        const obj = JSON.parse(res.obj);
+        if (obj['status'] && obj['status'] < 0) {
+          this.messageService.error('获取数据失败');
+        } else {
+          this.orders = [];
+          obj.forEach(balance => {
+            balance.fieldAmount = balance['field-amount'];
+            balance.finishedAt = balance['finished-at'];
+            this.orders.push(balance);
+          });
+        }
+      },
+      error => {
+        this.messageService.error(error.error.msg || '响应超时');
+      }
+
+    );
   }
 
+  // 买入
+  buyMarket(symbol: string, amount: number) {
+    const currncyPair = {
+      symbol: symbol,
+      amount: amount
+    };
+    this.exchangeService.buyMarketOrders(currncyPair).subscribe(
+      (res: HttpResponseData<string>) => {
+        const obj = JSON.parse(res.obj);
+        if (obj['status'] && obj['status'] < 0) {
+          this.messageService.error('获取数据失败');
+        } else {
+          this.orders = [];
+          obj.forEach(balance => {
+            console.log(balance);
+            balance.fieldAmount = balance['field-amount'];
+            balance.finishedAt = balance['finished-at'];
+            this.orders.push(balance);
+          });
+          console.log(this.orders);
+        }
+      },
+      error => {
+        this.messageService.error(error.error.msg || '响应超时');
+      }
+
+    );
+  }
+
+  // 卖出
+  sellMarket(symbol: string, amount: number) {
+    const currncyPair = {
+      symbol: symbol,
+      amount: amount
+    };
+    this.exchangeService.sellMarketOrders(currncyPair).subscribe(
+      (res: HttpResponseData<string>) => {
+        const obj = JSON.parse(res.obj);
+        if (obj['status'] && obj['status'] < 0) {
+          this.messageService.error('获取数据失败');
+        } else {
+          this.orders = [];
+          obj.forEach(balance => {
+            console.log(balance);
+            balance.fieldAmount = balance['field-amount'];
+            balance.finishedAt = balance['finished-at'];
+            this.orders.push(balance);
+          });
+          console.log(this.orders);
+        }
+      },
+      error => {
+        this.messageService.error(error.error.msg || '响应超时');
+      }
+
+    );
+  }
+
+  // 提币
+  withdrawal(coin: string, amount: number, address: string) {
+    const currncyPair = {
+      coin: coin,
+      amount: amount,
+      address: address
+    };
+    this.exchangeService.withdrawal(currncyPair).subscribe(
+      (res: HttpResponseData<string>) => {
+        const obj = JSON.parse(res.obj);
+        if (obj['status'] && obj['status'] < 0) {
+          this.messageService.error('获取数据失败');
+        } else {
+          this.orders = [];
+          obj.forEach(balance => {
+            console.log(balance);
+            balance.fieldAmount = balance['field-amount'];
+            balance.finishedAt = balance['finished-at'];
+            this.orders.push(balance);
+          });
+          console.log(this.orders);
+        }
+      },
+      error => {
+        this.messageService.error(error.error.msg || '响应超时');
+      }
+
+    );
+  }
+
+  // 查询提币订单
+  withdrawalsSearch(coin: string, from: number, size: number) {
+    const condition = {
+      coin: coin || this.selectedCurrencyW,
+      from: from || this.fromNumW,
+      size: size || this.sizeNumW
+    };
+    this.statisticsService.getWithdrawalsList(condition).subscribe(
+      (res: HttpResponseData<string>) => {
+        if (res.status === 200) {
+          const obj = JSON.parse(res.obj);
+          console.log(obj);
+          this.withdrawalsList = [];
+          obj.forEach(val => {
+            val.createdAt = val['created-at'];
+            val.txHash = val['tx-hash'];
+            val.updatedAt = val['updated-at'];
+            this.fromNumW = val.id + 1;
+            this.withdrawalsList.push(val);
+          });
+
+        } else {
+          this.messageService.error(res.msg);
+        }
+      },
+      error => {
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
+      }
+    );
+  }
+
+  // 撤销订单
+  cancelOrder(id: number) {
+    this.exchangeService.cancel(id).subscribe(
+      (res: HttpResponseData<string>) => {
+        const obj = JSON.parse(res.obj);
+        if (obj['status'] && obj['status'] < 0) {
+          this.messageService.error('获取数据失败');
+        } else {
+          console.log(obj);
+          this.messageService.success(obj);
+        }
+      },
+      error => {
+        this.messageService.error(error.error.msg || '响应超时');
+      }
+
+    );
+  }
+
+  // 撤销提币订单
+  cancelWithdraw(id: number) {
+    this.exchangeService.cancelWithdraw(id).subscribe(
+      (res: HttpResponseData<string>) => {
+        const obj = JSON.parse(res.obj);
+        if (obj['status'] && obj['status'] < 0) {
+          this.messageService.error('获取数据失败');
+        } else {
+          console.log(obj);
+          this.messageService.success(obj);
+        }
+      },
+      error => {
+        this.messageService.error(error.error.msg || '响应超时');
+      }
+
+    );
+  }
 }

@@ -18,6 +18,10 @@ h3 {
   width: 100%;
 }
 
+span.search-input {
+  margin-right: 10px;
+}
+
 .pagination {
   margin-top: 10px;
   text-align: right;

@@ -1,5 +1,5 @@
 {
-  "system_title": "ATM数字资产兑换系统",
+  "system_title": "DigiccyATM数字资产兑换系统",
   "edit_password": "修改密码",
   "old_password": "原密码",
   "old_password_tip": "请输入原密码!",
@@ -14,6 +14,7 @@
   "search": "查询",
   "operation": "操作",
   "login_out": "退出",
+  "action": "操作",
   "menu": {
     "equipment": {
       "equipment_management": "设备管理",
@@ -29,6 +30,7 @@
       "statistics": "统计分析",
       "equipment_statistics": "设备流水",
       "company_statistics": "公司流水",
+      "asset_statistics": "数字资产流水",
       "fault_statistics": "设备故障统计"
     },
     "setting": {
@@ -105,6 +107,24 @@
     "create_role": "创建角色",
     "delete_role_tip": "确定删除该角色?"
   },
+  "exchange": {
+    "assets": "资产",
+    "transaction": "交易",
+    "transactions": {
+      "id": "订单ID",
+      "fieldAmount": "数量",
+      "amount": "金额",
+      "type": "类型",
+      "finishedAt": "交易时间",
+      "state": "状态"
+    },
+    "symbol": "币种",
+    "balance": "余额",
+    "state": "状态",
+    "withdrawals": "提币",
+    "search": "查询",
+    "cancel": "撤销"
+  },
   "statistics": {
     "company": {
       "date_rang": "时间范围",
@@ -120,13 +140,29 @@
       "transaction_amount": "交易金额",
       "unlimited": "不限"
     },
+    "asset": {
+      "currency": "币种",
+      "start_id": "起始id",
+      "size": "条数",
+      "id": "ID",
+      "address": "地址",
+      "amount": "个数",
+      "created_at": "发起时间",
+      "fee": "手续费",
+      "state": "状态",
+      "type": "类型",
+      "updated_at": "最后更新时间"
+    },
     "fault": {
+      "fault_list": "故障列表",
       "search_type": "查询类型",
       "query_by_device": "按设备查询",
       "query_by_company": "按公司查询",
       "company": "公司名称",
       "equipment_type": "设备类型",
-      "error_count": "故障次数"
+      "status_code": "状态",
+      "error_count": "故障次数",
+      "receiveTime": "发生时间"
     }
   },
   "equipment": {

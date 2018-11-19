@@ -92,6 +92,7 @@ export class AccountFormComponent implements OnInit {
   }
 
   getAllCompanies() {
+    if (!this.authService.isAdmin()) { return; }
     this.pagination.size = 9999999;
     this.companyService.getCompanyList(this.pagination).subscribe(
       (res: HttpResponseData<Pagination<Company>>) => {
@@ -181,8 +182,8 @@ export class AccountFormComponent implements OnInit {
     } else {
       for (const i in this.accountForm.controls) {
         if (this.accountForm.controls.hasOwnProperty(i)) {
-          this.accountForm.controls[ i ].markAsDirty();
-          this.accountForm.controls[ i ].updateValueAndValidity();
+          this.accountForm.controls[i].markAsDirty();
+          this.accountForm.controls[i].updateValueAndValidity();
         }
       }
     }
@@ -213,8 +214,8 @@ export class AccountFormComponent implements OnInit {
     } else {
       for (const i in this.accountForm.controls) {
         if (this.accountForm.controls.hasOwnProperty(i)) {
-          this.accountForm.controls[ i ].markAsDirty();
-          this.accountForm.controls[ i ].updateValueAndValidity();
+          this.accountForm.controls[i].markAsDirty();
+          this.accountForm.controls[i].updateValueAndValidity();
         }
       }
     }

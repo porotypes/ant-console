@@ -22,11 +22,15 @@ export class AuthService extends HttpService<any> {
   }
 
   private getPermissionsForUser(): Array<string> {
-    return JSON.parse(this.decodeToken().permissions);
+    if (!this.decodeToken() || !this.decodeToken().permissions) {
+      return [];
+    }
+    return JSON.parse(this.decodeToken().permissions || []);
   }
 
   /**
    * is admin
+   * level<2的为蚁矿
    */
   public isAdmin() {
     return this.decodeToken().level < 2;

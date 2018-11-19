@@ -11,6 +11,7 @@ import { Company } from 'src/app/common/company';
 import { FaultStatistics } from 'src/app/common/fault-statistics';
 import { HttpResponseData } from 'src/app/common/http-response-data';
 import { Pagination } from 'src/app/common/pagination';
+import { FaultList } from 'src/app/common/fault-list';
 
 @Component({
   selector: 'app-fault-statistics',
@@ -27,6 +28,46 @@ export class FaultStatisticsComponent implements OnInit {
   companies: Company[];
   statisticsList: FaultStatistics[];
   pagination = new Pagination<Company>();
+
+  isVisible = false;
+  data: FaultList[];
+
+  showFaultListModal(eId: number, eType: string, status: number): void {
+    this.isVisible = true;
+    // 查询故障详情
+    const condition = {
+      companyId: '1',
+      equipmentId: eId,
+      statusCode: status,
+      startTime: DateTimeUtil.formatDateTimeToString(this.startTimeValue),
+      endTime: DateTimeUtil.formatDateTimeToString(this.endTimeValue),
+      deviceType: eType
+    };
+    this.tableLoading = true;
+    this.statisticsService.getFaultList(condition).subscribe(
+      (res: HttpResponseData<FaultList>) => {
+        this.tableLoading = false;
+        if (res.status === 200) {
+          this.data = res.obj.records;
+        } else {
+          this.messageService.error(res.msg);
+        }
+      },
+      error => {
+        this.tableLoading = false;
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
+      }
+    );
+  }
+
+  // 故障详情框关闭
+  handleCancelOrOk(): void {
+    this.isVisible = false;
+  }
 
   disabledStartDate = (startTimeValue: Date): boolean => {
     if (!startTimeValue || !this.endTimeValue) {
@@ -83,6 +124,7 @@ export class FaultStatisticsComponent implements OnInit {
   }
 
   getAllCompanies() {
+    if (!this.authService.isAdmin()) { return; }
     this.pagination.size = 9999999;
     this.companyService.getCompanyList(this.pagination).subscribe(
       (res: HttpResponseData<Pagination<Company>>) => {

@@ -1,5 +1,5 @@
-<nz-layout class="layout">
-  <nz-header>
+<nz-layout class="layout" style="background:#fff">
+  <nz-header style="background:#a0cdf8">
     <div nz-row>
       <div nz-col nzSpan="8">
         <h1 class="title">{{ 'system_title' | translate }}</h1>
@@ -26,8 +26,8 @@
     </div>
   </nz-header>
   <nz-layout>
-    <nz-sider [nzWidth]="240" style="background:#fff">
-      <ul nz-menu [nzMode]="'inline'" style="height: calc(100vh - 64px)" [nzTheme]="'dark'">
+    <nz-sider [nzWidth]="240">
+      <ul nz-menu [nzMode]="'inline'" style="height: calc(100vh - 64px);" [nzTheme]="'light'">
         <!-- <li nz-menu-item routerLink="/dashboard/home"><i class="anticon anticon-home"></i>首页</li> -->
         <li *ngIf="authService.isCanShowEquipmentList()" nz-submenu [nzOpen]="true">
           <span title><i class="anticon anticon-desktop"></i>{{ 'menu.equipment.equipment_management' | translate }}</span>
@@ -44,11 +44,12 @@
             <li nz-menu-item routerLink="/dashboard/trading-record">{{ 'menu.transaction.transaction_record' | translate }}</li>
           </ul>
         </li>
-        <li nz-submenu [nzOpen]="true">
+        <li *ngIf="authService.isCanTansactionStatistice()" nz-submenu [nzOpen]="true">
           <span title><i class="anticon anticon-laptop"></i>{{ 'menu.statistics.statistics' | translate }}</span>
           <ul>
             <li nz-menu-item routerLink="/dashboard/equipment-statistics">{{ 'menu.statistics.equipment_statistics' | translate }}</li>
             <!-- <li nz-menu-item>数字资产流水</li> -->
+            <li nz-menu-item routerLink="/dashboard/asset-statistics">{{ 'menu.statistics.asset_statistics' | translate }}</li>
             <li nz-menu-item routerLink="/dashboard/company-statistics">{{ 'menu.statistics.company_statistics' | translate }}</li>
             <!-- <li nz-menu-item>区域分布统计</li> -->
             <li nz-menu-item routerLink="/dashboard/fault-statistics">{{ 'menu.statistics.fault_statistics' | translate }}</li>
@@ -60,7 +61,7 @@
             <li *ngIf="authService.isCanShowCompanyList()" nz-menu-item routerLink="/dashboard/company-management">{{ 'menu.setting.company' | translate }}</li>
             <li *ngIf="authService.isCanShowRoleList()" nz-menu-item routerLink="/dashboard/role-management">{{ 'menu.setting.role' | translate }}</li>
             <li *ngIf="authService.isCanShowUserList()" nz-menu-item routerLink="/dashboard/account-management">{{ 'menu.setting.account' | translate }}</li>
-            <li nz-menu-item routerLink="/dashboard/customer-service">
+            <li *ngIf="authService.isCanShowChatReceiveList()" nz-menu-item routerLink="/dashboard/customer-service">
               <span style="margin-right: 5px;">{{ 'menu.setting.coustomer_service' | translate }}</span>
               <nz-badge [nzCount]="unreadInformationNum"></nz-badge>
             </li>

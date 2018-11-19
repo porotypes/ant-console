@@ -50,6 +50,7 @@ export class CompanyStatisticsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.authService.isAdmin());
     if (this.authService.isAdmin()) {
       this.getAllCompanies();
     }

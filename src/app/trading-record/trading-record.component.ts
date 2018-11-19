@@ -33,7 +33,7 @@ export class TradingRecordComponent implements OnInit {
     this.tradingRecordService.getTradingRecordList(this.pagination).subscribe(
       (res: HttpResponseData<Pagination<TradingRecord>>) => {
         this.tableLoading = false;
-        if (res.status === 200) {
+        if (res.status === 200 && res.obj) {
           this.pagination = res.obj;
         } else {
           this.messageService.error(res.msg);

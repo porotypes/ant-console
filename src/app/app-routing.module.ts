@@ -15,6 +15,7 @@ import { EquipmentMapComponent } from './equipment/equipment-map/equipment-map.c
 import { EquipmentCashComponent } from './equipment/equipment-cash/equipment-cash.component';
 // statistics
 import { EquipmentStatisticsComponent } from './statistics/equipment-statistics/equipment-statistics.component';
+import { AssetStatisticsComponent } from './statistics/asset-statistics/asset-statistics.component';
 import { CompanyStatisticsComponent } from './statistics/company-statistics/company-statistics.component';
 import { FaultStatisticsComponent } from './statistics/fault-statistics/fault-statistics.component';
 // trading record
@@ -50,6 +51,7 @@ const router: Routes = [
       { path: 'equipment-cash', component: EquipmentCashComponent },
       // statistics
       { path: 'equipment-statistics', component: EquipmentStatisticsComponent },
+      { path: 'asset-statistics', component: AssetStatisticsComponent },
       { path: 'company-statistics', component: CompanyStatisticsComponent },
       { path: 'fault-statistics', component: FaultStatisticsComponent },
       // trading record

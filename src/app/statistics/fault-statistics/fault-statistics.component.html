@@ -2,19 +2,11 @@
   <div class="search-form">
     <span class="label">{{ 'statistics.company.date_rang' | translate }}</span>
     <span class="input">
-      <nz-date-picker
-        [nzDisabledDate]="disabledStartDate"
-        nzShowTime
-        nzFormat="yyyy-MM-dd HH:mm:ss"
-        [(ngModel)]="startTimeValue"
+      <nz-date-picker [nzStyle]="{width:'180px'}" [nzDisabledDate]="disabledStartDate" nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" [(ngModel)]="startTimeValue"
         [nzPlaceHolder]="'statistics.company.start_time' | translate">
       </nz-date-picker>
       -
-      <nz-date-picker
-        [nzDisabledDate]="disabledEndDate"
-        nzShowTime
-        nzFormat="yyyy-MM-dd HH:mm:ss"
-        [(ngModel)]="endTimeValue"
+      <nz-date-picker [nzStyle]="{width:'180px'}" [nzDisabledDate]="disabledEndDate" nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" [(ngModel)]="endTimeValue"
         [nzPlaceHolder]="'statistics.company.end_time' | translate">
       </nz-date-picker>
     </span>
@@ -22,10 +14,7 @@
     <span class="input" *ngIf="authService.isAdmin()">
       <nz-select style="width: 230px;" [(ngModel)]="selectedCompany">
         <nz-option [nzValue]="''" [nzLabel]="'statistics.company.unlimited' | translate"></nz-option>
-        <nz-option
-          *ngFor="let company of companies"
-          [nzValue]="company.id" 
-          [nzLabel]="company.companyFullName">
+        <nz-option *ngFor="let company of companies" [nzValue]="company.id" [nzLabel]="company.companyFullName">
         </nz-option>
       </nz-select>
     </span>
@@ -42,11 +31,7 @@
   </div>
 </div>
 
-<nz-table
-  #basicTable
-  [nzShowPagination]="false"
-  [nzLoading]="tableLoading"
-  [nzData]="statisticsList">
+<nz-table #basicTable [nzShowPagination]="false" [nzLoading]="tableLoading" [nzData]="statisticsList">
   <thead>
     <tr>
       <th>{{ 'index' | translate }}</th>
@@ -62,7 +47,30 @@
       <td>{{statistics.companyName}}</td>
       <td>{{statistics.equipmentId }}</td>
       <td>{{statistics.deviceType}}</td>
-      <td>{{statistics.errorCount}}</td>
+      <td><a (click)="showFaultListModal(statistics.equipmentId,statistics.deviceType,statistics.statusCode)">{{statistics.errorCount}}</a></td>
     </tr>
   </tbody>
 </nz-table>
+
+<!--故障列表对话框-->
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="'statistics.fault.fault_list' | translate" (nzOnCancel)="handleCancelOrOk()" (nzOnOk)="handleCancelOrOk()"
+  [nzBodyStyle]="{padding:'10px'}">
+  <nz-table #rowSelectionTable [nzData]="data" [nzPageSize]="5" [nzSize]="small">
+    <thead>
+      <tr>
+        <th>{{ 'statistics.company.equipment_id' | translate }}</th>
+        <th>{{ 'statistics.fault.equipment_type' | translate }}</th>
+        <th>{{ 'statistics.fault.status_code' | translate }}</th>
+        <th>{{ 'statistics.fault.receiveTime' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of rowSelectionTable.data">
+        <td>{{data.equipmentId}}</td>
+        <td>{{data.deviceType}}</td>
+        <td>{{data.detailed}}</td>
+        <td>{{data.receiveTime}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-modal>

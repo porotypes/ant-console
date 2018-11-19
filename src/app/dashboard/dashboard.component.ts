@@ -7,6 +7,8 @@ import {
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
+import { envStyle } from '../../environments/style';
+
 import { AuthService } from '../core/auth/auth.service';
 import { StorageService } from '../core/storage.service';
 import { LoginService } from '../core/auth/login.service';
@@ -46,7 +48,7 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
     private router: Router,
     private chatInformationService: ChatInformationService,
     private languageService: LanguageService
-  ) {}
+  ) { }
 
   createForm() {
     this.changePswForm = this.fb.group({
@@ -57,8 +59,11 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngOnInit() {
     this.createForm();
-    this.getUnreadChatInformationNum();
-    this.selectedLanguage = this.storageService.readStorage('language');
+    if (this.authService.isCanShowChatReceiveList()) {
+      this.getUnreadChatInformationNum();
+    }
+
+    this.selectedLanguage = this.storageService.readStorage('language') || 'zh_CN';
     this.sub = this.chatInformationService.getList.subscribe((total: number) => {
       this.getUnreadChatInformationNum();
     });
