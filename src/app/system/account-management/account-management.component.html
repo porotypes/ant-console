@@ -9,20 +9,14 @@
   </div>
 </div>
 
-<nz-table
-  #basicTable
-  nzShowSizeChanger
-  nzShowQuickJumper
-  [nzLoading]="tableLoading"
-  [nzData]="pagination.records"
-  [(nzPageSize)]="pagination.size"
-  (nzPageIndexChange)="changePageOrSize($event)"
-  (nzPageSizeChange)="changePageOrSize($event, true)">
+<nz-table #basicTable nzShowSizeChanger nzShowQuickJumper [nzLoading]="tableLoading" [nzData]="pagination.records"
+  [(nzPageSize)]="pagination.size" (nzPageIndexChange)="changePageOrSize($event)" (nzPageSizeChange)="changePageOrSize($event, true)">
   <thead>
     <tr>
       <th>{{ 'index' | translate }}</th>
       <th>{{ 'account.login_name' | translate }}</th>
       <th>{{ 'login.username' | translate }}</th>
+      <th *ngIf="authService.isAdmin()">{{ 'company.company_name' | translate }}</th>
       <th>{{ 'account.phone_number' | translate }}</th>
       <th>{{ 'operation' | translate }}</th>
     </tr>
@@ -32,33 +26,18 @@
       <td>{{ i + 1 }}</td>
       <td>{{account.username}}</td>
       <td>{{account.nickname}}</td>
+      <td *ngIf="authService.isAdmin()">{{account.companyName}}</td>
       <td>{{account.phoneNumber}}</td>
       <td>
-        <button
-          *ngIf="authService.isCanResetPassword()"
-          nz-button
-          nzType="warning"
-          nz-popconfirm
-          [nzTitle]="'account.reset_password_tip' | translate"
+        <button *ngIf="authService.isCanResetPassword()" nz-button nzType="warning" nz-popconfirm [nzTitle]="'account.reset_password_tip' | translate"
           (nzOnConfirm)="resetPassword(account)">{{ 'account.reset_password' | translate }}</button>
         <nz-divider *ngIf="authService.isCanResetPassword()" nzType="vertical"></nz-divider>
-        <button
-          *ngIf="authService.isCanUpdateUser()"
-          nz-button
-          nzType="primary"
-          (click)="editAccount(account)">
+        <button *ngIf="authService.isCanUpdateUser()" nz-button nzType="primary" (click)="editAccount(account)">
           {{ 'edit' | translate }}
         </button>
         <nz-divider *ngIf="authService.isCanUpdateUser()" nzType="vertical"></nz-divider>
-        <button
-          *ngIf="authService.isCanDeleteUser()"
-          nz-button
-          nzType="danger"
-          nz-popconfirm
-          [nzOkText]="'ok' | translate"
-          [nzCancelText]="'cancel' | translate"
-          [nzTitle]="'account.delete_password_tip' | translate"
-          (nzOnConfirm)="deleteAccount(account)">
+        <button *ngIf="authService.isCanDeleteUser()" nz-button nzType="danger" nz-popconfirm [nzOkText]="'ok' | translate"
+          [nzCancelText]="'cancel' | translate" [nzTitle]="'account.delete_password_tip' | translate" (nzOnConfirm)="deleteAccount(account)">
           {{ 'delete' | translate }}
         </button>
       </td>

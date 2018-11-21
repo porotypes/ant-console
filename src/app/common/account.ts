@@ -9,6 +9,7 @@ export class Account {
   email: string;
   phoneNumber: number;
   companyId: number;
+  companyName: string;
   salt: string;
   roles: Role[];
   display: boolean;

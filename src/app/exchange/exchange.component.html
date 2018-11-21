@@ -2,11 +2,11 @@
 
 <div class="item">
   <p *ngFor="let account of accounts">
-    <span style="margin-right: 20px;">ID：{{ account.id }}</span>
-    <span style="margin-right: 20px;">状态：{{ account.state }}</span>
-    <span>类型：{{ account.type }}</span>
+    <span style="margin-right: 20px;">{{'exchange.id' | translate}}：{{ account.id }}</span>
+    <span style="margin-right: 20px;">{{'exchange.state' | translate}}：{{ account.state }}</span>
+    <span>{{'exchange.type' | translate}}：{{ account.type }}</span>
   </p>
-  
+
   <!--资产-->
   <div class="title">{{'exchange.assets' | translate}}</div>
   <nz-table #basicTable [nzData]="balancesList" [nzLoading]="balanceTableLoading" [nzShowPagination]="false"
@@ -37,7 +37,7 @@
   <div class="title">{{'exchange.transaction' | translate}}</div>
   <div class="search search-form" style="height:auto">
     <span class="search-input">
-      <nz-select #symbol1 style="width: 200px;" nzPlaceHolder="请选择交易币种">
+      <nz-select #symbol1 style="width: 200px;" nzPlaceHolder="{{'exchange.selectCurrency' | translate}}">
         <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option>
         <nz-option [nzLabel]="'BTC'" [nzValue]="'btc'"></nz-option>
         <nz-option [nzLabel]="'ETH'" [nzValue]="'eth'"></nz-option>
@@ -45,30 +45,32 @@
     </span>
     ->
     <span class="search-input">
-      <nz-select #symbol2 style="width: 200px;" nzPlaceHolder="请选择交易币种">
+      <nz-select #symbol2 style="width: 200px;" nzPlaceHolder="{{'exchange.selectCurrency' | translate}}">
         <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option>
         <nz-option [nzLabel]="'BTC'" [nzValue]="'btc'"></nz-option>
         <nz-option [nzLabel]="'ETH'" [nzValue]="'eth'"></nz-option>
       </nz-select>
     </span>
     <span class="search-input">
-      <nz-input-number #order_amount style="width: 230px;" [nzStep]="0.1" [nzPlaceHolder]="'请输入交易数量'"></nz-input-number>
+      <nz-input-number #order_amount style="width: 230px;" [nzStep]="0.1" nzPlaceHolder="{{'exchange.enterNumber' | translate}}"></nz-input-number>
     </span>
     <span class="search-button">
-      <button nzType="primary" nz-button (click)="buyMarket(symbol1.value+symbol2.value,order_amount.value)">买入</button>
+      <button nzType="primary" nz-button (click)="buyMarket(symbol1.value+symbol2.value,order_amount.value)">{{'exchange.buy'
+        | translate}}</button>
       <span style="margin-right: 10px;"></span>
-      <button nzType="primary" nz-button (click)="sellMarket(symbol1.value+symbol2.value,order_amount.value)">卖出</button>
+      <button nzType="primary" nz-button (click)="sellMarket(symbol1.value+symbol2.value,order_amount.value)">{{'exchange.sell'
+        | translate}}</button>
     </span>
     <br /><span style="margin-left: 20px;height: 10px;"></span>
     <br />
     <span class="search-input">
-      <nz-select style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyType1">
+      <nz-select style="width: 230px;" nzPlaceHolder="{{'exchange.selectCurrency' | translate}}" [(ngModel)]="selectedCurrencyType1">
         <nz-option *ngFor="let item of currencyType" [nzLabel]="item.name" [nzValue]="item.value"></nz-option>
       </nz-select>
     </span>
     <span>-</span>
     <span class="search-input">
-      <nz-select style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyType2">
+      <nz-select style="width: 230px;" nzPlaceHolder="{{'exchange.selectCurrency' | translate}}" [(ngModel)]="selectedCurrencyType2">
         <nz-option *ngFor="let item of currencyType" [nzLabel]="item.name" [nzValue]="item.value"></nz-option>
       </nz-select>
     </span>
@@ -86,14 +88,16 @@
 
     <span class="label">{{ 'statistics.asset.size' | translate }}</span>
     <span class="input">
-      <nz-input-number style="width: 230px;" [nzStep]="1" [nzMax]="100" [nzPlaceHolder]="'请输入查找条数'" [(ngModel)]="sizeNum"></nz-input-number>
+      <nz-input-number style="width: 230px;" [nzStep]="1" [nzMax]="100" nzPlaceHolder="{{'exchange.numberOfFinds' | translate}}" [(ngModel)]="sizeNum"></nz-input-number>
     </span>
 
     <span class="search-button">
-      <button nzType="primary" nz-button (click)="searchOrders()">{{'exchange.search' | translate}}</button>
+      <button nzType="primary" [nzLoading]="transactionTableLoading" nz-button (click)="searchOrders()">
+        {{'exchange.search' | translate}}
+      </button>
     </span>
   </div>
-  <nz-table #orderTable [nzData]="orders" [nzPageSize]="10">
+  <nz-table #orderTable [nzData]="orders" [nzLoading]="transactionTableLoading" [nzPageSize]="10">
     <thead>
       <tr>
         <th>{{'exchange.transactions.id' | translate}}</th>
@@ -116,7 +120,9 @@
         <td>{{i.finishedAt | date:"yyyy-MM-dd HH:mm:ss ZZZZ"}}</td>
         <td>{{i.state}}</td>
         <td>
-          <button nzType="primary" nz-button (click)="cancelOrder(i.id)">{{'exchange.cancel' | translate}}</button>
+          <button nz-button nzType="primary" [nzLoading]="cancelOrderLoading" (click)="cancelOrder(i.id)">
+            {{'exchange.cancel' | translate}}
+          </button>
         </td>
       </tr>
     </tbody>
@@ -128,27 +134,28 @@
   <div class="title">{{'exchange.withdrawals' | translate}}</div>
   <div class="search search-form" style="height:auto">
     <span class="search-input">
-      <nz-select #coin style="width: 200px;" nzPlaceHolder="请选择交易币种">
+      <nz-select #coin style="width: 200px;" nzPlaceHolder="{{'exchange.selectCurrency' | translate}}">
         <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option>
         <nz-option [nzLabel]="'BTC'" [nzValue]="'btc'"></nz-option>
         <nz-option [nzLabel]="'ETH'" [nzValue]="'eth'"></nz-option>
       </nz-select>
     </span>
     <span class="search-input">
-      <nz-input-number #drawal_amount style="width: 230px;" [nzStep]="0.1" [nzPlaceHolder]="'请输入交易数量'"></nz-input-number>
+      <nz-input-number #drawal_amount style="width: 230px;" [nzStep]="0.1" nzPlaceHolder="{{'exchange.enterNumber' | translate}}"></nz-input-number>
     </span>
     <span class="search-input">
-      <input #address nz-input style="width: 230px;" placeholder="请输入钱包提取地址">
+      <input #address nz-input style="width: 230px;" placeholder="{{'exchange.walletAddress' | translate}}">
     </span>
     <span class="search-button">
-      <button nzType="primary" nz-button (click)="withdrawal(coin.value,drawal_amount.value,address.value)">提取</button>
+      <button nzType="primary" nz-button (click)="withdrawal(coin.value,drawal_amount.value,address.value)">{{'exchange.extract'
+        | translate}}</button>
     </span>
   </div>
 
   <div class="search search-form" style="height: auto;">
     <span class="label">{{ 'statistics.asset.currency' | translate }}</span>
     <span class="input">
-      <nz-select #coinW style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyW">
+      <nz-select #coinW style="width: 230px;" nzPlaceHolder="{{'exchange.selectCurrency' | translate}}" [(ngModel)]="selectedCurrencyW">
         <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option>
         <nz-option [nzLabel]="'BTC'" [nzValue]="'btc'"></nz-option>
         <nz-option [nzLabel]="'ETH'" [nzValue]="'eth'"></nz-option>
@@ -157,21 +164,22 @@
 
     <span class="label">{{ 'statistics.asset.start_id' | translate }}</span>
     <span class="input">
-      <nz-input-number #fromW style="width: 230px;" [nzStep]="1" [nzPlaceHolder]="'请输入起始id'" [(ngModel)]="fromNumW"></nz-input-number>
+      <nz-input-number #fromW style="width: 230px;" [nzStep]="1" nzPlaceHolder="{{'exchange.enterStartId' | translate}}" [(ngModel)]="fromNumW"></nz-input-number>
     </span>
 
     <span class="label">{{ 'statistics.asset.size' | translate }}</span>
     <span class="input">
-      <nz-input-number #sizeW style="width: 230px;" [nzStep]="1" [nzMax]="100" [nzPlaceHolder]="'请输入查找条数'" [(ngModel)]="sizeNumW"></nz-input-number>
+      <nz-input-number #sizeW style="width: 230px;" [nzStep]="1" [nzMax]="100" nzPlaceHolder="{{'exchange.numberOfFinds' | translate}}" [(ngModel)]="sizeNumW"></nz-input-number>
     </span>
 
-    <span class="button">
-      <button nz-button nzType="primary" (click)="withdrawalsSearch(coinW.value,fromW.value,sizeW.value)">{{ 'search' |
-        translate }}</button>
+    <span class="search-button">
+      <button nz-button nzType="primary" [nzLoading]="withdrawalsTableLoading" (click)="withdrawalsSearch(coinW.value,fromW.value,sizeW.value)">
+        {{ 'search' | translate }}
+      </button>
     </span>
   </div>
 
-  <nz-table #withdrawalsTable [nzLoading]="tableLoading" [nzData]="withdrawalsList">
+  <nz-table #withdrawalsTable [nzLoading]="withdrawalsTableLoading" [nzData]="withdrawalsList">
     <thead>
       <tr class="table_tr">
         <th style="min-width: 100px;">{{ 'statistics.asset.id' | translate }}</th>
@@ -198,7 +206,9 @@
         <!--<td>{{statistics.txHash}}</td>-->
         <td>{{statistics.updatedAt | date:"yyyy-MM-dd HH:mm:ss ZZZZ"}}</td>
         <td>
-          <button nzType="primary" nz-button (click)="cancelWithdraw(statistics.id)">撤销</button>
+          <button nz-button nzType="primary" [nzLoading]="cancelWithdrawalsLoading" (click)="cancelWithdraw(statistics.id)">
+            {{'exchange.cancel' | translate}}
+          </button>
         </td>
       </tr>
     </tbody>

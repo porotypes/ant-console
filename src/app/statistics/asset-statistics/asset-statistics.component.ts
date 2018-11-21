@@ -21,6 +21,9 @@ export class AssetStatisticsComponent implements OnInit {
   statisticsList: AssetStatistics[] = [];
   withdrawalsList: AssetStatistics[] = [];
 
+  tableLoadingD = false;
+  tableLoadingW = false;
+
   selectedCurrencyD = 'btc';
   fromNumD = 0;
   sizeNumD = 100;
@@ -38,7 +41,8 @@ export class AssetStatisticsComponent implements OnInit {
   }
 
   // 查询提币订单
-  withdrawalsSearch(coin: string, from: number, size: number) {
+  withdrawalsSearch(coin: string = 'btc', from: number = 0, size: number = 100) {
+    this.tableLoadingW = true;
     const condition = {
       coin: coin || this.selectedCurrencyW,
       from: from || this.fromNumW,
@@ -57,12 +61,13 @@ export class AssetStatisticsComponent implements OnInit {
             this.fromNumW = val.id + 1;
             this.withdrawalsList.push(val);
           });
-
         } else {
           this.messageService.error(res.msg);
         }
+        this.tableLoadingW = false;
       },
       error => {
+        this.tableLoadingW = false;
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -74,6 +79,7 @@ export class AssetStatisticsComponent implements OnInit {
 
   // 查询充值订单
   depositsSearch(coin: string, from: number, size: number) {
+    this.tableLoadingD = true;
     const condition = {
       coin: coin || this.selectedCurrencyD,
       from: from || this.fromNumD,
@@ -96,8 +102,10 @@ export class AssetStatisticsComponent implements OnInit {
         } else {
           this.messageService.error(res.msg);
         }
+        this.tableLoadingD = false;
       },
       error => {
+        this.tableLoadingD = false;
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

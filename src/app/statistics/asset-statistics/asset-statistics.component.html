@@ -21,11 +21,11 @@
     </span>
 
     <span class="button">
-      <button nz-button nzType="primary" (click)="depositsSearch(coinD.value,fromD.value,sizeW.value)">{{ 'search' |
+      <button nz-button nzType="primary"  [nzLoading]="tableLoadingD" (click)="depositsSearch(coinD.value,fromD.value,sizeW.value)">{{ 'search' |
         translate }}</button>
     </span>
   </div>
-  <nz-table #basicTable [nzLoading]="tableLoading" [nzData]="statisticsList">
+  <nz-table #basicTable [nzLoading]="tableLoadingD" [nzData]="statisticsList">
     <thead>
       <tr class="table_tr">
         <th style="min-width:100px">{{ 'statistics.asset.id' | translate }}</th>
@@ -77,12 +77,12 @@
     </span>
 
     <span class="button">
-      <button nz-button nzType="primary" (click)="withdrawalsSearch(coinW.value,fromW.value,sizeW.value)">{{ 'search' |
+      <button nz-button nzType="primary" [nzLoading]="tableLoadingW" (click)="withdrawalsSearch(coinW.value,fromW.value,sizeW.value)">{{ 'search' |
         translate }}</button>
     </span>
   </div>
 
-  <nz-table #withdrawalsTable [nzLoading]="tableLoading" [nzData]="withdrawalsList">
+  <nz-table #withdrawalsTable [nzLoading]="tableLoadingW" [nzData]="withdrawalsList">
     <thead>
       <tr class="table_tr">
         <th style="min-width: 100px;">{{ 'statistics.asset.id' | translate }}</th>

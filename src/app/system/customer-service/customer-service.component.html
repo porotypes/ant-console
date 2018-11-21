@@ -54,7 +54,7 @@
   </nz-tab>
 </nz-tabset>
 
-<nz-modal [(nzVisible)]="isShowDialog" nzTitle="'custom_service.contact_customer_service' | translate" (nzOnCancel)="closeDialog()" (nzOnOk)="send()">
+<nz-modal [(nzVisible)]="isShowDialog" [nzTitle]="'custom_service.contact_customer_service' | translate" (nzOnCancel)="closeDialog()" (nzOnOk)="send()">
   <textarea rows="4" nz-input [(ngModel)]="content"></textarea>
 </nz-modal>
 

@@ -1,26 +1,23 @@
 <nz-layout class="layout" style="background:#fff">
-  <nz-header style="background:#a0cdf8">
-    <div nz-row>
-      <div nz-col nzSpan="8">
-        <h1 class="title">{{ 'system_title' | translate }}</h1>
-      </div>
-      <div nz-col nzOffset="10" nzSpan="6">
-        <div nz-row>
-          <div nz-col nzSpan="8">
-            <nz-select style="width: 100px;" [ngModel]="selectedLanguage" (ngModelChange)="selectLanguage($event)">
-              <nz-option nzValue="zh_CN" nzLabel="简体中文"></nz-option>
-              <nz-option nzValue="en_US" nzLabel="English"></nz-option>
-            </nz-select>
-          </div>
-          <div nz-col nzSpan="8" nzOffset="2">
-            <nz-dropdown-button>
-              {{ authService.user.username }}
-              <ul nz-menu>
-                <li nz-menu-item (click)="openDialog()">{{ 'edit_password' | translate }}</li>
-                <li nz-menu-item (click)="loginOut()">{{ 'login_out' | translate }}</li>
-              </ul>
-            </nz-dropdown-button>
-          </div>
+  <nz-header style="background:#fb702f">
+    <div>
+      <div style="width:200px;float: left;"><img src="assets/img/logo.png" height="64px" style="float:left" /></div>
+      <h1 class="title">{{ 'system_title' | translate }}</h1>
+      <div style="float:right">
+        <div style="float: left; margin: auto 10px;">
+          <nz-select style="width: 100px;" [ngModel]="selectedLanguage" (ngModelChange)="selectLanguage($event)">
+            <nz-option nzValue="zh_CN" nzLabel="简体中文"></nz-option>
+            <nz-option nzValue="en_US" nzLabel="English"></nz-option>
+          </nz-select>
+        </div>
+        <div style="float: right; margin: auto 10px;">
+          <nz-dropdown-button [nzTrigger]="'click'">
+            {{ authService.user.username }}
+            <ul nz-menu>
+              <li nz-menu-item (click)="openDialog()">{{ 'edit_password' | translate }}</li>
+              <li nz-menu-item (click)="loginOut()">{{ 'login_out' | translate }}</li>
+            </ul>
+          </nz-dropdown-button>
         </div>
       </div>
     </div>
@@ -33,34 +30,44 @@
           <span title><i class="anticon anticon-desktop"></i>{{ 'menu.equipment.equipment_management' | translate }}</span>
           <ul>
             <li nz-menu-item routerLink="/dashboard/equipment-list">{{ 'menu.equipment.equipment_list' | translate }}</li>
-            <li nz-menu-item routerLink="/dashboard/equipment-cash">{{ 'menu.equipment.equipment_cash_amount' | translate }}</li>
+            <li nz-menu-item routerLink="/dashboard/equipment-cash">{{ 'menu.equipment.equipment_cash_amount' |
+              translate }}</li>
             <!-- <li nz-menu-item routerLink="/dashboard/equipment-map">设备位置</li> -->
           </ul>
         </li>
-        <li *ngIf="authService.isCanTansactionStatistice()" nz-submenu [nzOpen]="true">
-          <span title><i class="anticon anticon-shopping-cart"></i>{{ 'menu.transaction.transaction_management' | translate }}</span>
+        <li *ngIf="authService.isCanGetHuoBi()" nz-submenu [nzOpen]="true">
+          <span title><i class="anticon anticon-shopping-cart"></i>{{ 'menu.transaction.transaction_management' |
+            translate }}</span>
           <ul>
             <li nz-menu-item routerLink="/dashboard/exchange">{{ 'menu.transaction.transaction_exchange' | translate }}</li>
-            <li nz-menu-item routerLink="/dashboard/trading-record">{{ 'menu.transaction.transaction_record' | translate }}</li>
+            <li nz-menu-item routerLink="/dashboard/trading-record">{{ 'menu.transaction.transaction_record' |
+              translate }}</li>
           </ul>
         </li>
         <li *ngIf="authService.isCanTansactionStatistice()" nz-submenu [nzOpen]="true">
           <span title><i class="anticon anticon-laptop"></i>{{ 'menu.statistics.statistics' | translate }}</span>
           <ul>
-            <li nz-menu-item routerLink="/dashboard/equipment-statistics">{{ 'menu.statistics.equipment_statistics' | translate }}</li>
+            <li nz-menu-item routerLink="/dashboard/equipment-statistics">{{ 'menu.statistics.equipment_statistics' |
+              translate }}</li>
             <!-- <li nz-menu-item>数字资产流水</li> -->
-            <li nz-menu-item routerLink="/dashboard/asset-statistics">{{ 'menu.statistics.asset_statistics' | translate }}</li>
-            <li nz-menu-item routerLink="/dashboard/company-statistics">{{ 'menu.statistics.company_statistics' | translate }}</li>
+            <li nz-menu-item routerLink="/dashboard/asset-statistics">{{ 'menu.statistics.asset_statistics' | translate
+              }}</li>
+            <li nz-menu-item routerLink="/dashboard/company-statistics">{{ 'menu.statistics.company_statistics' |
+              translate }}</li>
             <!-- <li nz-menu-item>区域分布统计</li> -->
-            <li nz-menu-item routerLink="/dashboard/fault-statistics">{{ 'menu.statistics.fault_statistics' | translate }}</li>
+            <li nz-menu-item routerLink="/dashboard/fault-statistics">{{ 'menu.statistics.fault_statistics' | translate
+              }}</li>
           </ul>
         </li>
         <li nz-submenu [nzOpen]="true">
           <span title><i class="anticon anticon-setting"></i>{{ 'menu.setting.setting' | translate }}</span>
           <ul>
-            <li *ngIf="authService.isCanShowCompanyList()" nz-menu-item routerLink="/dashboard/company-management">{{ 'menu.setting.company' | translate }}</li>
-            <li *ngIf="authService.isCanShowRoleList()" nz-menu-item routerLink="/dashboard/role-management">{{ 'menu.setting.role' | translate }}</li>
-            <li *ngIf="authService.isCanShowUserList()" nz-menu-item routerLink="/dashboard/account-management">{{ 'menu.setting.account' | translate }}</li>
+            <li *ngIf="authService.isCanShowCompanyList()" nz-menu-item routerLink="/dashboard/company-management">{{
+              'menu.setting.company' | translate }}</li>
+            <li *ngIf="authService.isCanShowRoleList()" nz-menu-item routerLink="/dashboard/role-management">{{
+              'menu.setting.role' | translate }}</li>
+            <li *ngIf="authService.isCanShowUserList()" nz-menu-item routerLink="/dashboard/account-management">{{
+              'menu.setting.account' | translate }}</li>
             <li *ngIf="authService.isCanShowChatReceiveList()" nz-menu-item routerLink="/dashboard/customer-service">
               <span style="margin-right: 5px;">{{ 'menu.setting.coustomer_service' | translate }}</span>
               <nz-badge [nzCount]="unreadInformationNum"></nz-badge>
@@ -70,34 +77,30 @@
       </ul>
     </nz-sider>
     <nz-layout style="padding: 15px">
-      <nz-content style="background:#fff;padding: 15px;max-height: calc(100vh - 94px);overflow-y: auto;">
+      <nz-content class="content">
         <router-outlet></router-outlet>
       </nz-content>
     </nz-layout>
   </nz-layout>
 </nz-layout>
 
-<nz-modal
-  [(nzVisible)]="isShowChangePswDialog"
-  [nzTitle]=" 'edit_password' | translate "
-  [nzCancelText]="'cancel' | translate"
-  [nzOkText]="'ok' | translate"
-  (nzOnCancel)="closeDialog()"
-  (nzOnOk)="changePassword()"
-  [nzOkLoading]="isSaving">
+<nz-modal [(nzVisible)]="isShowChangePswDialog" [nzTitle]=" 'edit_password' | translate " [nzCancelText]="'cancel' | translate"
+  [nzOkText]="'ok' | translate" (nzOnCancel)="closeDialog()" (nzOnOk)="changePassword()" [nzOkLoading]="isSaving">
   <form nz-form [formGroup]="changePswForm" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>{{ 'old_password' | translate }}</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
         <input type="password" nz-input formControlName="oldPassword">
-        <nz-form-explain *ngIf="changePswForm.get('oldPassword').dirty && changePswForm.get('oldPassword').errors">{{ 'old_password_tip' | translate }}</nz-form-explain>
+        <nz-form-explain *ngIf="changePswForm.get('oldPassword').dirty && changePswForm.get('oldPassword').errors">{{
+          'old_password_tip' | translate }}</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>{{ 'new_password' | translate }}</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
         <input type="password" nz-input formControlName="newPassword">
-        <nz-form-explain *ngIf="changePswForm.get('newPassword').dirty && changePswForm.get('newPassword').errors">{{ 'new_password_tip' | translate }}</nz-form-explain>
+        <nz-form-explain *ngIf="changePswForm.get('newPassword').dirty && changePswForm.get('newPassword').errors">{{
+          'new_password_tip' | translate }}</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
   </form>

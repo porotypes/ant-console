@@ -10,6 +10,7 @@ import { LanguageService } from '../../core/language.service';
 import { Pagination } from 'src/app/common/pagination';
 import { Equipment } from 'src/app/common/equipment';
 import { HttpResponseData } from 'src/app/common/http-response-data';
+import { LoginService } from 'src/app/core/auth/login.service';
 
 @Component({
   selector: 'app-equipment-list',
@@ -33,6 +34,7 @@ export class EquipmentListComponent implements OnInit {
     private messageService: NzMessageService,
     private router: Router,
     public authService: AuthService,
+    private loginService: LoginService,
     private languageService: LanguageService
   ) {}
 
@@ -96,7 +98,9 @@ export class EquipmentListComponent implements OnInit {
       (res: HttpResponseData<any>) => {
         if (res.status === 200) {
           this.messageService.success(res.msg);
-        } else {
+        } else if ( res.status === 401) {
+          this.loginService.loginOut();
+        }  else {
           this.messageService.error(res.msg);
         }
       },
@@ -120,7 +124,9 @@ export class EquipmentListComponent implements OnInit {
         if (res.status === 200) {
           this.messageService.success(res.msg);
           this.getEquipmentList();
-        } else {
+        } else if ( res.status === 401) {
+          this.loginService.loginOut();
+        }  else {
           this.messageService.error(res.msg);
         }
       },

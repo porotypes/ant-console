@@ -1,5 +1,5 @@
 {
-  "system_title": "Digiccy-ATM-CONSOLE",
+  "system_title": "Digiccy ATM CONSOLE",
   "edit_password": "change password",
   "old_password": "old password",
   "old_password_tip": "Please input old password!",
@@ -45,7 +45,9 @@
     "username": "username",
     "username_input_tip": "Please input your username!",
     "password": "password",
+    "code": "captcha",
     "password_input_tip": "Please input your password!",
+    "code_input_tip": "Please input your captcha!",
     "login": "log in"
   },
   "trading": {
@@ -89,7 +91,7 @@
     "email_tip": "Please input company email!",
     "port": "port",
     "port_tip": "Please input company port!",
-    "delete_company_tip": "Make sure to delete the company?"
+    "delete_company_tip": "Make sure to delete the company and its account?"
   },
   "custom_service": {
     "contact_customer_service": "contact customer service",
@@ -122,9 +124,20 @@
     "symbol": "symbol",
     "balance": "balance",
     "state": "state",
+    "type": "type",
     "withdrawals": "withdrawals",
+    
+    "buy": "buy",
+    "sell": "sell",
+    "extract": "extract",
     "search": "search",
-    "cancel": "cancel"
+    "cancel": "cancel",
+
+    "numberOfFinds": "Please enter the number of finds",
+    "enterStartId": "Please enter the starting id",
+    "walletAddress": "Please enter the wallet to extract the address",
+    "selectCurrency": "Please select the transaction currency",
+    "enterNumber": "Please enter the number of transactions"
   },
   "statistics": {
     "company": {
@@ -161,7 +174,9 @@
       "query_by_company": "query by company",
       "company": "company name",
       "equipment_type": "equipment type",
-      "error_count": "error count"
+      "status_code": "status code",
+      "error_count": "error count",
+      "receive_time": "receive time"
     }
   },
   "equipment": {

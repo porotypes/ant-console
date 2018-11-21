@@ -18,7 +18,7 @@
       </nz-select>
     </span>
     <span class="button">
-      <button nz-button nzType="primary" (click)="search()">{{ 'search' | translate }}</button>
+      <button nz-button nzType="primary" [nzLoading]="tableLoading" (click)="search()">{{ 'search' | translate }}</button>
     </span>
   </div>
 </div>

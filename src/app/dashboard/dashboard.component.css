@@ -1,6 +1,16 @@
 h1.title {
   color: #fff;
+  float: left;
 }
 .ant-menu-submenu {
-  background: #a0cdf8;
+  background: #fb702f;
+  color: white;
+}
+
+.content {
+  background-image: url();
+  background-position: 50% 100%;
+  padding: 15px;
+  max-height: calc(100vh - 94px);
+  overflow-y: auto;
 }

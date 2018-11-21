@@ -25,6 +25,7 @@ export class FaultStatisticsComponent implements OnInit {
   selectedType = '0';
   selectedCompany = '';
   tableLoading = false;
+  tableLoadingFault = false;
   companies: Company[];
   statisticsList: FaultStatistics[];
   pagination = new Pagination<Company>();
@@ -32,6 +33,7 @@ export class FaultStatisticsComponent implements OnInit {
   isVisible = false;
   data: FaultList[];
 
+  // 查询故障列表
   showFaultListModal(eId: number, eType: string, status: number): void {
     this.isVisible = true;
     // 查询故障详情
@@ -43,10 +45,10 @@ export class FaultStatisticsComponent implements OnInit {
       endTime: DateTimeUtil.formatDateTimeToString(this.endTimeValue),
       deviceType: eType
     };
-    this.tableLoading = true;
+    this.tableLoadingFault = true;
     this.statisticsService.getFaultList(condition).subscribe(
       (res: HttpResponseData<FaultList>) => {
-        this.tableLoading = false;
+        this.tableLoadingFault = false;
         if (res.status === 200) {
           this.data = res.obj.records;
         } else {
@@ -54,7 +56,7 @@ export class FaultStatisticsComponent implements OnInit {
         }
       },
       error => {
-        this.tableLoading = false;
+        this.tableLoadingFault = false;
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

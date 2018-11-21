@@ -26,9 +26,14 @@ export class ExchangeComponent implements OnInit {
 
   balances: Balance[] = [];
   balancesList: Balance[];
-  balanceTableLoading = false;
   balancePageIndex = 1;
   balanceTotal: number;
+
+  balanceTableLoading = false;  // 资产loading
+  transactionTableLoading = false;  // 交易记录查询loading
+  withdrawalsTableLoading = false;  // 提币记录查询loading
+  cancelOrderLoading = false;  // 交易订单撤销loading
+  cancelWithdrawalsLoading = false;  // 提币订单撤销loading
 
   selectedCurrencyType1: string;
   selectedCurrencyType2: string;
@@ -36,7 +41,7 @@ export class ExchangeComponent implements OnInit {
   endTimeValue: Date = new Date();
   sizeNum = 100;
 
-  selectedCurrencyW = 'btc';
+  selectedCurrencyW = 'btc'; // 提币查询默认选择币种
   fromNumW = 0;
   sizeNumW = 100;
 
@@ -142,6 +147,7 @@ export class ExchangeComponent implements OnInit {
 
   // 查询订单
   searchOrders() {
+    this.transactionTableLoading = true;
     const currncyPair = {
       symbol: this.selectedCurrencyType1 + this.selectedCurrencyType2,
       start: format(this.startTimeValue, 'YYYY-MM-DD'),
@@ -161,8 +167,10 @@ export class ExchangeComponent implements OnInit {
             this.orders.push(balance);
           });
         }
+        this.transactionTableLoading = false;
       },
       error => {
+        this.transactionTableLoading = false;
         this.messageService.error(error.error.msg || '响应超时');
       }
 
@@ -247,7 +255,6 @@ export class ExchangeComponent implements OnInit {
             balance.finishedAt = balance['finished-at'];
             this.orders.push(balance);
           });
-          console.log(this.orders);
         }
       },
       error => {
@@ -259,6 +266,7 @@ export class ExchangeComponent implements OnInit {
 
   // 查询提币订单
   withdrawalsSearch(coin: string, from: number, size: number) {
+    this.withdrawalsTableLoading = true;
     const condition = {
       coin: coin || this.selectedCurrencyW,
       from: from || this.fromNumW,
@@ -277,12 +285,13 @@ export class ExchangeComponent implements OnInit {
             this.fromNumW = val.id + 1;
             this.withdrawalsList.push(val);
           });
-
         } else {
           this.messageService.error(res.msg);
         }
+        this.withdrawalsTableLoading = false;
       },
       error => {
+        this.withdrawalsTableLoading = false;
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -292,8 +301,13 @@ export class ExchangeComponent implements OnInit {
     );
   }
 
+  fromNumWClear() {
+    this.fromNumW = 0;
+  }
+
   // 撤销订单
   cancelOrder(id: number) {
+    this.cancelOrderLoading = true;
     this.exchangeService.cancel(id).subscribe(
       (res: HttpResponseData<string>) => {
         const obj = JSON.parse(res.obj);
@@ -303,8 +317,11 @@ export class ExchangeComponent implements OnInit {
           console.log(obj);
           this.messageService.success(obj);
         }
+        this.cancelOrderLoading = false;
+
       },
       error => {
+        this.cancelOrderLoading = false;
         this.messageService.error(error.error.msg || '响应超时');
       }
 
@@ -313,6 +330,7 @@ export class ExchangeComponent implements OnInit {
 
   // 撤销提币订单
   cancelWithdraw(id: number) {
+    this.cancelWithdrawalsLoading = true;
     this.exchangeService.cancelWithdraw(id).subscribe(
       (res: HttpResponseData<string>) => {
         const obj = JSON.parse(res.obj);
@@ -322,8 +340,10 @@ export class ExchangeComponent implements OnInit {
           console.log(obj);
           this.messageService.success(obj);
         }
+        this.cancelWithdrawalsLoading = false;
       },
       error => {
+        this.cancelWithdrawalsLoading = false;
         this.messageService.error(error.error.msg || '响应超时');
       }
 

@@ -7,8 +7,6 @@ import {
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
-import { envStyle } from '../../environments/style';
-
 import { AuthService } from '../core/auth/auth.service';
 import { StorageService } from '../core/storage.service';
 import { LoginService } from '../core/auth/login.service';
@@ -62,7 +60,6 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
     if (this.authService.isCanShowChatReceiveList()) {
       this.getUnreadChatInformationNum();
     }
-
     this.selectedLanguage = this.storageService.readStorage('language') || 'zh_CN';
     this.sub = this.chatInformationService.getList.subscribe((total: number) => {
       this.getUnreadChatInformationNum();
@@ -95,6 +92,8 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
           this.timer = setInterval(() => {
             this.getUnreadChatInformationNum();
           }, 60000);
+        } else if (res.status === 401) {
+          this.loginService.loginOut();
         } else {
           this.messageService.error(res.msg);
         }
@@ -137,6 +136,8 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
           }
           this.storageService.removeStorage('USER_TOKEN');
           this.router.navigate(['/login']);
+        } else if (res.status === 401) {
+          this.loginService.loginOut();
         } else {
           this.messageService.error(res.msg);
         }

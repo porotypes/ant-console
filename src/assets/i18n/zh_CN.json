@@ -45,7 +45,9 @@
     "username": "用户名",
     "username_input_tip": "请输入用户名!",
     "password": "密码",
+    "code": "验证码",
     "password_input_tip": "请输入密码!",
+    "code_input_tip": "请输入验证码",
     "login": "登录"
   },
   "trading": {
@@ -89,7 +91,7 @@
     "email_tip": "请输入公司邮箱!",
     "port": "端口",
     "port_tip": "请输入端口号!",
-    "delete_company_tip": "确定删除该公司？"
+    "delete_company_tip": "确定删除该公司及旗下账号？"
   },
   "custom_service": {
     "contact_customer_service": "联系客服",
@@ -118,12 +120,24 @@
       "finishedAt": "交易时间",
       "state": "状态"
     },
+    "id": "ID",
     "symbol": "币种",
     "balance": "余额",
     "state": "状态",
+    "type": "类型",
     "withdrawals": "提币",
+
+    "buy": "买入",
+    "sell": "卖出",
+    "extract": "提取",
     "search": "查询",
-    "cancel": "撤销"
+    "cancel": "撤销",
+
+    "numberOfFinds": "请输入查找条数",
+    "enterStartId": "请输入起始id",
+    "walletAddress": "请输入钱包提取地址",
+    "selectCurrency": "请选择币种",
+    "enterNumber": "请输入交易数量"
   },
   "statistics": {
     "company": {
@@ -162,7 +176,7 @@
       "equipment_type": "设备类型",
       "status_code": "状态",
       "error_count": "故障次数",
-      "receiveTime": "发生时间"
+      "receive_time": "发生时间"
     }
   },
   "equipment": {

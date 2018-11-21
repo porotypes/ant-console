@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../../core/system/account.service';
+import { CompanyService } from '../../core/system/company.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { LanguageService } from '../../core/language.service';
 import { NzMessageService } from 'ng-zorro-antd';
@@ -8,6 +9,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { Pagination } from '../../common/pagination';
 import { Account } from '../../common/Account';
 import { HttpResponseData } from '../../common/http-response-data';
+import { LoginService } from 'src/app/core/auth/login.service';
 
 @Component({
   selector: 'app-account-management',
@@ -17,12 +19,14 @@ import { HttpResponseData } from '../../common/http-response-data';
 export class AccountManagementComponent implements OnInit {
 
   pagination = new Pagination<Account>();
-  private tableLoading = true;
+  tableLoading = true;
 
   constructor(
     private accountService: AccountService,
+    private companyService: CompanyService,
     private messageService: NzMessageService,
     private authService: AuthService,
+    private loginService: LoginService,
     private router: Router,
     private languageService: LanguageService
   ) { }
@@ -32,16 +36,25 @@ export class AccountManagementComponent implements OnInit {
   }
 
   private getAccountList() {
+    this.tableLoading = true;
     this.accountService.getAccountList(this.pagination).subscribe(
       (res: HttpResponseData<Pagination<Account>>) => {
-        this.tableLoading = false;
+
         if (res.status === 200) {
+          // res.obj.records.forEach((e, k) => {
+          //   res.obj.records[k].companyName = this.getCompanyName(e.companyId);
+          // });
           this.pagination = res.obj;
+          console.log(res.obj);
+        } else if ( res.status === 401) {
+          this.loginService.loginOut();
         } else {
           this.messageService.error(res.msg);
         }
+        this.tableLoading = false;
       },
       error => {
+        this.tableLoading = false;
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
