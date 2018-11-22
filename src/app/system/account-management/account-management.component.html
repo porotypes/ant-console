@@ -1,9 +1,10 @@
 <div class="search">
-  <!-- <div class="search-form">
-    <span class="search-label">用户名</span>
-    <span class="search-input"><input nz-input></span>
-    <span class="search-button"><button nz-button nzType="primary">查询</button></span>
-  </div> -->
+  <div class="search-form">
+    <span class="search-label" style="margin: auto 16px;">{{ 'account.login_name' | translate }}</span>
+    <span class="search-input"><input nz-input [(ngModel)]="accountName"></span>
+    <span class="search-button"><button nz-button nzType="primary" (click)="searchAccount()">{{ 'search' | translate
+        }}</button></span>
+  </div>
   <div class="add" *ngIf="authService.isCanAddUser()">
     <button nz-button nzType="primary" routerLink="/dashboard/add-account">{{ 'account.create_account' | translate }}</button>
   </div>

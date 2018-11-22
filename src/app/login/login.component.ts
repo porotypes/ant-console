@@ -11,7 +11,7 @@ import { AuthService } from '../core/auth/auth.service';
 import { StorageService } from '../core/storage.service';
 import { LanguageService } from '../core/language.service';
 
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'; // 解决sanitizing unsafe URL value问题
+import { DomSanitizer } from '@angular/platform-browser'; // 解决sanitizing unsafe URL value问题
 
 // import { Md5 } from 'ts-md5/dist/md5';
 
@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
 
   validateForm: FormGroup;
   imgLoading = false;
-  codeImg: SafeResourceUrl;
+  codeImg: any = '';
   key: string;
-  // loginStatus = false;
+  loginStatus = false;
 
   constructor(
     private fb: FormBuilder,
@@ -51,10 +51,10 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm(): void {
-    this.validateForm.value.key = this.key;
-    // if (!this.validateForm.valid) {
-    //   return;
-    // }
+    this.validateForm.controls.key.setValue(this.key); // 设置key控件的值
+    if (!this.validateForm.valid) {
+      return;
+    }
     // this.validateForm.setValue({
     //   'password': Md5.hashStr(this.validateForm.value.password + new Date().getTime()),
     //   'time': new Date().getTime(),
@@ -72,6 +72,10 @@ export class LoginComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 403) {
+          // 当错误状态为403（验证码错误）时，刷新验证码
+          this.refresh();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -92,7 +96,12 @@ export class LoginComponent implements OnInit {
       },
       error => {
         this.imgLoading = false;
-        this.messageService.error(error.error.msg);
+        if (error.error.msg) {
+          this.messageService.error(error.error.msg);
+        } else {
+          this.messageService.error('error!!!');
+        }
+
       }
     );
   }

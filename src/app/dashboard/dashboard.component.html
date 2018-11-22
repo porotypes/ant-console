@@ -1,7 +1,7 @@
 <nz-layout class="layout" style="background:#fff">
   <nz-header style="background:#fb702f">
     <div>
-      <div style="width:200px;float: left;"><img src="assets/img/logo.png" height="64px" style="float:left" /></div>
+      <div style="width:200px;float: left;"><img src="assets/img/logo.png" height="64px" style="float:left;filter: brightness(0%) invert(100%);" /></div>
       <h1 class="title">{{ 'system_title' | translate }}</h1>
       <div style="float:right">
         <div style="float: left; margin: auto 10px;">
@@ -12,7 +12,7 @@
         </div>
         <div style="float: right; margin: auto 10px;">
           <nz-dropdown-button [nzTrigger]="'click'">
-            {{ authService.user.username }}
+            {{ authService.user['username'] }}
             <ul nz-menu>
               <li nz-menu-item (click)="openDialog()">{{ 'edit_password' | translate }}</li>
               <li nz-menu-item (click)="loginOut()">{{ 'login_out' | translate }}</li>
@@ -86,7 +86,7 @@
 
 <nz-modal [(nzVisible)]="isShowChangePswDialog" [nzTitle]=" 'edit_password' | translate " [nzCancelText]="'cancel' | translate"
   [nzOkText]="'ok' | translate" (nzOnCancel)="closeDialog()" (nzOnOk)="changePassword()" [nzOkLoading]="isSaving">
-  <form nz-form [formGroup]="changePswForm" (ngSubmit)="submitForm()">
+  <form nz-form [formGroup]="changePswForm">
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>{{ 'old_password' | translate }}</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">

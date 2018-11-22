@@ -29,3 +29,7 @@ span.search-input {
 .label, .search-button {
   padding: 4px;
 }
+
+tr th,tr td {
+  text-align: center;
+}

@@ -20,6 +20,7 @@ export class CompanyManagementComponent implements OnInit {
   pagination = new Pagination<Company>();
   tableLoading = true;
   companyName: string;
+  pageSizeOptions = [ 5, 10, 20, 30, 40, 50 ];
 
   constructor(
     private router: Router,
@@ -44,6 +45,7 @@ export class CompanyManagementComponent implements OnInit {
         }
       },
       error => {
+        this.tableLoading = false;
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -53,13 +55,7 @@ export class CompanyManagementComponent implements OnInit {
     );
   }
 
-  changePageOrSize(event, resetPageIndex = false) {
-    if (event === 0) {
-      return;
-    }
-    if (resetPageIndex) {
-      this.pagination.current = event;
-    }
+  changePageOrSize(resetPageIndex = false) {
     this.tableLoading = true;
     this.getCompanyList();
   }

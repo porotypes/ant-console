@@ -6,9 +6,7 @@
       nzShowQuickJumper
       [nzLoading]="fullTableLoading"
       [nzData]="fullPagination.records"
-      [(nzPageSize)]="fullPagination.size"
-      (nzPageIndexChange)="changeFullPageOrSize()"
-      (nzPageSizeChange)="changeFullPageOrSize(true)">
+      [(nzPageSize)]="fullPagination.size">
       <thead>
         <tr>
           <th>序号</th>
@@ -34,9 +32,7 @@
       nzShowQuickJumper
       [nzLoading]="emptyTableLoading"
       [nzData]="emptyPagination.records"
-      [(nzPageSize)]="emptyPagination.size"
-      (nzPageIndexChange)="changeEmptyPageOrSize()"
-      (nzPageSizeChange)="changeEmptyPageOrSize(true)">
+      [(nzPageSize)]="emptyPagination.size">
       <thead>
         <tr>
           <th>序号</th>
@@ -63,8 +59,7 @@
       [nzLoading]="tableLoading"
       [nzData]="pagination.records"
       [(nzPageSize)]="pagination.size"
-      (nzPageIndexChange)="changePageOrSize()"
-      (nzPageSizeChange)="changePageOrSize(true)">
+      >
       <thead>
         <tr>
           <th>序号</th>

@@ -1,6 +1,6 @@
 <div class="search">
   <div class="search-form">
-    <span class="search-label">{{ 'company.company_name' | translate }}</span>
+    <span class="search-label" style="margin: auto 16px;">{{ 'company.company_name' | translate }}</span>
     <span class="search-input"><input nz-input [(ngModel)]="companyName"></span>
     <span class="search-button"><button nz-button nzType="primary" (click)="searchCompany()">{{ 'search' | translate }}</button></span>
   </div>
@@ -15,9 +15,12 @@
   nzShowQuickJumper
   [nzLoading]="tableLoading"
   [nzData]="pagination.records"
+  [nzTotal] = "pagination.total"
+  [(nzPageIndex)] = "pagination.current"
+  [nzPageSizeOptions] = "pageSizeOptions"
   [(nzPageSize)]="pagination.size"
-  (nzPageIndexChange)="changePageOrSize($evnet, false)"
-  (nzPageSizeChange)="changePageOrSize($evnet, true)">
+  (nzPageIndexChange)="changePageOrSize(false)"
+  (nzPageSizeChange)="changePageOrSize(true)">
   <thead>
     <tr>
       <th>{{ 'index' | translate }}</th>

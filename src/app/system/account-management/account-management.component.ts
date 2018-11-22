@@ -20,12 +20,13 @@ export class AccountManagementComponent implements OnInit {
 
   pagination = new Pagination<Account>();
   tableLoading = true;
+  accountName: string;
 
   constructor(
     private accountService: AccountService,
     private companyService: CompanyService,
     private messageService: NzMessageService,
-    private authService: AuthService,
+    public authService: AuthService,
     private loginService: LoginService,
     private router: Router,
     private languageService: LanguageService
@@ -64,7 +65,7 @@ export class AccountManagementComponent implements OnInit {
     );
   }
 
-  private changePageOrSize(event, resetPageIndex = false) {
+  public changePageOrSize(event, resetPageIndex = false) {
     if (event === 0) {
       return;
     }
@@ -80,6 +81,31 @@ export class AccountManagementComponent implements OnInit {
       (res: HttpResponseData<any>) => {
         if (res.status === 200) {
           this.messageService.success(res.msg);
+        } else {
+          this.messageService.error(res.msg);
+        }
+      },
+      error => {
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
+      }
+    );
+  }
+
+  searchAccount() {
+    if (this.accountName.trim() === '') {
+      this.getAccountList();
+      return;
+    }
+    this.pagination.current = 1;
+    this.pagination.size = 10;
+    this.accountService.searchAccount(this.pagination, this.accountName).subscribe(
+      (res: HttpResponseData<Pagination<Account>>) => {
+        if (res.status === 200) {
+          this.pagination = res.obj;
         } else {
           this.messageService.error(res.msg);
         }

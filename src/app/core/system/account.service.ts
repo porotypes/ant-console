@@ -14,6 +14,11 @@ export class AccountService extends HttpService<HttpResponseData<Pagination<Acco
     return super.getPagination(url);
   }
 
+  searchAccount(pagination: Pagination<Account>, accountName: string) {
+    const url = `${this.URL}/${accountName}/${pagination.current}/${pagination.size}`;
+    return super.getPagination(url);
+  }
+
   getAccount(id: number) {
     const url = `${this.URL}/${id}`;
     return super.get(url);

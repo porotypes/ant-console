@@ -55,7 +55,7 @@
 <!--故障列表对话框-->
 <nz-modal [(nzVisible)]="isVisible" [nzTitle]="'statistics.fault.fault_list' | translate" (nzOnCancel)="handleCancelOrOk()" (nzOnOk)="handleCancelOrOk()"
   [nzBodyStyle]="{padding:'10px'}">
-  <nz-table #rowSelectionTable [nzLoading]="tableLoadingFault" [nzData]="data" [nzPageSize]="5" [nzSize]="small">
+  <nz-table #rowSelectionTable [nzLoading]="tableLoadingFault" [nzData]="data" [nzPageSize]="5" [nzSize]="'small'">
     <thead>
       <tr>
         <th>{{ 'statistics.company.equipment_id' | translate }}</th>

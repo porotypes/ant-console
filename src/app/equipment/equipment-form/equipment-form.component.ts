@@ -36,7 +36,7 @@ export class EquipmentFormComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService,
+    public authService: AuthService,
     private languageService: LanguageService
   ) { }
 

@@ -52,7 +52,7 @@ export class AccountFormComponent implements OnInit {
       phoneNumber: [null, [Validators.required]],
       address: [null, [Validators.required]],
       email: [null, [Validators.required]],
-      password: [null, [Validators.required]],
+      // password: [null, [Validators.required]],
       companyId: [this.authService.decodeToken().companyId, [Validators.required]],
       roles: [[], Validators.required]
     });
@@ -143,7 +143,7 @@ export class AccountFormComponent implements OnInit {
       phoneNumber: account.phoneNumber,
       address: account.address,
       email: account.email,
-      password: account.password,
+      // password: account.password,
       companyId: account.companyId,
       roles: ids
     });

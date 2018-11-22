@@ -18,6 +18,7 @@ export class RoleManagementComponent implements OnInit {
 
   pagination = new Pagination<Role>();
   tableLoading = false;
+  roleName: string;
 
   constructor(
     public authService: AuthService,
@@ -61,6 +62,31 @@ export class RoleManagementComponent implements OnInit {
     }
     this.tableLoading = true;
     this.getRoleList();
+  }
+
+  searchRole() {
+    if (this.roleName.trim() === '') {
+      this.getRoleList();
+      return;
+    }
+    this.pagination.current = 1;
+    this.pagination.size = 10;
+    this.roleService.searchRole(this.pagination, this.roleName).subscribe(
+      (res: HttpResponseData<Pagination<Role>>) => {
+        if (res.status === 200) {
+          this.pagination = res.obj;
+        } else {
+          this.messageService.error(res.msg);
+        }
+      },
+      error => {
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
+      }
+    );
   }
 
   editRole(role: Role) {
