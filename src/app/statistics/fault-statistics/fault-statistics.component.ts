@@ -6,12 +6,14 @@ import { DateTimeUtil } from '../../shared/date-time-util';
 import { CompanyService } from '../../core/system/company.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { LanguageService } from '../../core/language.service';
+import { EquipmentService } from '../../core/equipment/equipment.service';
 
 import { Company } from 'src/app/common/company';
 import { FaultStatistics } from 'src/app/common/fault-statistics';
 import { HttpResponseData } from 'src/app/common/http-response-data';
 import { Pagination } from 'src/app/common/pagination';
 import { FaultList } from 'src/app/common/fault-list';
+import { Equipment } from 'src/app/common/equipment';
 
 @Component({
   selector: 'app-fault-statistics',
@@ -29,16 +31,16 @@ export class FaultStatisticsComponent implements OnInit {
   companies: Company[];
   statisticsList: FaultStatistics[];
   pagination = new Pagination<Company>();
-
+  paginationE = new Pagination<Equipment>();
   isVisible = false;
   data: FaultList[];
 
   // 查询故障列表
-  showFaultListModal(eId: number, eType: string, status: number): void {
+  showFaultListModal(cId: number, eId: number, eType: string, status: number): void {
     this.isVisible = true;
     // 查询故障详情
     const condition = {
-      companyId: '1',
+      companyId: cId,
       equipmentId: eId,
       statusCode: status,
       startTime: DateTimeUtil.formatDateTimeToString(this.startTimeValue),
@@ -50,6 +52,17 @@ export class FaultStatisticsComponent implements OnInit {
       (res: HttpResponseData<FaultList>) => {
         this.tableLoadingFault = false;
         if (res.status === 200) {
+          res.obj.records.forEach((e, k) => {
+            res.obj.records[k].equipmentName = '';
+            this.paginationE.records.forEach(i => {
+              if (i.equipmentId !== '') {
+                if (i.equipmentId === e.equipmentId) {
+                  res.obj.records[k].equipmentName = i.equipmentName;
+                }
+              }
+            }
+            );
+          });
           this.data = res.obj.records;
         } else {
           this.messageService.error(res.msg);
@@ -90,11 +103,31 @@ export class FaultStatisticsComponent implements OnInit {
     private messageService: NzMessageService,
     private companyService: CompanyService,
     public authService: AuthService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private equipmentService: EquipmentService,
   ) { }
 
   ngOnInit() {
     this.getAllCompanies();
+    this.getEquipmentList();
+  }
+
+  // 获取设备列表
+  getEquipmentList() {
+    const query = {
+      status: ''
+    };
+    this.tableLoading = true;
+    this.equipmentService.getEquipmetList(this.paginationE, query).subscribe(
+      (res: Pagination<Equipment>) => {
+        this.tableLoading = false;
+        this.paginationE = res;
+      },
+      error => {
+        this.tableLoading = false;
+        this.messageService.error(error.error.msg);
+      }
+    );
   }
 
   getFaultStatisticsList() {
@@ -109,6 +142,17 @@ export class FaultStatisticsComponent implements OnInit {
       (res: HttpResponseData<FaultStatistics[]>) => {
         this.tableLoading = false;
         if (res.status === 200) {
+          res.obj.forEach((e, k) => {
+            res.obj[k].equipmentName = '';
+            this.paginationE.records.forEach(i => {
+              if (i.equipmentId !== '') {
+                if (i.equipmentId === e.equipmentId) {
+                  res.obj[k].equipmentName = i.equipmentName;
+                }
+              }
+            }
+            );
+          });
           this.statisticsList = res.obj;
         } else {
           this.messageService.error(res.msg);

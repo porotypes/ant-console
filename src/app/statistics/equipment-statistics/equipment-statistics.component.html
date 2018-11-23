@@ -28,7 +28,7 @@
   <thead>
     <tr>
       <th>{{ 'index' | translate }}</th>
-      <th>{{ 'statistics.company.equipment_id' | translate }}</th>
+      <th>{{ 'equipment.equipment_name' | translate }}</th>
       <th>{{ 'statistics.company.transaction_type' | translate }}</th>
       <th>{{ 'statistics.company.num_of_transactions' | translate }}</th>
       <th>{{ 'statistics.company.coin_type' | translate }}</th>
@@ -40,7 +40,7 @@
   <tbody>
     <tr *ngFor="let statistics of basicTable.data, index as i">
       <td>{{ i + 1 }}</td>
-      <td>{{statistics.equipmentId}}</td>
+      <td>{{statistics.equipmentName}}</td>
       <td>{{statistics.transactionType | transactionType }}</td>
       <td>{{statistics.numOfTransactions}}</td>
       <td>{{statistics.coinType}}</td>

@@ -1,5 +1,10 @@
-.search .search-form {
+.search-form {
   width: 100%;
+  height: auto;
+  line-height: 40px;
+}
+.search-form span {
+  margin-right: 10px;
 }
 .picker_input {
   min-width: 180px;

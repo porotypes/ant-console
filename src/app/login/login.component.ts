@@ -72,8 +72,8 @@ export class LoginComponent implements OnInit {
         }
       },
       error => {
-        if (error.error.status === 403) {
-          // 当错误状态为403（验证码错误）时，刷新验证码
+        if (error.error.status === 450) {
+          // 当错误状态为450（验证码错误）时，刷新验证码
           this.refresh();
         }
         if (this.languageService.currentLang === 'zh_CN') {

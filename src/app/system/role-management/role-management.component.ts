@@ -17,7 +17,7 @@ import { Role } from '../../common/role';
 export class RoleManagementComponent implements OnInit {
 
   pagination = new Pagination<Role>();
-  tableLoading = false;
+  tableLoading = true;
   roleName: string;
 
   constructor(
@@ -53,13 +53,7 @@ export class RoleManagementComponent implements OnInit {
     );
   }
 
-  changePageOrSize(event, resetPageIndex = false) {
-    if (event === 0) {
-      return;
-    }
-    if (resetPageIndex) {
-      this.pagination.current = event;
-    }
+  changePageOrSize(resetPageIndex = false) {
     this.tableLoading = true;
     this.getRoleList();
   }

@@ -21,11 +21,12 @@
   <thead>
     <tr>
       <th>{{ 'index' | translate }}</th>
-      <th>{{ 'trading.equipment_id' | translate }}</th>
+      <th>{{ 'equipment.equipment_name' | translate }}</th>
       <th>{{ 'trading.transaction_flow_number' | translate }}</th>
       <th>{{ 'trading.number_of_transaction' | translate }}</th>
-      <th>{{ 'trading.transaction_currency' | translate }}</th>
+      <th>{{ 'trading.coin_type' | translate }}</th>
       <th>{{ 'trading.transaction_amount' | translate }}</th>
+      <th>{{ 'trading.transaction_currency' | translate }}</th>
       <th>{{ 'trading.transaction_type' | translate }}</th>
       <th>{{ 'trading.transaction_time' | translate }}</th>
     </tr>
@@ -33,11 +34,12 @@
   <tbody>
     <tr *ngFor="let trading of basicTable.data, index as i">
       <td>{{ i + 1 }}</td>
-      <td>{{ trading.equipmentId }}</td>
+      <td>{{ trading.equipmentName }}</td>
       <td>{{ trading.transactionId }}</td>
       <td>{{ trading.transactionNum }}</td>
-      <td>{{ trading.currency }}</td>
+      <td>{{ trading.coinType }}</td>
       <td>{{ trading.currentPrice }}</td>
+      <td>{{ trading.currency }}</td>
       <td>{{ trading.transactionType | transactionType }}</td>
       <td>{{ trading.transactionTime | date: 'yyyy-MM-dd HH:SS:ss' }}</td>
     </tr>

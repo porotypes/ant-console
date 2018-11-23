@@ -21,6 +21,7 @@ export class AccountManagementComponent implements OnInit {
   pagination = new Pagination<Account>();
   tableLoading = true;
   accountName: string;
+  pageSizeOptions = [ 5, 10, 20, 30, 40, 50 ];
 
   constructor(
     private accountService: AccountService,

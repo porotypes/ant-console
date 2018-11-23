@@ -1,34 +1,32 @@
-<div class="search">
-  <div class="search-form">
-    <span class="label">{{ 'statistics.company.date_rang' | translate }}</span>
-    <span class="input">
-      <nz-date-picker [nzStyle]="{width:'180px'}" [nzDisabledDate]="disabledStartDate" nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" [(ngModel)]="startTimeValue"
-        [nzPlaceHolder]="'statistics.company.start_time' | translate">
-      </nz-date-picker>
-      -
-      <nz-date-picker [nzStyle]="{width:'180px'}" [nzDisabledDate]="disabledEndDate" nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" [(ngModel)]="endTimeValue"
-        [nzPlaceHolder]="'statistics.company.end_time' | translate">
-      </nz-date-picker>
-    </span>
-    <span class="label" *ngIf="authService.isAdmin()">{{ 'statistics.company.company' | translate }}</span>
-    <span class="input" *ngIf="authService.isAdmin()">
-      <nz-select style="width: 230px;" [(ngModel)]="selectedCompany">
-        <nz-option [nzValue]="''" [nzLabel]="'statistics.company.unlimited' | translate"></nz-option>
-        <nz-option *ngFor="let company of companies" [nzValue]="company.id" [nzLabel]="company.companyFullName">
-        </nz-option>
-      </nz-select>
-    </span>
-    <span class="label" *ngIf="authService.isAdmin()">{{ 'statistics.fault.search_type' | translate }}</span>
-    <span class="input" *ngIf="authService.isAdmin()">
-      <nz-select style="width: 150px;" [(ngModel)]="selectedType">
-        <nz-option [nzValue]="'0'" [nzLabel]="'statistics.fault.query_by_company' | translate"></nz-option>
-        <nz-option [nzValue]="'1'" [nzLabel]="'statistics.fault.query_by_device' | translate"></nz-option>
-      </nz-select>
-    </span>
-    <span class="button">
-      <button nz-button nzType="primary" [nzLoading]="tableLoading" (click)="search()">{{ 'search' | translate }}</button>
-    </span>
-  </div>
+<div class="search search-form">
+  <span class="label">{{ 'statistics.company.date_rang' | translate }}</span>
+  <span class="input">
+    <nz-date-picker [nzStyle]="{width:'180px'}" [nzDisabledDate]="disabledStartDate" nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss"
+      [(ngModel)]="startTimeValue" [nzPlaceHolder]="'statistics.company.start_time' | translate">
+    </nz-date-picker>
+    -
+    <nz-date-picker [nzStyle]="{width:'180px'}" [nzDisabledDate]="disabledEndDate" nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss"
+      [(ngModel)]="endTimeValue" [nzPlaceHolder]="'statistics.company.end_time' | translate">
+    </nz-date-picker>
+  </span>
+  <span class="label" *ngIf="authService.isAdmin()">{{ 'statistics.company.company' | translate }}</span>
+  <span class="input" *ngIf="authService.isAdmin()">
+    <nz-select style="width: 230px;" [(ngModel)]="selectedCompany">
+      <nz-option [nzValue]="''" [nzLabel]="'statistics.company.unlimited' | translate"></nz-option>
+      <nz-option *ngFor="let company of companies" [nzValue]="company.id" [nzLabel]="company.companyFullName">
+      </nz-option>
+    </nz-select>
+  </span>
+  <span class="label" *ngIf="authService.isAdmin()">{{ 'statistics.fault.search_type' | translate }}</span>
+  <span class="input" *ngIf="authService.isAdmin()">
+    <nz-select style="width: 150px;" [(ngModel)]="selectedType">
+      <nz-option [nzValue]="'0'" [nzLabel]="'statistics.fault.query_by_company' | translate"></nz-option>
+      <nz-option [nzValue]="'1'" [nzLabel]="'statistics.fault.query_by_device' | translate"></nz-option>
+    </nz-select>
+  </span>
+  <span class="button">
+    <button nz-button nzType="primary" [nzLoading]="tableLoading" (click)="search()">{{ 'search' | translate }}</button>
+  </span>
 </div>
 
 <nz-table #basicTable [nzShowPagination]="false" [nzLoading]="tableLoading" [nzData]="statisticsList">
@@ -36,7 +34,7 @@
     <tr>
       <th>{{ 'index' | translate }}</th>
       <th>{{ 'statistics.fault.company' | translate }}</th>
-      <th>{{ 'statistics.company.equipment_id' | translate }}</th>
+      <th>{{ 'equipment.equipment_name' | translate }}</th>
       <th>{{ 'statistics.fault.equipment_type' | translate }}</th>
       <th>{{ 'statistics.fault.error_count' | translate }}</th>
     </tr>
@@ -45,20 +43,21 @@
     <tr *ngFor="let statistics of basicTable.data, index as i">
       <td>{{ i + 1 }}</td>
       <td>{{statistics.companyName}}</td>
-      <td>{{statistics.equipmentId }}</td>
+      <td>{{statistics.equipmentName }}</td>
       <td>{{statistics.deviceType}}</td>
-      <td><a (click)="showFaultListModal(statistics.equipmentId,statistics.deviceType,statistics.statusCode)">{{statistics.errorCount}}</a></td>
+      <td><a (click)="showFaultListModal(statistics.companyId,statistics.equipmentId,statistics.deviceType,statistics.statusCode)">{{statistics.errorCount}}</a></td>
     </tr>
   </tbody>
 </nz-table>
 
 <!--故障列表对话框-->
-<nz-modal [(nzVisible)]="isVisible" [nzTitle]="'statistics.fault.fault_list' | translate" (nzOnCancel)="handleCancelOrOk()" (nzOnOk)="handleCancelOrOk()"
-  [nzBodyStyle]="{padding:'10px'}">
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="'statistics.fault.fault_list' | translate" (nzOnCancel)="handleCancelOrOk()"
+  (nzOnOk)="handleCancelOrOk()" [nzBodyStyle]="{padding:'10px'}">
   <nz-table #rowSelectionTable [nzLoading]="tableLoadingFault" [nzData]="data" [nzPageSize]="5" [nzSize]="'small'">
     <thead>
       <tr>
         <th>{{ 'statistics.company.equipment_id' | translate }}</th>
+        <th>{{ 'equipment.equipment_name' | translate }}</th>
         <th>{{ 'statistics.fault.equipment_type' | translate }}</th>
         <th>{{ 'statistics.fault.status_code' | translate }}</th>
         <th>{{ 'statistics.fault.receive_time' | translate }}</th>
@@ -67,6 +66,7 @@
     <tbody>
       <tr *ngFor="let data of rowSelectionTable.data">
         <td>{{data.equipmentId}}</td>
+        <td>{{data.equipmentName}}</td>
         <td>{{data.deviceType}}</td>
         <td>{{data.detailed}}</td>
         <td>{{data.receiveTime}}</td>

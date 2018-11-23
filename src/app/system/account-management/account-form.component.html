@@ -3,62 +3,70 @@
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'login.username' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input formControlName="nickname">
-      <nz-form-explain *ngIf="accountForm.get('nickname').dirty && accountForm.get('nickname').errors">{{ 'login.username_input_tip' | translate }}</nz-form-explain>
+      <nz-form-explain *ngIf="accountForm.get('nickname').dirty && accountForm.get('nickname').errors">{{
+        'login.username_input_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'account.login_name' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input formControlName="username" [attr.disabled]="currentAccountId">
-      <nz-form-explain *ngIf="accountForm.get('username').dirty && accountForm.get('username').errors">{{ 'account.login_name_tip' | translate }}</nz-form-explain>
+      <nz-form-explain *ngIf="accountForm.get('username').dirty && accountForm.get('username').errors">{{
+        'account.login_name_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'account.address' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input formControlName="address">
-      <nz-form-explain *ngIf="accountForm.get('address').dirty && accountForm.get('address').errors">{{ 'account.address_tip' | translate }}</nz-form-explain>
+      <nz-form-explain *ngIf="accountForm.get('address').dirty && accountForm.get('address').errors">{{
+        'account.address_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item *ngIf="authService.isAdmin()">
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'account.company' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <nz-select formControlName="companyId">
-        <nz-option
-          *ngFor="let company of companies"
-          [nzValue]="company.id" 
-          [nzLabel]="company.companyFullName">
+        <nz-option *ngFor="let company of companies" [nzValue]="company.id" [nzLabel]="company.companyFullName">
         </nz-option>
       </nz-select>
-      <nz-form-explain *ngIf="accountForm.get('companyId').dirty && accountForm.get('companyId').errors">{{ 'account.company_tip' | translate }}</nz-form-explain>
+      <nz-form-explain *ngIf="accountForm.get('companyId').dirty && accountForm.get('companyId').errors">{{
+        'account.company_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'account.phone_number' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input formControlName="phoneNumber">
-      <nz-form-explain *ngIf="accountForm.get('phoneNumber').dirty && accountForm.get('phoneNumber').errors">{{ 'account.phone_number_tip' | translate }}</nz-form-explain>
+      <nz-form-explain *ngIf="accountForm.get('phoneNumber').dirty && accountForm.get('phoneNumber').errors">{{
+        'account.phone_number_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'account.email' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input formControlName="email">
-      <nz-form-explain *ngIf="accountForm.get('email').dirty && accountForm.get('email').errors">{{ 'account.email_tip' | translate }}</nz-form-explain>
+      <nz-form-explain *ngIf="accountForm.get('email').dirty && accountForm.get('email').errors">{{ 'account.email_tip'
+        | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
-
+  <nz-form-item *ngIf="isAdd">
+    <nz-form-label [nzSpan]="4" nzRequired>{{ 'login.password' | translate }}</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input type="password" formControlName="password">
+      <nz-form-explain *ngIf="accountForm.get('password').dirty && accountForm.get('password').errors">{{
+        'login.password_input_tip' | translate }}</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'account.role' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <nz-select nzMode="multiple" formControlName="roles">
-        <nz-option
-          *ngFor="let role of roles"
-          [nzValue]="role.id"
-          [nzLabel]="role.roleName">
+        <nz-option *ngFor="let role of roles" [nzValue]="role.id" [nzLabel]="role.roleName">
         </nz-option>
       </nz-select>
-      <nz-form-explain *ngIf="accountForm.get('roles').dirty && accountForm.get('roles').errors">{{ 'account.role_tip' | translate }}</nz-form-explain>
+      <nz-form-explain *ngIf="accountForm.get('roles').dirty && accountForm.get('roles').errors">{{ 'account.role_tip'
+        | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>

@@ -10,8 +10,7 @@
   </div>
 </div>
 
-<nz-table #basicTable nzShowSizeChanger nzShowQuickJumper [nzLoading]="tableLoading" [nzData]="pagination.records"
-  [(nzPageSize)]="pagination.size" (nzPageIndexChange)="changePageOrSize($event)" (nzPageSizeChange)="changePageOrSize($event, true)">
+<nz-table #basicTable [nzLoading]="tableLoading" [nzData]="pagination.records" [nzShowPagination]="false">
   <thead>
     <tr>
       <th>{{ 'index' | translate }}</th>
@@ -35,3 +34,6 @@
     </tr>
   </tbody>
 </nz-table>
+<nz-pagination *ngIf="!tableLoading" nzShowSizeChanger nzShowQuickJumper [(nzPageIndex)]="pagination.current" [nzTotal]="pagination.total"
+  [(nzPageSize)]="pagination.size" (nzPageIndexChange)="changePageOrSize(false)" (nzPageSizeChange)="changePageOrSize(true)"
+  [nzPageSizeOptions]="pageSizeOptions" style="float:right"></nz-pagination>

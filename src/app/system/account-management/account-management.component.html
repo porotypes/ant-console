@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<nz-table #basicTable nzShowSizeChanger nzShowQuickJumper [nzLoading]="tableLoading" [nzData]="pagination.records"
+<nz-table #basicTable nzShowSizeChanger nzShowQuickJumper [nzLoading]="tableLoading"  [nzPageSizeOptions] = "pageSizeOptions" [nzData]="pagination.records"
   [(nzPageSize)]="pagination.size" (nzPageIndexChange)="changePageOrSize($event)" (nzPageSizeChange)="changePageOrSize($event, true)">
   <thead>
     <tr>

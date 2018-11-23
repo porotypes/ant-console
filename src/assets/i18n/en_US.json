@@ -54,6 +54,7 @@
     "transaction_flow_number": "transaction flow number",
     "export_excel": "export excel",
     "equipment_id": "equipment id",
+    "coin_type": "coin type",
     "number_of_transaction": "number of transaction",
     "transaction_currency": "transaction currency",
     "transaction_amount": "transaction amount($)",

@@ -32,6 +32,7 @@ export class AccountFormComponent implements OnInit {
   companies: Company[];
   roles: Role[];
   isSaving = false;
+  isAdd = true;
 
   constructor(
     private fb: FormBuilder,
@@ -52,7 +53,7 @@ export class AccountFormComponent implements OnInit {
       phoneNumber: [null, [Validators.required]],
       address: [null, [Validators.required]],
       email: [null, [Validators.required]],
-      // password: [null, [Validators.required]],
+      password: [null, [Validators.required]],
       companyId: [this.authService.decodeToken().companyId, [Validators.required]],
       roles: [[], Validators.required]
     });
@@ -69,6 +70,7 @@ export class AccountFormComponent implements OnInit {
     this.currentAccountId = this.route.params['value'].id;
     if (this.currentAccountId) {
       this.getAccount();
+      this.isAdd = false;
     }
   }
 
@@ -143,7 +145,7 @@ export class AccountFormComponent implements OnInit {
       phoneNumber: account.phoneNumber,
       address: account.address,
       email: account.email,
-      // password: account.password,
+      password: account.password,
       companyId: account.companyId,
       roles: ids
     });
