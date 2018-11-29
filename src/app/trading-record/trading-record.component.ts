@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 
 import { TradingRecordService } from '../core/trading-record/trading-record.service';
 import { EquipmentService } from '../core/equipment/equipment.service';
+import { LoginService } from '../core/auth/login.service';
 
 import { Pagination } from '../common/pagination';
 import { TradingRecord } from '../common/trading-record';
@@ -25,6 +26,7 @@ export class TradingRecordComponent implements OnInit {
   constructor(
     private tradingRecordService: TradingRecordService,
     private equipmentService: EquipmentService,
+    private loginService: LoginService,
     private messageService: NzMessageService,
   ) { }
 
@@ -75,6 +77,9 @@ export class TradingRecordComponent implements OnInit {
       },
       error => {
         this.tableLoading = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         this.messageService.error(error.error.msg);
       }
     );

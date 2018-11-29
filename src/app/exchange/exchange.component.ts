@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 
 import { ExchangeService } from '../core/exchange/exchange.service';
-import { DateTimeUtil } from '../shared/date-time-util';
 import { format, subDays } from 'date-fns';
 
 import { StatisticsService } from '../core/statistics/statistics.service';
 import { AssetStatistics } from '../common/asset-statistics';
 import { LanguageService } from '../core/language.service';
+import { LoginService } from 'src/app/core/auth/login.service';
 
 import { Account } from '../common/exchange/account';
 import { Order } from '../common/exchange/order';
@@ -80,6 +80,7 @@ export class ExchangeComponent implements OnInit {
     private statisticsService: StatisticsService,
     private exchangeService: ExchangeService,
     private messageService: NzMessageService,
+    private loginService: LoginService,
     private languageService: LanguageService
   ) { }
 
@@ -292,6 +293,9 @@ export class ExchangeComponent implements OnInit {
       },
       error => {
         this.withdrawalsTableLoading = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

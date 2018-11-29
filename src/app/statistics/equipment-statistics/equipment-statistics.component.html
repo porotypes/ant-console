@@ -1,5 +1,4 @@
-<div class="search">
-  <div class="search-form">
+<div class="search search-form">
     <span class="label">{{ 'statistics.company.date_rang' | translate }}</span>
     <span class="input">
       <nz-date-picker [nzDisabledDate]="disabledStartDate" [nzStyle]="{width:'180px'}" nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss"
@@ -21,7 +20,6 @@
     <span class="button">
       <button nz-button nzType="primary" (click)="search()">{{ 'search' | translate }}</button>
     </span>
-  </div>
 </div>
 
 <nz-table #basicTable [nzShowPagination]="false" [nzLoading]="tableLoading" [nzData]="statisticsList">

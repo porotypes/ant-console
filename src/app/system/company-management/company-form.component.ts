@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { CompanyService } from '../../core/system/company.service';
 import { LanguageService } from '../../core/language.service';
+import { LoginService } from '../../core/auth/login.service';
 
 import { HttpResponseData } from '../../common/http-response-data';
 import { Company } from '../../common/company';
@@ -29,6 +30,7 @@ export class CompanyFormComponent implements OnInit {
     private route: ActivatedRoute,
     private companyService: CompanyService,
     private messageService: NzMessageService,
+    private loginService: LoginService,
     private languageService: LanguageService
   ) { }
 
@@ -62,6 +64,9 @@ export class CompanyFormComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -75,7 +80,7 @@ export class CompanyFormComponent implements OnInit {
     this.companyForm.patchValue({
       companyFullName: company.companyFullName,
       companyShortName: company.companyShortName,
-      address: company.address,
+      address: company.address1,
       contact: company.contact,
       phone: company.phone,
       email: company.email,
@@ -114,6 +119,9 @@ export class CompanyFormComponent implements OnInit {
       },
       error => {
         this.isSaving = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -137,6 +145,9 @@ export class CompanyFormComponent implements OnInit {
       },
       error => {
         this.isSaving = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

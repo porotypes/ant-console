@@ -44,7 +44,7 @@ export class EquipmentFormComponent implements OnInit {
     this.equipmentForm = this.fb.group({
       equipmentId: [null, [Validators.required]],
       owner: [this.authService.decodeToken().companyId, [Validators.required]],
-      address: [null],
+      address1: [null],
       amountOfCash: [0, [Validators.required]],
       equipmentName: [null, [Validators.required]],
       highThreshold: [null],
@@ -71,13 +71,14 @@ export class EquipmentFormComponent implements OnInit {
       (res: HttpResponseData<Pagination<Company>>) => {
         if (res.status === 200) {
           this.companies = res.obj.records;
-        } else if (res.status === 401) {
-          this.loginService.loginOut();
         } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -92,13 +93,14 @@ export class EquipmentFormComponent implements OnInit {
       (res: HttpResponseData<Equipment>) => {
         if (res.status === 200) {
           this.populateForm(res.obj);
-        } else if (res.status === 401) {
-          this.loginService.loginOut();
         } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -145,13 +147,14 @@ export class EquipmentFormComponent implements OnInit {
         if (res.status === 200) {
           this.messageService.success(res.msg);
           this.router.navigate(['/dashboard/equipment-list']);
-        } else if (res.status === 401) {
-          this.loginService.loginOut();
         } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -168,13 +171,14 @@ export class EquipmentFormComponent implements OnInit {
         if (res.status === 200) {
           this.messageService.success(res.msg);
           this.router.navigate(['/dashboard/equipment-list']);
-        } else if (res.status === 401) {
-          this.loginService.loginOut();
         } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

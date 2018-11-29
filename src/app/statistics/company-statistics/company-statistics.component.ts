@@ -6,6 +6,7 @@ import { DateTimeUtil } from '../../shared/date-time-util';
 import { CompanyService } from '../../core/system/company.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { LanguageService } from '../../core/language.service';
+import { LoginService } from '../../core/auth/login.service';
 
 import { EquipmentStatistics } from '../../common/Equipment-statistics';
 import { HttpResponseData } from 'src/app/common/http-response-data';
@@ -21,7 +22,7 @@ export class CompanyStatisticsComponent implements OnInit {
 
   startTimeValue = DateTimeUtil.getStartTimeString(new Date());
   endTimeValue = DateTimeUtil.getEndTimeString(new Date());
-  selectedCompany: number;
+  selectedCompany = '';
   statisticsList: EquipmentStatistics[];
   tableLoading = false;
   pagination = new Pagination<Company>();
@@ -46,6 +47,7 @@ export class CompanyStatisticsComponent implements OnInit {
     private messageService: NzMessageService,
     private companyService: CompanyService,
     public authService: AuthService,
+    private loginService: LoginService,
     private languageService: LanguageService
   ) { }
 
@@ -79,6 +81,9 @@ export class CompanyStatisticsComponent implements OnInit {
       },
       error => {
         this.tableLoading = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -99,6 +104,9 @@ export class CompanyStatisticsComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

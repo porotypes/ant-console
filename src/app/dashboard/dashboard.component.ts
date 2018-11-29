@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   langSub: any;
   timer: any;
   selectedLanguage = 'zh_CN';
+  username = '';
 
   get loginStatus(): boolean {
     return this.storageService.hasStorage('USER_TOKEN')
@@ -56,6 +57,9 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (this.authService.user) {
+      this.username = this.authService.user['username'] || '';
+    }
     this.createForm();
     if (this.authService.isCanShowChatReceiveList()) {
       this.getUnreadChatInformationNum();
@@ -92,13 +96,14 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
           this.timer = setInterval(() => {
             this.getUnreadChatInformationNum();
           }, 60000);
-        } else if (res.status === 401) {
-          this.loginService.loginOut();
         } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -136,14 +141,15 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
           }
           this.storageService.removeStorage('USER_TOKEN');
           this.router.navigate(['/login']);
-        } else if (res.status === 401) {
-          this.loginService.loginOut();
         } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
         this.isSaving = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

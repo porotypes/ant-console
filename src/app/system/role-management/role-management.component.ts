@@ -4,6 +4,7 @@ import { RoleService } from '../../core/system/role.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
 import { LanguageService } from '../../core/language.service';
+import { LoginService } from '../../core/auth/login.service';
 
 import { HttpResponseData } from '../../common/http-response-data';
 import { Pagination } from '../../common/pagination';
@@ -25,6 +26,7 @@ export class RoleManagementComponent implements OnInit {
     private roleService: RoleService,
     private messageService: NzMessageService,
     private router: Router,
+    private loginService: LoginService,
     private languageService: LanguageService
   ) { }
 
@@ -44,6 +46,9 @@ export class RoleManagementComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -74,6 +79,9 @@ export class RoleManagementComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -98,6 +106,9 @@ export class RoleManagementComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

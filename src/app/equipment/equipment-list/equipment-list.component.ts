@@ -98,13 +98,14 @@ export class EquipmentListComponent implements OnInit {
       (res: HttpResponseData<any>) => {
         if (res.status === 200) {
           this.messageService.success(res.msg);
-        } else if ( res.status === 401) {
-          this.loginService.loginOut();
-        }  else {
+        } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         this.messageService.error(error.error.msg);
       }
     );
@@ -124,13 +125,14 @@ export class EquipmentListComponent implements OnInit {
         if (res.status === 200) {
           this.messageService.success(res.msg);
           this.getEquipmentList();
-        } else if ( res.status === 401) {
-          this.loginService.loginOut();
-        }  else {
+        } else {
           this.messageService.error(res.msg);
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

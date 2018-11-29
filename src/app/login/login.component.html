@@ -54,7 +54,7 @@
         <line class="cls-4" x1="334" y1="1399.99" x2="1666" y2="1399.99" /><text class="cls-5" transform="translate(419.02 1474.74)">ant
           mine smart machine</text><text class="cls-6" transform="translate(1539.15 1452.09)">TM</text>
       </svg>
-      <h1>{{ 'system_title' | translate }}</h1>
+      <h1>DIGICCY ATM CONSOLE</h1>
 
       <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
         <nz-form-item>
@@ -87,14 +87,14 @@
               </nz-input-group>
             </div>
             <div style="width:80px;float: right;line-height: 32px;background: white;" (click)="refresh()">
-              <nz-skeleton [nzLoading]="imgLoading"><img [src]='codeImg' /></nz-skeleton>
+              <img [src]='codeImg'/>
             </div>
             <nz-form-explain *ngIf="validateForm.get('captcha').dirty && validateForm.get('captcha').errors">{{
               'login.code_input_tip' | translate }}</nz-form-explain>
           </nz-form-control>
         </nz-form-item>
 
-        <nz-form-item>
+        <nz-form-item style="margin: 0">
           <nz-form-control>
             <button nz-button class="login-form-button" style="width:100%" [nzType]="'primary'">{{ 'login.login' |
               translate }}</button>

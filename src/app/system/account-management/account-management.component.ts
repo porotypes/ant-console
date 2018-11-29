@@ -48,8 +48,6 @@ export class AccountManagementComponent implements OnInit {
           // });
           this.pagination = res.obj;
           console.log(res.obj);
-        } else if ( res.status === 401) {
-          this.loginService.loginOut();
         } else {
           this.messageService.error(res.msg);
         }
@@ -57,6 +55,9 @@ export class AccountManagementComponent implements OnInit {
       },
       error => {
         this.tableLoading = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -87,6 +88,9 @@ export class AccountManagementComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -112,6 +116,9 @@ export class AccountManagementComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -136,6 +143,9 @@ export class AccountManagementComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

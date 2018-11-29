@@ -7,6 +7,7 @@ import { CompanyService } from '../../core/system/company.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { LanguageService } from '../../core/language.service';
 import { EquipmentService } from '../../core/equipment/equipment.service';
+import { LoginService } from '../../core/auth/login.service';
 
 import { EquipmentStatistics } from '../../common/Equipment-statistics';
 import { HttpResponseData } from 'src/app/common/http-response-data';
@@ -50,7 +51,8 @@ export class EquipmentStatisticsComponent implements OnInit {
     private companyService: CompanyService,
     public authService: AuthService,
     private equipmentService: EquipmentService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit() {
@@ -108,6 +110,9 @@ export class EquipmentStatisticsComponent implements OnInit {
       },
       error => {
         this.tableLoading = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -128,6 +133,9 @@ export class EquipmentStatisticsComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

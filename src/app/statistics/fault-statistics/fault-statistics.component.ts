@@ -7,6 +7,7 @@ import { CompanyService } from '../../core/system/company.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { LanguageService } from '../../core/language.service';
 import { EquipmentService } from '../../core/equipment/equipment.service';
+import { LoginService } from '../../core/auth/login.service';
 
 import { Company } from 'src/app/common/company';
 import { FaultStatistics } from 'src/app/common/fault-statistics';
@@ -70,6 +71,9 @@ export class FaultStatisticsComponent implements OnInit {
       },
       error => {
         this.tableLoadingFault = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -104,6 +108,7 @@ export class FaultStatisticsComponent implements OnInit {
     private companyService: CompanyService,
     public authService: AuthService,
     private languageService: LanguageService,
+    private loginService: LoginService,
     private equipmentService: EquipmentService,
   ) { }
 
@@ -160,6 +165,9 @@ export class FaultStatisticsComponent implements OnInit {
       },
       error => {
         this.tableLoading = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -181,6 +189,9 @@ export class FaultStatisticsComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
