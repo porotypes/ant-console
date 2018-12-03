@@ -31,7 +31,8 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   langSub: any;
   timer: any;
   selectedLanguage = 'zh_CN';
-  username = '';
+  username: string;
+  binding: string;
 
   get loginStatus(): boolean {
     return this.storageService.hasStorage('USER_TOKEN')
@@ -57,9 +58,6 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.authService.user) {
-      this.username = this.authService.user['username'] || '';
-    }
     this.createForm();
     if (this.authService.isCanShowChatReceiveList()) {
       this.getUnreadChatInformationNum();
@@ -76,6 +74,7 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   ngAfterContentInit() {
     if (this.storageService.hasStorage('USER_TOKEN')) {
       this.authService.user = this.authService.decodeToken();
+      this.username = this.authService.user['username'] || '';
     } else {
       this.router.navigate(['/login']);
     }

@@ -2,7 +2,7 @@
   <nz-header style="background:#fb702f">
     <div>
       <div style="width:200px;float: left;"><img src="assets/img/logo.png" height="64px" style="float:left;filter: brightness(0%) invert(100%);" /></div>
-      <h1 class="title">{{ 'system_title' | translate }}</h1>
+      <h1 class="title" >{{ 'system_title' | translate }}</h1>
       <div style="float:right">
         <div style="float: left; margin: auto 10px;">
           <nz-select style="width: 100px;" [ngModel]="selectedLanguage" (ngModelChange)="selectLanguage($event)">
@@ -30,7 +30,7 @@
           <span title><i class="anticon anticon-desktop"></i>{{ 'menu.equipment.equipment_management' | translate }}</span>
           <ul>
             <li nz-menu-item routerLink="/dashboard/equipment-list">{{ 'menu.equipment.equipment_list' | translate }}</li>
-            <li nz-menu-item routerLink="/dashboard/equipment-cash">{{ 'menu.equipment.equipment_cash_amount' |
+            <li *ngIf="false" nz-menu-item routerLink="/dashboard/equipment-cash">{{ 'menu.equipment.equipment_cash_amount' |
               translate }}</li>
             <!-- <li nz-menu-item routerLink="/dashboard/equipment-map">设备位置</li> -->
           </ul>

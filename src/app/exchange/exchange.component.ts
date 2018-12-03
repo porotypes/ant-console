@@ -199,6 +199,11 @@ export class ExchangeComponent implements OnInit {
           });
           console.log(this.orders);
         }
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.success('订单号：' + res.obj);
+        } else {
+          this.messageService.success('OrderID：' + res.obj);
+        }
       },
       error => {
         this.messageService.error(error.error.msg || '响应超时');
@@ -227,6 +232,11 @@ export class ExchangeComponent implements OnInit {
             this.orders.push(balance);
           });
           console.log(this.orders);
+          if (this.languageService.currentLang === 'zh_CN') {
+            this.messageService.success('订单号：' + res.obj);
+          } else {
+            this.messageService.success('OrderID：' + res.obj);
+          }
         }
       },
       error => {
@@ -256,6 +266,11 @@ export class ExchangeComponent implements OnInit {
             balance.finishedAt = balance['finished-at'];
             this.orders.push(balance);
           });
+        }
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.success('订单号：' + res.obj);
+        } else {
+          this.messageService.success('OrderID：' + res.obj);
         }
       },
       error => {
@@ -322,7 +337,11 @@ export class ExchangeComponent implements OnInit {
           this.messageService.success(obj);
         }
         this.cancelOrderLoading = false;
-
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.success('订单号：' + res.obj);
+        } else {
+          this.messageService.success('OrderID：' + res.obj);
+        }
       },
       error => {
         this.cancelOrderLoading = false;
@@ -345,6 +364,11 @@ export class ExchangeComponent implements OnInit {
           this.messageService.success(obj);
         }
         this.cancelWithdrawalsLoading = false;
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.success('订单号：' + res.obj);
+        } else {
+          this.messageService.success('OrderID：' + res.obj);
+        }
       },
       error => {
         this.cancelWithdrawalsLoading = false;
