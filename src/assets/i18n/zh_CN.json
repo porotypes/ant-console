@@ -156,6 +156,8 @@
       "unlimited": "不限"
     },
     "asset": {
+      "titleStatistics": "充值记录",
+      "titleWdrawals": "提取记录",
       "currency": "币种",
       "start_id": "起始id",
       "size": "条数",

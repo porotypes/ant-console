@@ -156,6 +156,8 @@
       "unlimited": "unlimited"
     },
     "asset": {
+      "titleStatistics": "Statistics log",
+      "titleWdrawals": "Wdrawals log",
       "currency": "currency",
       "start_id": "start id",
       "size": "size",
