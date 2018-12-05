@@ -115,7 +115,6 @@
     "transaction": "transaction",
     "transactions": {
       "id": "ID",
-      "symbol": "symbol",
       "fieldAmount": "field amount",
       "amount": "amount",
       "type": "type",
