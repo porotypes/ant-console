@@ -4,7 +4,7 @@ export class Company {
   companyShortName: string;
   contact: string;
   phone: string;
-  address1: string;
+  address: string;
   email: string;
   port: number;
   display: string;

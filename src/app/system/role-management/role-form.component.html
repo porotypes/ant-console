@@ -1,31 +1,29 @@
 <form nz-form [formGroup]="roleForm" (ngSubmit)="submitForm()">
-    <nz-form-item>
-      <nz-form-label [nzSpan]="4" nzRequired>{{ 'role.role_name' | translate }}</nz-form-label>
-      <nz-form-control [nzSpan]="10">
-        <input nz-input formControlName="roleName">
-        <nz-form-explain *ngIf="roleForm.get('roleName').dirty && roleForm.get('roleName').errors">{{ 'role.role_name_tip' | translate }}</nz-form-explain>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="4">{{ 'role.permission' | translate }}</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        <nz-checkbox-wrapper (nzOnChange)="selectPermissions($event)">
-          <div nz-row>
-            <div nz-col nzSpan="12" *ngFor="let permission of permissions">
-              <label nz-checkbox [nzValue]="permission.id" [(ngModel)]="permission.checked" [ngModelOptions]="{standalone: true}">{{ permission.name }}</label>
-            </div>
-          </div>
-        </nz-checkbox-wrapper>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control [nzSpan]="10" [nzOffset]="4">
-        <div nz-row>
-          <div nz-col nzSpan="5">
-            <button nz-button nzType="primary" [nzLoading]="isSaving">{{ 'save' | translate }}</button>
-          </div>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>{{ 'role.role_name' | translate }}</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input formControlName="roleName">
+      <nz-form-explain *ngIf="roleForm.get('roleName').dirty && roleForm.get('roleName').errors">{{
+        'role.role_name_tip' | translate }}</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">{{ 'role.permission' | translate }}</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <nz-skeleton [nzLoading]="treeLoading">
+        <nz-tree [nzData]="permissionsList" [nzCheckedKeys]="permissionsChecked" [nzDefaultExpandAll]="true"
+          nzCheckable="true" (nzCheckBoxChange)="selectPermissions($event)" [nzShowExpand]="false">
+        </nz-tree>
+      </nz-skeleton>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="10" [nzOffset]="4">
+      <div nz-row>
+        <div nz-col nzSpan="5">
+          <button nz-button nzType="primary" [nzLoading]="isSaving">{{ 'save' | translate }}</button>
         </div>
-      </nz-form-control>
-    </nz-form-item>
-  </form>
-  
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+</form>

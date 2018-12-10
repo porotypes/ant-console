@@ -14,6 +14,7 @@ import { LoginService } from '../../core/auth/login.service';
 import { HttpResponseData } from 'src/app/common/http-response-data';
 import { Permission } from '../../common/Permission';
 import { Role } from '../../common/role';
+import { NzFormatEmitEvent } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-role-form',
@@ -24,8 +25,11 @@ export class RoleFormComponent implements OnInit {
 
   roleForm: FormGroup;
   permissions: Permission[];
+  permissionsList: Array<any>;
+  permissionsChecked: Array<string>;
   currentRoleId: number;
   isSaving = false;
+  treeLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -54,13 +58,37 @@ export class RoleFormComponent implements OnInit {
     this.currentRoleId = this.route.params['value'].id;
     if (this.currentRoleId) {
       this.getRole();
+    } else {
+      this.treeLoading = false;
     }
   }
 
+  // 获取所有权限
   getAllPermission() {
+    this.treeLoading = true;
     this.permissionService.getAllPermissions().subscribe(
       (res: HttpResponseData<Permission[]>) => {
         if (res.status === 200) {
+          const firstList = [];
+          res.obj.forEach((e) => {
+            if (!firstList[e.parentId - 1]) {
+              firstList[e.parentId - 1] = {
+                key: e.parentId,
+                title: e.parentName,
+                // expanded: true,
+                children: []
+              };
+            }
+
+            const children = firstList[e.parentId - 1].children;
+            children[children.length] = {
+              key: e.id,
+              title: e.name,
+              name: e.label
+            };
+
+          });
+          this.permissionsList = firstList;
           this.permissions = res.obj;
           this.permissions.map(role => { role['checked'] = false; });
           this.getCurrentRoleId();
@@ -104,21 +132,41 @@ export class RoleFormComponent implements OnInit {
   }
 
   populateForm(role: Role) {
-    const ids = [];
-    this.permissions.forEach(permission => {
-      if (role.permissions.some(item => permission.id === item['id'])) {
-        permission['checked'] = true;
-        ids.push(permission.id);
-      }
+    // const ids = [];
+    const checked = [];
+    // this.permissions.forEach(permission => {
+    //   if (role.permissions.some(item => permission.id === item['id'])) {
+    //     permission['checked'] = true;
+    //     ids.push(permission.id);
+    //   }
+    // });
+
+    // 设置默认选中权限（当前角色已有权限）
+    role.permissions.forEach(permission => {
+      checked.push(permission['id']);
     });
+    this.permissionsChecked = checked;
+    this.treeLoading = false;
+
     this.roleForm.patchValue({
       roleName: role.roleName,
-      permissions: ids
+      permissions: checked
     });
   }
 
-  selectPermissions(ids: number[]) {
-    this.roleForm.value.permissions = ids;
+  // 更新选中的权限
+  selectPermissions(event: NzFormatEmitEvent) {
+    const keys = [];
+    event.checkedKeys.forEach(key => {
+      if (key.children.length > 0) {
+        key.children.forEach(id => {
+          keys.push(id.key);
+        });
+      } else {
+        keys.push(key.key);
+      }
+    });
+    this.roleForm.value.permissions = keys;
   }
 
   submitForm() {
@@ -157,8 +205,8 @@ export class RoleFormComponent implements OnInit {
     } else {
       for (const i in this.roleForm.controls) {
         if (this.roleForm.controls.hasOwnProperty(i)) {
-          this.roleForm.controls[ i ].markAsDirty();
-          this.roleForm.controls[ i ].updateValueAndValidity();
+          this.roleForm.controls[i].markAsDirty();
+          this.roleForm.controls[i].updateValueAndValidity();
         }
       }
     }
@@ -192,8 +240,8 @@ export class RoleFormComponent implements OnInit {
     } else {
       for (const i in this.roleForm.controls) {
         if (this.roleForm.controls.hasOwnProperty(i)) {
-          this.roleForm.controls[ i ].markAsDirty();
-          this.roleForm.controls[ i ].updateValueAndValidity();
+          this.roleForm.controls[i].markAsDirty();
+          this.roleForm.controls[i].updateValueAndValidity();
         }
       }
     }

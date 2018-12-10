@@ -44,7 +44,7 @@ export class EquipmentFormComponent implements OnInit {
     this.equipmentForm = this.fb.group({
       equipmentId: [null, [Validators.required]],
       owner: [this.authService.decodeToken().companyId, [Validators.required]],
-      address1: [null],
+      address: [null],
       amountOfCash: [0, [Validators.required]],
       equipmentName: [null, [Validators.required]],
       highThreshold: [null],
