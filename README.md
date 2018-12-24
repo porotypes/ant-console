@@ -2,9 +2,9 @@
 这个项目是用[Angular CLI](https://github.com/angular/angular-cli)版本6.2.5生成的(Angular CLI已提升到7.0)。
 # #配置文件
 “src\environments”
-environment.ts为开发环境下的
-environment.prod.ts为生产环境下的
-	base_url为api地址
+environment.ts为开发环境下的  
+environment.prod.ts为生产环境下的  
+	base_url为api地址  
 # #开发服务器
 为开发服务器运行“ng service”。导航到http://localhost: 4200 /。如果您更改了任何源文件，应用程序将自动重新加载。
 # #代码脚手架
