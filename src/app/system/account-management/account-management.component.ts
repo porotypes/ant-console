@@ -7,7 +7,7 @@ import { LanguageService } from '../../core/language.service';
 import { NzMessageService } from 'ng-zorro-antd';
 
 import { Pagination } from '../../common/pagination';
-import { Account } from '../../common/Account';
+import { Account } from '../../common/account';
 import { HttpResponseData } from '../../common/http-response-data';
 import { LoginService } from 'src/app/core/auth/login.service';
 
