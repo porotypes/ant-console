@@ -17,5 +17,5 @@
 # docker编译
 1、获取源码 git clone https://gitlab.ywqian.com:8081/atm-blockchain/mgr-web.git
 2、进入项目 cd /mgr-web
-3、将源码编译为静态文件：docker run --rm --name node-build -v "${pwd}":/ -w /usr/share/node/html node npm i & npm install -g @angular/cli & ng build --prod
+3、将源码编译为静态文件：docker run --rm --name node-build -v "${pwd}":/usr/share/node/html -w /usr/share/node/html node npm i & npm install -g @angular/cli & ng build --prod
 4、构建镜像docker build -t antt .
