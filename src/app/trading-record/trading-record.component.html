@@ -2,22 +2,16 @@
   <div class="search-form">
     <span class="search-label">{{ 'trading.transaction_flow_number' | translate }}</span>
     <span class="search-input"><input nz-input [(ngModel)]="transactionId"></span>
-    <span class="search-button"><button nz-button nzType="primary" (click)="searchTradingRecord()">{{ 'search' | translate }}</button></span>
+    <span class="search-button"><button nz-button nzType="primary" (click)="searchTradingRecord()">{{ 'search' |
+        translate }}</button></span>
   </div>
   <div class="add">
     <button (click)="exportExcel()" nzType="primary" nz-button>{{ 'trading.export_excel' | translate }}</button>
   </div>
 </div>
 
-<nz-table
-  #basicTable
-  nzShowSizeChanger
-  nzShowQuickJumper
-  [nzLoading]="tableLoading"
-  [nzData]="pagination.records"
-  [(nzPageSize)]="pagination.size"
-  (nzPageIndexChange)="changePageOrSize($event)"
-  (nzPageSizeChange)="changePageOrSize($event, true)">
+<nz-table #basicTable nzShowSizeChanger nzShowQuickJumper [nzLoading]="tableLoading" [nzData]="pagination.records"
+  [(nzPageSize)]="pagination.size" (nzPageIndexChange)="changePageOrSize($event)" (nzPageSizeChange)="changePageOrSize($event, true)">
   <thead>
     <tr>
       <th>{{ 'index' | translate }}</th>
@@ -28,7 +22,9 @@
       <th>{{ 'trading.transaction_amount' | translate }}</th>
       <th>{{ 'trading.transaction_currency' | translate }}</th>
       <th>{{ 'trading.transaction_type' | translate }}</th>
+      <th>{{ 'trading.fee' | translate }}</th>
       <th>{{ 'trading.transaction_time' | translate }}</th>
+      <th>{{ 'action' | translate }}</th>
     </tr>
   </thead>
   <tbody>
@@ -41,7 +37,24 @@
       <td>{{ trading.currentPrice }}</td>
       <td>{{ trading.currency }}</td>
       <td>{{ trading.transactionType | transactionType }}</td>
+      <td>{{ trading.fee }}</td>
       <td>{{ trading.transactionTime | date: 'yyyy-MM-dd HH:SS:ss' }}</td>
+      <td>
+        <div *ngIf="!trading.transactionId"><button nz-button nzType="primary" (click)="showModal(trading.txpId)">查询状态</button></div>
+      </td>
     </tr>
   </tbody>
 </nz-table>
+
+<!--状态展示对话框-->
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="'trading.status' | translate" (nzOnCancel)="handleCancelOrOk()"
+  (nzOnOk)="handleCancelOrOk()" [nzBodyStyle]="{padding:'10px'}">
+  <nz-table #selectionTable [nzData]="modalData" [nzSize]="'small'" [nzShowPagination]="false">
+    <tbody>
+      <tr *ngFor="let item of selectionTable.data">
+        <th>{{ 'trading.failed.' + item.title | translate }}</th>
+        <td>{{item.data}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-modal>

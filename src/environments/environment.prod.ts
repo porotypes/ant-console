@@ -1,4 +1,4 @@
 export const environment = {
-  base_url: 'https://192.168.0.242:8080/',
+  base_url: 'http://121.8.157.45:8080/',
   production: true
 };

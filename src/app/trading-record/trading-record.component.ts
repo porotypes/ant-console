@@ -22,6 +22,9 @@ export class TradingRecordComponent implements OnInit {
   paginationE = new Pagination<Equipment>();
   tableLoading = false;
   transactionId: string;
+  isVisible = false;
+  modalTableLoading = false;
+  modalData: Array<any> = [];
 
   constructor(
     private tradingRecordService: TradingRecordService,
@@ -114,6 +117,34 @@ export class TradingRecordComponent implements OnInit {
         window.open(url);
       }
     );
+  }
+
+  // 打开modal框
+  showModal(id: number) {
+    this.tradingRecordService.getStatus(id).subscribe(
+      (res: HttpResponseData<any>) => {
+        if (res.status === 200 && res.obj) {
+          this.modalData = [];
+          Object.keys(res.obj).forEach(e => {
+            this.modalData.push({ title: e, data: res.obj[e] });
+          });
+          this.isVisible = true;
+        } else {
+          this.messageService.error(res.msg);
+        }
+      },
+      error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
+        this.messageService.error(error.error.msg);
+      }
+    );
+  }
+
+  // modal开关
+  handleCancelOrOk(): void {
+    this.isVisible = false;
   }
 
 }

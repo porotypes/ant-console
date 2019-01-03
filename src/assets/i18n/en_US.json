@@ -59,7 +59,17 @@
     "transaction_currency": "transaction currency",
     "transaction_amount": "transaction amount($)",
     "transaction_type": "transaction type",
-    "transaction_time": "transaction time"
+    "fee": "service charge",
+    "transaction_time": "transaction time",
+    "status": "status",
+    "failed": {
+      "id": "ID",
+      "msg": "msg",
+      "address": "Address",
+      "amount": "Amount",
+      "coinType": "Coin Type",
+      "failedTime": "Failed Time"
+    }
   },
   "account": {
     "login_name": "login name",
@@ -126,13 +136,11 @@
     "state": "state",
     "type": "type",
     "withdrawals": "withdrawals",
-    
     "buy": "buy",
     "sell": "sell",
     "extract": "extract",
     "search": "search",
     "cancel": "cancel",
-
     "numberOfFinds": "Please enter the number of finds",
     "enterStartId": "Please enter the starting id",
     "walletAddress": "Please enter the wallet to extract the address",
@@ -152,6 +160,7 @@
       "transaction_num": "transaction num",
       "currency_type": "currency type",
       "transaction_amount": "transaction amount",
+      "fee": "service charge",
       "unlimited": "unlimited"
     },
     "asset": {

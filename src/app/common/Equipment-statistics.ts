@@ -8,4 +8,5 @@ export class EquipmentStatistics {
   transactionNum: number;
   currencyType: string;
   transactionAmount: number;
+  fee: number;
 }

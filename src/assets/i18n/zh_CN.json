@@ -59,7 +59,17 @@
     "transaction_currency": "交易币种",
     "transaction_amount": "交易金额($)",
     "transaction_type": "交易类型",
-    "transaction_time": "交易时间"
+    "fee": "手续费",
+    "transaction_time": "交易时间",
+    "status": "状态",
+    "failed": {
+      "id":"ID",
+      "msg": "消息",
+      "address":"地址",
+      "amount":"数量",
+      "coinType": "币种",
+      "failedTime": "失败时间"
+    }
   },
   "account": {
     "login_name": "登录名",
@@ -153,6 +163,7 @@
       "transaction_num": "虚拟币交易数",
       "currency_type": "货币类型",
       "transaction_amount": "交易金额",
+      "fee": "手续费",
       "unlimited": "不限"
     },
     "asset": {
