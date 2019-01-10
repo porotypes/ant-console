@@ -1,4 +1,4 @@
-<h3>火币网</h3>
+<h3>Huobi</h3>
 
 <div class="item">
   <p *ngFor="let account of accounts">
@@ -132,14 +132,19 @@
   <div class="title">{{'exchange.withdrawals' | translate}}</div>
   <div class="search search-form" style="height:auto;line-height: 40px;">
     <span class="search-input">
-      <nz-select #coin style="width: 200px;" nzPlaceHolder="{{'exchange.selectCurrency' | translate}}">
-        <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option>
+      <nz-select
+        #coin
+        style="width: 200px;"
+        [(ngModel)]="selectCurrenyType"
+        (ngModelChange)="changeCurrencyType($event)"
+        nzPlaceHolder="{{'exchange.selectCurrency' | translate}}">
+        <!-- <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option> -->
         <nz-option [nzLabel]="'BTC'" [nzValue]="'btc'"></nz-option>
         <nz-option [nzLabel]="'ETH'" [nzValue]="'eth'"></nz-option>
       </nz-select>
     </span>
     <span class="search-input">
-      <nz-input-number #drawal_amount style="width: 230px;" [nzStep]="0.1" nzPlaceHolder="{{'exchange.enterNumber' | translate}}"></nz-input-number>
+      <nz-input-number #drawal_amount style="width: 230px;" [nzStep]="0.1" [nzPlaceHolder]="withdrawalsTip"></nz-input-number>
     </span>
     <span class="search-input">
       <input #address nz-input style="width: 350px" placeholder="{{'exchange.walletAddress' | translate}}">

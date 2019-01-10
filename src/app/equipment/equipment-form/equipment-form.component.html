@@ -13,12 +13,12 @@
       <nz-form-explain *ngIf="equipmentForm.get('equipmentName').dirty && equipmentForm.get('equipmentName').errors">{{ 'equipment.equipment_name_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item>
+  <!-- <nz-form-item>
     <nz-form-label [nzSpan]="4">{{ 'equipment.equipment_address' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input formControlName="address">
     </nz-form-control>
-  </nz-form-item>
+  </nz-form-item> -->
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'equipment.amount_of_cash' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">

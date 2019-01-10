@@ -69,26 +69,26 @@ export class RoleFormComponent implements OnInit {
     this.permissionService.getAllPermissions().subscribe(
       (res: HttpResponseData<Permission[]>) => {
         if (res.status === 200) {
-          const firstList = [];
+          const result = [];
           res.obj.forEach((e) => {
-            if (!firstList[e.parentId - 1]) {
-              firstList[e.parentId - 1] = {
-                key: e.parentId,
+            // 给数组分类
+            if (!result.some((item: any) => item.title === e.parentName)) {
+              result.push({
+                key: e.id,
                 title: e.parentName,
-                // expanded: true,
+                expanded: true,
                 children: []
-              };
+              });
+            } else {
+              const index = result.indexOf(result.find((item: any) => item.title === e.parentName));
+              result[index].children.push({
+                key: e.id,
+                title: e.name,
+                isLeaf: true
+              });
             }
-
-            const children = firstList[e.parentId - 1].children;
-            children[children.length] = {
-              key: e.id,
-              title: e.name,
-              name: e.label
-            };
-
           });
-          this.permissionsList = firstList;
+          this.permissionsList = result;
           this.permissions = res.obj;
           this.permissions.map(role => { role['checked'] = false; });
           this.getCurrentRoleId();

@@ -10,8 +10,18 @@
   </div>
 </div>
 
-<nz-table #basicTable nzShowSizeChanger nzShowQuickJumper [nzLoading]="tableLoading" [nzData]="pagination.records"
-  [(nzPageSize)]="pagination.size" (nzPageIndexChange)="changePageOrSize($event)" (nzPageSizeChange)="changePageOrSize($event, true)">
+<nz-table 
+  #basicTable
+  nzShowSizeChanger
+  nzShowQuickJumper
+  [nzLoading]="tableLoading"
+  [nzData]="pagination.records"
+  [(nzPageIndex)]="pagination.current"
+  [(nzPageSize)]="pagination.size"
+  [nzFrontPagination]="false"
+  [nzTotal]="pagination.total"
+  (nzPageIndexChange)="changePageOrSize($event, false)"
+  (nzPageSizeChange)="changePageOrSize($event, true)">
   <thead>
     <tr>
       <th>{{ 'index' | translate }}</th>
@@ -34,7 +44,7 @@
       <td>{{ trading.transactionId }}</td>
       <td>{{ trading.transactionNum }}</td>
       <td>{{ trading.coinType }}</td>
-      <td>{{ trading.currentPrice }}</td>
+      <td>{{ trading.transactionAmount }}</td>
       <td>{{ trading.currency }}</td>
       <td>{{ trading.transactionType | transactionType }}</td>
       <td>{{ trading.fee }}</td>

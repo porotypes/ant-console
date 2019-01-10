@@ -34,9 +34,8 @@ export class EquipmentService extends HttpService<Equipment> {
     return super.deleted(url, data);
   }
 
-  downloadExcel() {
-    const url = `${this.URL}/download`;
-    return super.downloadTemplate(url);
+  downloadExcel(): string {
+    return `${super.getBaseUrl()}equipments.xls`;
   }
 
   uploadExcel(file: FormData) {

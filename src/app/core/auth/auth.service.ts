@@ -54,7 +54,7 @@ export class AuthService extends HttpService<any> {
    * resetPassword
    */
   public resetPassword(id: number) {
-    return super.patch(this.URL, id);
+    return super.update(this.URL + '/' + id, '');
   }
 
   /**

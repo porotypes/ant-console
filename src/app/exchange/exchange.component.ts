@@ -35,8 +35,10 @@ export class ExchangeComponent implements OnInit {
   cancelOrderLoading = false;  // 交易订单撤销loading
   cancelWithdrawalsLoading = false;  // 提币订单撤销loading
 
+  selectCurrenyType: string;
   selectedCurrencyType1: string;
   selectedCurrencyType2: string;
+  withdrawalsTip = '';
   startTimeValue: Date = new Date();
   endTimeValue: Date = new Date();
   sizeNum = 100;
@@ -278,6 +280,15 @@ export class ExchangeComponent implements OnInit {
       }
 
     );
+  }
+
+  changeCurrencyType(val: string) {
+    const isZhCN = this.languageService.currentLang === 'zh_CN';
+    if (this.selectCurrenyType === 'btc') {
+      this.withdrawalsTip = isZhCN ? 'BTC须大于0.01, 不包含手续费' : 'BTC >= 0.01,Free of charge';
+    } else {
+      this.withdrawalsTip = isZhCN ? 'ETH须大于0.05, 不包含手续费' : 'BTC >= 0.05,Free of charge';
+    }
   }
 
   // 查询提币订单

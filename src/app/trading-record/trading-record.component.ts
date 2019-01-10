@@ -56,6 +56,7 @@ export class TradingRecordComponent implements OnInit {
       }
     );
   }
+
   getTradingRecordList() {
     this.tableLoading = true;
     this.tradingRecordService.getTradingRecordList(this.pagination).subscribe(
@@ -103,7 +104,7 @@ export class TradingRecordComponent implements OnInit {
       return;
     }
     if (resetPageIndex) {
-      this.pagination.current = 1;
+      this.pagination.current = event;
     }
     this.tableLoading = true;
     this.getTradingRecordList();

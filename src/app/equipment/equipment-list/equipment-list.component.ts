@@ -78,14 +78,7 @@ export class EquipmentListComponent implements OnInit {
   }
 
   downloadExcel() {
-    this.equipmentService.downloadExcel().subscribe(
-      (res: Blob) => {
-        console.log(res);
-        const file = new Blob([res], {type: 'application/vnd.ms-excel'});
-        const url = URL.createObjectURL(file);
-        window.open(url);
-      }
-    );
+    window.open(this.equipmentService.downloadExcel());
   }
 
   uploadExcel = (item: UploadXHRArgs) => {

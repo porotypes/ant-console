@@ -74,7 +74,7 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   ngAfterContentInit() {
     if (this.storageService.hasStorage('USER_TOKEN')) {
       this.authService.user = this.authService.decodeToken();
-      this.username = this.authService.user['username'] || '';
+      this.username = this.authService.user['nickname'] || this.authService.user['username'];
     } else {
       this.router.navigate(['/login']);
     }

@@ -60,6 +60,7 @@ export class EquipmentStatisticsComponent implements OnInit {
       this.getAllCompanies();
     }
     this.getEquipmentList();
+    this.getEquipmentStatisticsList();
   }
 
     // 获取设备列表
