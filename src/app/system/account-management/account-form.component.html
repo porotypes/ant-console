@@ -10,7 +10,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'account.login_name' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
-      <input nz-input formControlName="username" [attr.disabled]="!!currentAccountId">
+      <input nz-input formControlName="username" [attr.disabled]="currentAccountId">
       <nz-form-explain *ngIf="accountForm.get('username').dirty && accountForm.get('username').errors">{{
         'account.login_name_tip' | translate }}</nz-form-explain>
     </nz-form-control>
