@@ -13,6 +13,11 @@ export class RoleService extends HttpService<Role> {
     return super.getPagination(url);
   }
 
+  searchRole(pagination: Pagination<Role>, roleName: string) {
+    const url = `${this.URL}/${roleName}/${pagination.current}/${pagination.size}`;
+    return super.getPagination(url);
+  }
+
   getRole(id: number) {
     const url = `${this.URL}/${id}`;
     return super.get(url);

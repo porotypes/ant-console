@@ -1,18 +1,16 @@
 <div class="search" *ngIf="authService.isCanAddRole()">
+  <div class="search-form">
+    <span class="search-label" style="margin: auto 16px;">{{ 'role.role_name' | translate }}</span>
+    <span class="search-input"><input nz-input [(ngModel)]="roleName"></span>
+    <span class="search-button"><button nz-button nzType="primary" (click)="searchRole()">{{ 'search' | translate
+        }}</button></span>
+  </div>
   <div class="add">
     <button nz-button nzType="primary" routerLink="/dashboard/add-role">{{ 'role.create_role' | translate }}</button>
   </div>
 </div>
 
-<nz-table
-  #basicTable
-  nzShowSizeChanger
-  nzShowQuickJumper
-  [nzLoading]="tableLoading"
-  [nzData]="pagination.records"
-  [(nzPageSize)]="pagination.size"
-  (nzPageIndexChange)="changePageOrSize($event)"
-  (nzPageSizeChange)="changePageOrSize($event, true)">
+<nz-table #basicTable [nzLoading]="tableLoading" [nzData]="pagination.records" [nzShowPagination]="false">
   <thead>
     <tr>
       <th>{{ 'index' | translate }}</th>
@@ -25,24 +23,17 @@
       <td>{{ i + 1 }}</td>
       <td>{{ role.roleName }}</td>
       <td>
-        <button
-          *ngIf="authService.isCanUpdateRole()"
-          nz-button
-          nzType="primary"
-          (click)="editRole(role)">{{ 'edit' | translate }}</button>
+        <button *ngIf="authService.isCanUpdateRole()" nz-button nzType="primary" (click)="editRole(role)">{{ 'edit' |
+          translate }}</button>
         <nz-divider *ngIf="authService.isCanUpdateRole()" nzType="vertical"></nz-divider>
-        <button
-          *ngIf="authService.isCanDeleteRole()"
-          nz-button
-          nzType="danger"
-          nz-popconfirm
-          [nzOkText]="'ok' | translate"
-          [nzCancelText]="'cancel' | translate"
-          [nzTitle]="'role.delete_role_tip' | translate"
-          (nzOnConfirm)="deleteRole(role)">
+        <button *ngIf="authService.isCanDeleteRole()" nz-button nzType="danger" nz-popconfirm [nzOkText]="'ok' | translate"
+          [nzCancelText]="'cancel' | translate" [nzTitle]="'role.delete_role_tip' | translate" (nzOnConfirm)="deleteRole(role)">
           {{ 'delete' | translate }}
         </button>
       </td>
     </tr>
   </tbody>
 </nz-table>
+<nz-pagination *ngIf="!tableLoading" nzShowSizeChanger nzShowQuickJumper [(nzPageIndex)]="pagination.current" [nzTotal]="pagination.total"
+  [(nzPageSize)]="pagination.size" (nzPageIndexChange)="changePageOrSize(false)" (nzPageSizeChange)="changePageOrSize(true)"
+  [nzPageSizeOptions]="pageSizeOptions" style="float:right"></nz-pagination>

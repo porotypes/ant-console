@@ -9,19 +9,19 @@ import { Equipment } from 'src/app/common/equipment';
 })
 export class EquipmentCashComponent implements OnInit {
 
-  private panelStyle = {
+  public panelStyle = {
     'background': '#f7f7f7',
     'border-radius': '4px',
     'margin-bottom': '24px',
     'border': 'none'
   };
-  fullPagination = new Pagination<Equipment>();
-  emptyPagination = new Pagination<Equipment>();
-  pagination = new Pagination<Equipment>();
+  public fullPagination = new Pagination<Equipment>();
+  public emptyPagination = new Pagination<Equipment>();
+  public pagination = new Pagination<Equipment>();
 
-  fullTableLoading = false;
-  enptyTableLoading = false;
-  tableLoading = false;
+  public fullTableLoading = false;
+  public emptyTableLoading = false;
+  public tableLoading = false;
 
   constructor() { }
 

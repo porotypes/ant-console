@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { AuthService } from '../../core/auth/auth.service';
 import { LanguageService } from '../../core/language.service';
 import { StorageService } from '../../core/storage.service';
+import { LoginService } from '../../core/auth/login.service';
 
 import { ChatInformation } from '../../common/chat-information';
 import { Pagination } from 'src/app/common/pagination';
@@ -32,6 +33,7 @@ export class CustomerServiceComponent implements OnInit {
     private messageService: NzMessageService,
     public authService: AuthService,
     private languageService: LanguageService,
+    private loginService: LoginService,
     private storageService: StorageService
   ) { }
 
@@ -50,6 +52,9 @@ export class CustomerServiceComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -69,6 +74,9 @@ export class CustomerServiceComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -143,6 +151,13 @@ export class CustomerServiceComponent implements OnInit {
         if (res.status === 200) {
           this.chatInformationService.getList.emit();
           this.getChatInformationList();
+        } else {
+          this.messageService.error(res.msg);
+        }
+      },
+      error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
         }
       }
     );
@@ -171,6 +186,9 @@ export class CustomerServiceComponent implements OnInit {
       },
       error => {
         this.isSending = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

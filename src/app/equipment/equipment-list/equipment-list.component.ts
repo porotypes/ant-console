@@ -10,6 +10,7 @@ import { LanguageService } from '../../core/language.service';
 import { Pagination } from 'src/app/common/pagination';
 import { Equipment } from 'src/app/common/equipment';
 import { HttpResponseData } from 'src/app/common/http-response-data';
+import { LoginService } from 'src/app/core/auth/login.service';
 
 @Component({
   selector: 'app-equipment-list',
@@ -33,6 +34,7 @@ export class EquipmentListComponent implements OnInit {
     private messageService: NzMessageService,
     private router: Router,
     public authService: AuthService,
+    private loginService: LoginService,
     private languageService: LanguageService
   ) {}
 
@@ -76,14 +78,7 @@ export class EquipmentListComponent implements OnInit {
   }
 
   downloadExcel() {
-    this.equipmentService.downloadExcel().subscribe(
-      (res: Blob) => {
-        console.log(res);
-        const file = new Blob([res], {type: 'application/vnd.ms-excel'});
-        const url = URL.createObjectURL(file);
-        window.open(url);
-      }
-    );
+    window.open(this.equipmentService.downloadExcel());
   }
 
   uploadExcel = (item: UploadXHRArgs) => {
@@ -101,6 +96,9 @@ export class EquipmentListComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         this.messageService.error(error.error.msg);
       }
     );
@@ -125,6 +123,9 @@ export class EquipmentListComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

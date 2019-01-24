@@ -27,3 +27,7 @@
   position: absolute;
   right: 0;
 }
+
+.ant-table-thead tr th {
+  text-align: center;
+}

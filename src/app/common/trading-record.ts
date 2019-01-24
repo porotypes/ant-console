@@ -4,6 +4,7 @@ export class TradingRecord {
   seller: string;
   transactionType: string;
   equipmentId: string;
+  equipmentName: string;
   transactionNum: number;
   coinType: string;
   transactionAmount: number;

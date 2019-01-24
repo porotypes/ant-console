@@ -1,0 +1,113 @@
+<div class="item">
+  <div class="title">{{ 'statistics.asset.titleStatistics' | translate }}</div>
+  <div class="search search-form">
+    <span class="label">{{ 'statistics.asset.currency' | translate }}</span>
+    <span class="input">
+      <nz-select #coinD style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyD">
+        <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option>
+        <nz-option [nzLabel]="'BTC'" [nzValue]="'btc'"></nz-option>
+        <nz-option [nzLabel]="'ETH'" [nzValue]="'eth'"></nz-option>
+      </nz-select>
+    </span>
+
+    <span class="label">{{ 'statistics.asset.start_id' | translate }}</span>
+    <span class="input">
+      <nz-input-number #fromD style="width: 230px;" [nzStep]="1" [nzPlaceHolder]="'请输入起始id'" [(ngModel)]="fromNumD"></nz-input-number>
+    </span>
+
+    <span class="label">{{ 'statistics.asset.size' | translate }}</span>
+    <span class="input">
+      <nz-input-number #sizeW style="width: 230px;" [nzStep]="1" [nzMax]="100" [nzPlaceHolder]="'请输入查找条数'" [(ngModel)]="sizeNumW"></nz-input-number>
+    </span>
+
+    <span class="button">
+      <button nz-button nzType="primary"  [nzLoading]="tableLoadingD" (click)="depositsSearch(coinD.value,fromD.value,sizeW.value)">{{ 'search' |
+        translate }}</button>
+    </span>
+  </div>
+  <nz-table #basicTable [nzLoading]="tableLoadingD" [nzData]="statisticsList">
+    <thead>
+      <tr class="table_tr">
+        <th style="min-width:100px">{{ 'statistics.asset.id' | translate }}</th>
+        <th>{{ 'statistics.asset.address' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.amount' | translate }}</th>
+        <th>{{ 'statistics.asset.created_at' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.currency' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.fee' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.state' | translate }}</th>
+        <th>{{ 'statistics.asset.updated_at' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table_tr" *ngFor="let statistics of basicTable.data, index as i">
+        <td>{{statistics.id }}</td>
+        <td>{{statistics.address }}</td>
+        <td>{{statistics.amount}}</td>
+        <td>{{statistics.createdAt | date:"yyyy-MM-dd HH:mm:ss ZZZZ"}}</td>
+        <td>{{statistics.currency}}</td>
+        <td>{{statistics.fee}}</td>
+        <td>{{statistics.state}}</td>
+        <td>{{statistics.updatedAt | date:"yyyy-MM-dd HH:mm:ss ZZZZ"}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+
+
+<div class="item">
+  <div class="title">{{ 'statistics.asset.titleWdrawals' | translate }}</div>
+  <div class="search search-form" style="height: auto;">
+    <span class="label">{{ 'statistics.asset.currency' | translate }}</span>
+    <span class="input">
+      <nz-select #coinW style="width: 230px;" nzPlaceHolder="请选择币种" [(ngModel)]="selectedCurrencyW">
+        <nz-option [nzLabel]="'USDT'" [nzValue]="'usdt'"></nz-option>
+        <nz-option [nzLabel]="'BTC'" [nzValue]="'btc'"></nz-option>
+        <nz-option [nzLabel]="'ETH'" [nzValue]="'eth'"></nz-option>
+      </nz-select>
+    </span>
+
+    <span class="label">{{ 'statistics.asset.start_id' | translate }}</span>
+    <span class="input">
+      <nz-input-number #fromW style="width: 230px;" [nzStep]="1" [nzPlaceHolder]="'请输入起始id'" [(ngModel)]="fromNumW"></nz-input-number>
+    </span>
+
+    <span class="label">{{ 'statistics.asset.size' | translate }}</span>
+    <span class="input">
+      <nz-input-number #sizeW style="width: 230px;" [nzStep]="1" [nzMax]="100" [nzPlaceHolder]="'请输入查找条数'" [(ngModel)]="sizeNumW"></nz-input-number>
+    </span>
+
+    <span class="button">
+      <button nz-button nzType="primary" [nzLoading]="tableLoadingW" (click)="withdrawalsSearch(coinW.value,fromW.value,sizeW.value)">{{ 'search' |
+        translate }}</button>
+    </span>
+  </div>
+
+  <nz-table #withdrawalsTable [nzLoading]="tableLoadingW" [nzData]="withdrawalsList">
+    <thead>
+      <tr class="table_tr">
+        <th style="min-width: 100px;">{{ 'statistics.asset.id' | translate }}</th>
+        <th>{{ 'statistics.asset.address' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.amount' | translate }}</th>
+        <th>{{ 'statistics.asset.created_at' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.currency' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.fee' | translate }}</th>
+        <th style="min-width:60px">{{ 'statistics.asset.state' | translate }}</th>
+        <!--<th>{{ 'statistics.asset.tx_hash' | translate }}</th>-->
+        <th>{{ 'statistics.asset.updated_at' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table_tr" *ngFor="let statistics of withdrawalsTable.data, index as i">
+        <td>{{statistics.id }}</td>
+        <td>{{statistics.address }}</td>
+        <td>{{statistics.amount}}</td>
+        <td>{{statistics.createdAt | date:"yyyy-MM-dd HH:mm:ss ZZZZ"}}</td>
+        <td>{{statistics.currency}}</td>
+        <td>{{statistics.fee}}</td>
+        <td>{{statistics.state}}</td>
+        <!--<td>{{statistics.txHash}}</td>-->
+        <td>{{statistics.updatedAt | date:"yyyy-MM-dd HH:mm:ss ZZZZ"}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

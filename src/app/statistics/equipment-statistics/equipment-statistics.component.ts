@@ -6,11 +6,14 @@ import { DateTimeUtil } from '../../shared/date-time-util';
 import { CompanyService } from '../../core/system/company.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { LanguageService } from '../../core/language.service';
+import { EquipmentService } from '../../core/equipment/equipment.service';
+import { LoginService } from '../../core/auth/login.service';
 
 import { EquipmentStatistics } from '../../common/Equipment-statistics';
 import { HttpResponseData } from 'src/app/common/http-response-data';
 import { Pagination } from 'src/app/common/pagination';
 import { Company } from 'src/app/common/company';
+import { Equipment } from 'src/app/common/equipment';
 
 @Component({
   selector: 'app-equipment-statistics',
@@ -25,6 +28,7 @@ export class EquipmentStatisticsComponent implements OnInit {
   statisticsList: EquipmentStatistics[];
   tableLoading = false;
   pagination = new Pagination<Company>();
+  paginationE = new Pagination<Equipment>();
   companies: Company[];
 
   disabledStartDate = (startTimeValue: Date): boolean => {
@@ -46,14 +50,36 @@ export class EquipmentStatisticsComponent implements OnInit {
     private messageService: NzMessageService,
     private companyService: CompanyService,
     public authService: AuthService,
-    private languageService: LanguageService
+    private equipmentService: EquipmentService,
+    private languageService: LanguageService,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit() {
     if (this.authService.isAdmin()) {
       this.getAllCompanies();
     }
+    this.getEquipmentList();
+    this.getEquipmentStatisticsList();
   }
+
+    // 获取设备列表
+    getEquipmentList() {
+      const query = {
+        status: ''
+      };
+      this.tableLoading = true;
+      this.equipmentService.getEquipmetList(this.paginationE, query).subscribe(
+        (res: Pagination<Equipment>) => {
+          this.tableLoading = false;
+          this.paginationE = res;
+        },
+        error => {
+          this.tableLoading = false;
+          this.messageService.error(error.error.msg);
+        }
+      );
+    }
 
   getEquipmentStatisticsList() {
     const condition = {
@@ -67,6 +93,17 @@ export class EquipmentStatisticsComponent implements OnInit {
       (res: HttpResponseData<EquipmentStatistics[]>) => {
         this.tableLoading = false;
         if (res.status === 200) {
+          res.obj.forEach((e, k) => {
+            res.obj[k].equipmentName = '';
+            this.paginationE.records.forEach(i => {
+              if (i.equipmentId !== '') {
+                if (i.equipmentId === e.equipmentId) {
+                  res.obj[k].equipmentName = i.equipmentName;
+                }
+              }
+            }
+            );
+          });
           this.statisticsList = res.obj;
         } else {
           this.messageService.error(res.msg);
@@ -74,6 +111,9 @@ export class EquipmentStatisticsComponent implements OnInit {
       },
       error => {
         this.tableLoading = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -94,6 +134,9 @@ export class EquipmentStatisticsComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

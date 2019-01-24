@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../http.service';
 import { Pagination } from '../../common/pagination';
-import { Account } from '../../common/Account';
+import { Account } from '../../common/account';
 import { HttpResponseData } from 'src/app/common/http-response-data';
 
 @Injectable()
@@ -11,6 +11,11 @@ export class AccountService extends HttpService<HttpResponseData<Pagination<Acco
 
   getAccountList(pagination: Pagination<Account>) {
     const url = `${this.URL}/${pagination.current}/${pagination.size}`;
+    return super.getPagination(url);
+  }
+
+  searchAccount(pagination: Pagination<Account>, accountName: string) {
+    const url = `${this.URL}/${accountName}/${pagination.current}/${pagination.size}`;
     return super.getPagination(url);
   }
 

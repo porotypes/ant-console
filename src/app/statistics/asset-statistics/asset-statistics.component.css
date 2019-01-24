@@ -1,3 +1,8 @@
+.search {
+  height: auto;
+  line-height: 40px;
+}
+
 h3 {
   font-size: 18px;
   font-weight: 600;
@@ -14,22 +19,13 @@ h3 {
   background: #fb702f;
   font-size: 16px;
 }
-.search-form {
-  width: 100%;
-}
-
-span.search-input {
-  margin-right: 10px;
-}
-
-.pagination {
-  margin-top: 10px;
-  text-align: right;
-}
-.label, .search-button {
+.label {
   padding: 4px;
 }
+.input {
+  margin-right: 12px;
+}
 
-tr th,tr td {
+.table_tr th,td {
   text-align: center;
 }

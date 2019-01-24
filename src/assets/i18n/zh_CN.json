@@ -1,5 +1,5 @@
 {
-  "system_title": "ATM数字资产兑换系统",
+  "system_title": "DIGICCY ATM系统管理",
   "edit_password": "修改密码",
   "old_password": "原密码",
   "old_password_tip": "请输入原密码!",
@@ -14,6 +14,7 @@
   "search": "查询",
   "operation": "操作",
   "login_out": "退出",
+  "action": "操作",
   "menu": {
     "equipment": {
       "equipment_management": "设备管理",
@@ -29,6 +30,7 @@
       "statistics": "统计分析",
       "equipment_statistics": "设备流水",
       "company_statistics": "公司流水",
+      "asset_statistics": "数字资产流水",
       "fault_statistics": "设备故障统计"
     },
     "setting": {
@@ -43,18 +45,31 @@
     "username": "用户名",
     "username_input_tip": "请输入用户名!",
     "password": "密码",
+    "code": "验证码",
     "password_input_tip": "请输入密码!",
+    "code_input_tip": "请输入验证码",
     "login": "登录"
   },
   "trading": {
     "transaction_flow_number": "交易流水号",
     "export_excel": "导出当前数据为Excel",
     "equipment_id": "设备ID",
+    "coin_type": "虚拟币种",
     "number_of_transaction": "交易数量",
     "transaction_currency": "交易币种",
     "transaction_amount": "交易金额($)",
     "transaction_type": "交易类型",
-    "transaction_time": "交易时间"
+    "fee": "手续费",
+    "transaction_time": "交易时间",
+    "status": "状态",
+    "failed": {
+      "id":"ID",
+      "msg": "消息",
+      "address":"地址",
+      "amount":"数量",
+      "coinType": "币种",
+      "failedTime": "失败时间"
+    }
   },
   "account": {
     "login_name": "登录名",
@@ -87,7 +102,7 @@
     "email_tip": "请输入公司邮箱!",
     "port": "端口",
     "port_tip": "请输入端口号!",
-    "delete_company_tip": "确定删除该公司？"
+    "delete_company_tip": "确定删除该公司及旗下账号？"
   },
   "custom_service": {
     "contact_customer_service": "联系客服",
@@ -105,6 +120,36 @@
     "create_role": "创建角色",
     "delete_role_tip": "确定删除该角色?"
   },
+  "exchange": {
+    "assets": "资产",
+    "transaction": "交易",
+    "transactions": {
+      "id": "订单ID",
+      "fieldAmount": "数量",
+      "amount": "金额",
+      "type": "类型",
+      "finishedAt": "交易时间",
+      "state": "状态"
+    },
+    "id": "ID",
+    "symbol": "币种",
+    "balance": "余额",
+    "state": "状态",
+    "type": "类型",
+    "withdrawals": "提币",
+
+    "buy": "买入",
+    "sell": "卖出",
+    "extract": "提取",
+    "search": "查询",
+    "cancel": "撤销",
+
+    "numberOfFinds": "请输入查找条数",
+    "enterStartId": "请输入起始id",
+    "walletAddress": "请输入钱包提取地址",
+    "selectCurrency": "请选择币种",
+    "enterNumber": "请输入交易数量"
+  },
   "statistics": {
     "company": {
       "date_rang": "时间范围",
@@ -113,20 +158,39 @@
       "company": "公司",
       "equipment_id": "设备ID",
       "transaction_type": "交易类型",
-      "num_of_transactions": "交易总数",
+      "num_of_transactions": "交易笔数",
       "coin_type": "虚拟币种",
       "transaction_num": "虚拟币交易数",
       "currency_type": "货币类型",
       "transaction_amount": "交易金额",
+      "fee": "手续费",
       "unlimited": "不限"
     },
+    "asset": {
+      "titleStatistics": "充值记录",
+      "titleWdrawals": "提取记录",
+      "currency": "币种",
+      "start_id": "起始id",
+      "size": "条数",
+      "id": "ID",
+      "address": "地址",
+      "amount": "个数",
+      "created_at": "发起时间",
+      "fee": "手续费",
+      "state": "状态",
+      "type": "类型",
+      "updated_at": "最后更新时间"
+    },
     "fault": {
+      "fault_list": "故障列表",
       "search_type": "查询类型",
       "query_by_device": "按设备查询",
       "query_by_company": "按公司查询",
       "company": "公司名称",
       "equipment_type": "设备类型",
-      "error_count": "故障次数"
+      "status_code": "状态",
+      "error_count": "故障次数",
+      "receive_time": "发生时间"
     }
   },
   "equipment": {

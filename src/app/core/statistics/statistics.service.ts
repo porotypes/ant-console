@@ -20,4 +20,19 @@ export class StatisticsService extends HttpService<EquipmentStatistics> {
     return super.post(url, condition);
   }
 
+  getFaultList(condition: Object) {
+    const url = `/equipmentReceive/getByDeviceType`;
+    return super.post(url, condition);
+  }
+
+  getDepositsList(condition: Object) {
+    const url = `huobi/deposits`;
+    return super.get(url + '?coin=' + condition['coin'] + '&from=' + condition['from'] + '&size=' + condition['size']);
+  }
+
+  getWithdrawalsList(condition: Object) {
+    const url = `huobi/withdrawals`;
+    return super.get(url + '?coin=' + condition['coin'] + '&from=' + condition['from'] + '&size=' + condition['size']);
+  }
+
 }

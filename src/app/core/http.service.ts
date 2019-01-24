@@ -26,6 +26,10 @@ export abstract class HttpService<T> {
     }
   }
 
+  public getBaseUrl(): string {
+    return environment.base_url;
+  }
+
   /**
    * get pagination
    */

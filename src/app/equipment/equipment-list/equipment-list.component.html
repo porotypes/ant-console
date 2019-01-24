@@ -39,7 +39,7 @@
   <thead>
     <tr>
       <th>{{ 'index' | translate }}</th>
-      <th>{{ 'equipment.equipment_id' | translate }}</th>
+      <th>{{ 'equipment.equipment_name' | translate }}</th>
       <th>{{ 'equipment.company' | translate }}</th>
       <th>{{ 'equipment.problem' | translate }}</th>
       <th>{{ 'operation' | translate }}</th>
@@ -48,7 +48,7 @@
   <tbody>
     <tr *ngFor="let equipment of basicTable.data, index as i">
       <td>{{ i + 1 }}</td>
-      <td>{{ equipment.equipmentId }}</td>
+      <td>{{ equipment.equipmentName }}</td>
       <td>{{ equipment.companyName }}</td>
       <td>{{ equipment.detailed }}</td>
       <td>

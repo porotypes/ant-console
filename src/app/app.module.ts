@@ -38,6 +38,7 @@ import { EquipmentStatisticsComponent } from './statistics/equipment-statistics/
 import { CompanyStatisticsComponent } from './statistics/company-statistics/company-statistics.component';
 import { ExchangeComponent } from './exchange/exchange.component';
 import { FaultStatisticsComponent } from './statistics/fault-statistics/fault-statistics.component';
+import { AssetStatisticsComponent } from './statistics/asset-statistics/asset-statistics.component';
 
 registerLocaleData(zh);
 
@@ -66,7 +67,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EquipmentStatisticsComponent,
     CompanyStatisticsComponent,
     ExchangeComponent,
-    FaultStatisticsComponent
+    FaultStatisticsComponent,
+    AssetStatisticsComponent
   ],
   imports: [
     BrowserModule,

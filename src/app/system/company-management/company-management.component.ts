@@ -5,6 +5,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { CompanyService } from '../../core/system/company.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { LanguageService } from '../../core/language.service';
+import { LoginService } from '../../core/auth/login.service';
 
 import { Company } from '../../common/company';
 import { Pagination } from '../../common/pagination';
@@ -20,12 +21,14 @@ export class CompanyManagementComponent implements OnInit {
   pagination = new Pagination<Company>();
   tableLoading = true;
   companyName: string;
+  pageSizeOptions = [ 5, 10, 20, 30, 40, 50 ];
 
   constructor(
     private router: Router,
     public authService: AuthService,
     private companyService: CompanyService,
     private messageService: NzMessageService,
+    private loginService: LoginService,
     private languageService: LanguageService
   ) { }
 
@@ -44,6 +47,10 @@ export class CompanyManagementComponent implements OnInit {
         }
       },
       error => {
+        this.tableLoading = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -53,13 +60,7 @@ export class CompanyManagementComponent implements OnInit {
     );
   }
 
-  changePageOrSize(event, resetPageIndex = false) {
-    if (event === 0) {
-      return;
-    }
-    if (resetPageIndex) {
-      this.pagination.current = event;
-    }
+  changePageOrSize(resetPageIndex = false) {
     this.tableLoading = true;
     this.getCompanyList();
   }
@@ -80,6 +81,9 @@ export class CompanyManagementComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -104,6 +108,9 @@ export class CompanyManagementComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

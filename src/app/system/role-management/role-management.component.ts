@@ -4,6 +4,7 @@ import { RoleService } from '../../core/system/role.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
 import { LanguageService } from '../../core/language.service';
+import { LoginService } from '../../core/auth/login.service';
 
 import { HttpResponseData } from '../../common/http-response-data';
 import { Pagination } from '../../common/pagination';
@@ -17,13 +18,15 @@ import { Role } from '../../common/role';
 export class RoleManagementComponent implements OnInit {
 
   pagination = new Pagination<Role>();
-  tableLoading = false;
+  tableLoading = true;
+  roleName: string;
 
   constructor(
     public authService: AuthService,
     private roleService: RoleService,
     private messageService: NzMessageService,
     private router: Router,
+    private loginService: LoginService,
     private languageService: LanguageService
   ) { }
 
@@ -43,6 +46,9 @@ export class RoleManagementComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -52,15 +58,37 @@ export class RoleManagementComponent implements OnInit {
     );
   }
 
-  changePageOrSize(event, resetPageIndex = false) {
-    if (event === 0) {
-      return;
-    }
-    if (resetPageIndex) {
-      this.pagination.current = event;
-    }
+  changePageOrSize(resetPageIndex = false) {
     this.tableLoading = true;
     this.getRoleList();
+  }
+
+  searchRole() {
+    if (this.roleName.trim() === '') {
+      this.getRoleList();
+      return;
+    }
+    this.pagination.current = 1;
+    this.pagination.size = 10;
+    this.roleService.searchRole(this.pagination, this.roleName).subscribe(
+      (res: HttpResponseData<Pagination<Role>>) => {
+        if (res.status === 200) {
+          this.pagination = res.obj;
+        } else {
+          this.messageService.error(res.msg);
+        }
+      },
+      error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
+        if (this.languageService.currentLang === 'zh_CN') {
+          this.messageService.error(error.error.msg || '响应超时！');
+        } else {
+          this.messageService.error(error.error.msg || 'Server response timeout!');
+        }
+      }
+    );
   }
 
   editRole(role: Role) {
@@ -78,6 +106,9 @@ export class RoleManagementComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

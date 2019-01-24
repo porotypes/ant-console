@@ -13,12 +13,12 @@
       <nz-form-explain *ngIf="equipmentForm.get('equipmentName').dirty && equipmentForm.get('equipmentName').errors">{{ 'equipment.equipment_name_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item>
+  <!-- <nz-form-item>
     <nz-form-label [nzSpan]="4">{{ 'equipment.equipment_address' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input formControlName="address">
     </nz-form-control>
-  </nz-form-item>
+  </nz-form-item> -->
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'equipment.amount_of_cash' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
@@ -26,10 +26,10 @@
       <nz-form-explain *ngIf="equipmentForm.get('amountOfCash').dirty && equipmentForm.get('amountOfCash').errors">{{ 'equipment.amount_of_cash_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item>
+  <nz-form-item *ngIf="authService.isAdmin()">
     <nz-form-label [nzSpan]="4" nzRequired>{{ 'equipment.company' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
-      <nz-select style="width: 230px;" formControlName="owner">
+      <nz-select style="width: 230px;" formControlName="owner"  [(ngModel)]="selectedCompany">
         <nz-option
           *ngFor="let company of companies"
           [nzValue]="company.id"
@@ -40,21 +40,21 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>{{ 'equipment.high_threshold' | translate }}</nz-form-label>
+    <nz-form-label [nzSpan]="4">{{ 'equipment.high_threshold' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input formControlName="highThreshold">
       <nz-form-explain *ngIf="equipmentForm.get('highThreshold').dirty && equipmentForm.get('highThreshold').errors">{{ 'equipment.high_threshold_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>{{ 'equipment.low_threshold' | translate }}</nz-form-label>
+    <nz-form-label [nzSpan]="4">{{ 'equipment.low_threshold' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input formControlName="lowThreshold">
       <nz-form-explain *ngIf="equipmentForm.get('lowThreshold').dirty && equipmentForm.get('lowThreshold').errors">{{ 'equipment.low_threshold_tip' | translate }}</nz-form-explain>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>{{ 'equipment.maximum_cash_amount' | translate }}</nz-form-label>
+    <nz-form-label [nzSpan]="4">{{ 'equipment.maximum_cash_amount' | translate }}</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input formControlName="maximumCashAmount">
       <nz-form-explain *ngIf="equipmentForm.get('maximumCashAmount').dirty && equipmentForm.get('maximumCashAmount').errors">{{ 'equipment.maximum_cash_amount_tip' | translate }}</nz-form-explain>

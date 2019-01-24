@@ -11,6 +11,8 @@ import { HttpResponseData } from 'src/app/common/http-response-data';
 import { Pagination } from 'src/app/common/pagination';
 import { Equipment } from 'src/app/common/equipment';
 import { Company } from 'src/app/common/company';
+import { LoginService } from 'src/app/core/auth/login.service';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-equipment-form',
@@ -24,27 +26,30 @@ export class EquipmentFormComponent implements OnInit {
   currentEquipmentId: number;
   companies: Company[];
   pagination = new Pagination<Company>();
+  selectedCompany: number;
 
   constructor(
     private fb: FormBuilder,
     private equipmentService: EquipmentService,
     private companyService: CompanyService,
     private messageService: NzMessageService,
+    private loginService: LoginService,
     private router: Router,
     private route: ActivatedRoute,
+    public authService: AuthService,
     private languageService: LanguageService
   ) { }
 
   createForm() {
     this.equipmentForm = this.fb.group({
       equipmentId: [null, [Validators.required]],
-      owner: [null, [Validators.required]],
+      owner: [this.authService.decodeToken().companyId, [Validators.required]],
       address: [null],
       amountOfCash: [0, [Validators.required]],
       equipmentName: [null, [Validators.required]],
-      highThreshold: [null, [Validators.required]],
-      lowThreshold: [null, [Validators.required]],
-      maximumCashAmount: [null, [Validators.required]],
+      highThreshold: [null],
+      lowThreshold: [null],
+      maximumCashAmount: [0],
       serialNumber: [null, [Validators.required]]
     });
   }
@@ -53,9 +58,14 @@ export class EquipmentFormComponent implements OnInit {
     this.createForm();
     this.getAllCompanies();
     this.getCurrentEquipmentId();
+    this.selectedCompany = this.authService.decodeToken().companyId;
+    // this.selectedCompany = this.authService.decodeToken().companyId;
   }
 
   getAllCompanies() {
+    if (!this.authService.isAdmin()) {
+      return;
+    }
     this.pagination.size = 9999999;
     this.companyService.getCompanyList(this.pagination).subscribe(
       (res: HttpResponseData<Pagination<Company>>) => {
@@ -66,6 +76,9 @@ export class EquipmentFormComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -85,6 +98,9 @@ export class EquipmentFormComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -112,8 +128,8 @@ export class EquipmentFormComponent implements OnInit {
     if (!this.equipmentForm.valid) {
       for (const i in this.equipmentForm.controls) {
         if (this.equipmentForm.controls.hasOwnProperty(i)) {
-          this.equipmentForm.controls[ i ].markAsDirty();
-          this.equipmentForm.controls[ i ].updateValueAndValidity();
+          this.equipmentForm.controls[i].markAsDirty();
+          this.equipmentForm.controls[i].updateValueAndValidity();
         }
       }
       return;
@@ -136,6 +152,9 @@ export class EquipmentFormComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -157,6 +176,9 @@ export class EquipmentFormComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

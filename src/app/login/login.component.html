@@ -1,31 +1,109 @@
 <div class="login-wrap" *ngIf="!loginStatus">
-  <div class="login" nz-row nzType="flex" nzJustify="space-around" nzAlign="middle">
-    <div nz-col nzSpan="6">
-      <h1>{{ title | translate }}</h1>
+  <div class="login" nz-row nzType="flex" nzJustify="start" nzAlign="middle">
+    <div class="login_bg">
+      <svg id="svg_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
+        <defs>
+          <style>.cls-1,.cls-2,.cls-3,.cls-5,.cls-6{fill:#fff;}.cls-2{font-size:206.81px;}.cls-2,.cls-3,.cls-5{font-family:EngraversMT, Engravers MT;}.cls-3{font-size:146.12px;}.cls-4{fill:none;stroke:#0183bf;stroke-miterlimit:10;stroke-width:4px;}.cls-5{font-size:61.69px;}.cls-6{font-size:26.56px;font-family:MicrosoftYaHei, Microsoft YaHei;}</style>
+        </defs>
+        <title>logo2</title>
+        <path class="cls-1" d="M1842.93,1136.44c-15-9-29.93-18.19-45.1-26.93-129.06-74.37-264.69-133-409.08-170.69-5.46-.91-5.17-.09-5.58-1.66a1.27,1.27,0,0,1,.41-1.32c1.14-.91,2.32-1,4.77-1,3.59-.06,4.61.07,10.57-1.79,42.35-5.25,82.1-18.6,118.15-41.26,23.31-14.66,44.43-32.47,52.08-60.88,9.68-35.93-14.66-82.45-54.17-102.58-49.39-25.17-100.45-21.38-151.48-6.2-38.57,11.47-74,29.9-107,52.7-6.91,4.76-11.51,6.76-15.25-3.8-3.81-10.76-9.24-21.08-15-31-28.94-49.34-64.29-68.72-111.22-59-14.08,2.92-18.76-1.4-23.75-13.3-14.61-34.83-38.4-59.71-78.31-63.44-10.52-1-8.82-6.26-7.79-13.22,4.2-28.3-4.48-52.49-24.21-72.94-5.06-2.72-11.26-5.17-13.87,1.61-3,7.79-2.52,17.21,5.06,22.25,19.8,13.14,19.29,33.56,21.09,53.42.51,5.59-.8,10.64-7.13,10.38-17.12-.7-32.15,7.71-48.49,10.18-13.21,2.25-24.44,8.8-35.19,16.32-19,13.3-21.69,24.74-7.62,43.76,28.18,38.07,86.42,71.14,145.09,52.67,3.65-1.81,9.72-2.51,6.68,3.28a319.56,319.56,0,0,0-44.63,56.44,216,216,0,0,1-41.43,48.38c-12,10.43-25,20.64-41.68,20.62-12.72,0-9.06,6.16-7,12.78.45.75.9,1.5,1.36,2.23,18.93,14.57,37.41,7.82,55-2.15,25.94-14.68,44-37.15,59-62.44,4.34-7.31,10.67-14.09,20-9.78,10.26,4.73,6.27,13.65,3.5,21.4-5,13.91-8.53,28.25-13,42.3-6.42,20.09-6.17,20.54-27.12,20.22-38.27-.57-76.34,3.3-114.49,5.12-10.59.51-20.71,4.92-30.4.43-3.78-.44-6-1.64-10-1.08L825.69,893l-241.8,52.44C431.13,989.19,286.74,1051,154,1139.2c48.91-17.47,99.76-24.69,151-28.33,153-10.87,305.46-.08,457.76,14.14,88.32,8.25,176.21,20,264.19,31.22,92.37,11.76,185.14,19.42,278.17,24.2,152.41,7.82,304.47,7.77,455.49-18,28.78-4.92,57.58-10.64,85.34-22.19C1844.26,1138,1843.77,1136.94,1842.93,1136.44ZM1019,708.88c-33.61-3.52-60-25.37-81.14-55-5.74-8-2.12-14.13,6.1-18.48,27.74-14.67,57.41-9.12,78.42,14,8.22,9.05,14.34,19.21,19.71,29.92C1053.71,702.41,1049.4,709.08,1019,708.88Zm90.41,182.79c-10.91-.71-21.81-1.62-32.73-1.95-7.24-.22-11.69-1.08-8.24-10.28,7.1-18.91,13.08-38.23,22.91-56.05,4.4-8,7.47-12,18.6-6.89,27.57,12.63,57,14.07,86.55,6.86,8.2-2,13.61-2,18.32,7.21,15.42,30.1,32.88,58.95,61,80.49C1220.19,902.87,1165.06,895.27,1109.44,891.67Zm180.94-33.84c-11-15.5-19.85-32.58-29.71-48.92-2.25-3.72-5.48-7.11.92-10.36,39.32-20,74.9-47.31,118.18-59.45,50.12-14.06,92.2-2.38,120.9,33.74,32.31,40.65,21.68,91.48-23.75,116.41a181.16,181.16,0,0,1-87.13,23.08C1348.74,912.73,1315.25,892.8,1290.38,857.83Z" />
+        <path class="cls-1" d="M980.88,518.17c-4.44.94-10.55-1.91-12.63,4.57-2,6.16-.85,13.28,4.21,16.5,21.26,13.56,20,35.6,23.11,56.31.86,5.83,0,11.43-5.56,11.34-18.19-.27-34.35,10-52.47,9.12,8-6.6,18-6.91,27.45-9.09,6.24-1.45,10.37-3.06,5.94-10.65-7.71-13.19-15.61-26.26-25.67-37.81-5.08-5.83-11.44-9.91-19.52-10.78-3.21-.34-6.69-.75-9.47-2.23-9.36-5-19.89-13-15.74-23.14,4.47-10.92,16.21-4.24,24.29-.48,1.94.9,3.82,1.85,5.65,2.83,26.39,14.17,42,36.72,47.1,67.05.83,4.87.91,12,9.66,11.27,8.3-.7,5.58-7.29,5.48-12.36-.36-17.78-4.2-34.94-21.38-45.89-6.7-4.27-7-12.07-7.6-19.07-.41-4.63-2.1-10.48,3.47-13.16C973.25,509.59,977.49,513.42,980.88,518.17Z" />
+        <path class="cls-1" d="M911.72,870.26l-.15-.34" />
+        <path class="cls-1" d="M966.45,606.56c-43.25,8.31-64.1,25.77-64.1,25.77l16.36,2.26S1009.71,598.25,966.45,606.56Z" />
+        <polyline class="cls-1" points="971.15 568.94 977.75 593.4 979.7 602.27 974.33 577.83" />
+        <path class="cls-1" d="M949.75,538.2s20.28,17.72,26,45.89,4.15,10.16,4,19.83" />
+        <path class="cls-1" d="M977.57,591.71s1,10.72,4.48,11.63l-1.45,4.27-5.17-5.34V591.71Z" />
+        <path class="cls-1" d="M941.75,612.89s18.87-5.36,24.7-6.33" />
+        <circle class="cls-1" cx="1003.13" cy="668.1" r="14.75" />
+        <path class="cls-1" d="M970,605.33C919.63,614.74,896.25,637,896.25,637l64.46-15.85Z" />
+        <path class="cls-1" d="M955,543.62s20.42,19.08,27,59.72l-3.31,12.72-3.31-24.35Z" />
+        <polygon class="cls-1" points="1383.58 935.84 1410.5 931.41 1451.67 921.8 1440.96 913.92 1379.96 919.92 1383.58 935.84" />
+        <path class="cls-1" d="M664.54,735.56l30.58-4.25L763,812.38l-20.92,149-38.93,10.9s-81.19-128.45-86-137.89c13-27.35,47.38-98.83,47.38-98.83Zm0,0" />
+        <path class="cls-1" d="M664.54,735.56l30.58-4.25L763,812.38s-141,31.44-145.84,22c13-27.34,47.35-98.82,47.35-98.82Zm0,0" />
+        <path class="cls-1" d="M659.65,839.11l37.43,90.09-14.54,2.48-65.37-97.29Zm-3.93-1.53" />
+        <path class="cls-1" d="M589.5,877l-22.86,74.61,86.67,62.81,27-3.75,25.32-15.74L661.34,878Zm207,42.64,54.2-15,39.7,31-25.58,28-63.11-6.51Zm0,0" />
+        <path class="cls-1" d="M714.51,827.71,763,812.39l-20.9,154.48-16.92-.75Zm2.33-2.83" />
+        <path class="cls-1" d="M731.37,998.22l18.09,8.45,17.93-.22,22.55-12.13,31.93-109.65-32.66-70.45-74.86,45.42Zm0,0" />
+        <path class="cls-1" d="M789.7,870.92l32.17,13.75L789.94,994.32l-22.55,12.13Zm0,0" />
+        <path class="cls-1" d="M845.46,942.25l44.92-6.64-25.58,28-62.69-3.5,1.4-12.43Zm0,0" />
+        <path class="cls-1" d="M661.34,878l62.91,53.44,6.19,60.07-24.84,3.45Zm0,0" />
+        <path class="cls-1" d="M566.64,951.61,611,945.44l63,66.1-20.72,2.88Zm0,0" />
+        <path class="cls-1" d="M659.85,744.7,668.3,749l-8.65,90.09-42.48-4.72Zm0,0" />
+        <path class="cls-1" d="M714.35,859.64l30.8,10.61,4.31,136.42-18.09-8.45Zm0,0" />
+        <path class="cls-1" d="M661.34,878l-8.73,40.29,36.61,86.85,16.38-10.18Zm0,0" />
+        <path class="cls-1" d="M589.5,877l63.11,41.26L611,945.44Zm0,0" />
+        <path class="cls-1" d="M701.48,738.91l-9.08,8.55,22.11,80.25L763,812.39Zm0,0" />
+        <path class="cls-1" d="M668.3,749l24.1-1.56,22.11,80.25-54.86,11.4Zm0,0" />
+        <path class="cls-1" d="M789.21,814.22l-74.86,45.42,30.8,10.61Zm0,0" />
+        <polyline class="cls-1" points="789.7 870.92 821.87 884.66 789.21 814.22" />
+        <path class="cls-1" d="M789.21,814.22l.49,56.7-44.55-.67Zm0,0" />
+        <rect class="cls-1" x="603.16" y="676.52" width="87.51" height="6.86" rx="3.43" ry="3.43" transform="translate(1000.58 -189.39) rotate(65.71)" />
+        <rect class="cls-1" x="770.86" y="721.42" width="92.79" height="8.22" rx="4.11" ry="4.11" transform="translate(1887.22 503.1) rotate(126.66)" />
+        <rect class="cls-1" x="846.06" y="812.13" width="88.63" height="8.22" rx="4.11" ry="4.11" transform="translate(2037.7 1193.99) rotate(155.71)" />
+        <rect class="cls-1" x="855.87" y="874.25" width="53.98" height="9.45" rx="4.72" ry="4.72" transform="translate(1978.69 1471.59) rotate(163.53)" />
+        <rect class="cls-1" x="513.42" y="749.23" width="87.51" height="6.86" rx="3.43" ry="3.43" transform="translate(559.58 -183.79) rotate(36.66)" />
+        <rect class="cls-1" x="468.27" y="859.27" width="90.17" height="8.73" rx="3.43" ry="3.43" transform="translate(63.84 -34.88) rotate(4.15)" />
+        <rect class="cls-1" x="504.26" y="925.72" width="47.73" height="6.86" rx="3.43" ry="3.43" transform="translate(-116 76.31) rotate(-7.45)" />
+        <rect class="cls-1" x="522.85" y="808.69" width="47.73" height="6.86" rx="3.43" ry="3.43" transform="translate(342.65 -145.38) rotate(21.92)" />
+        <rect class="cls-1" x="586.36" y="721.97" width="47.73" height="6.86" rx="3.43" ry="3.43" transform="translate(767.65 -209.37) rotate(49.63)" />
+        <rect class="cls-1" x="680.97" y="678.5" width="47.73" height="6.86" rx="3.43" ry="3.43" transform="translate(1289.64 -105.37) rotate(82.55)" />
+        <rect class="cls-1" x="733" y="713.84" width="49.61" height="6.86" rx="3.43" ry="3.43" transform="translate(1708.52 287.3) rotate(112.24)" />
+        <rect class="cls-1" x="820.17" y="774.95" width="49.61" height="6.86" rx="3.43" ry="3.43" transform="translate(1992.92 824.12) rotate(139.63)" /><text
+          class="cls-2" transform="translate(326.13 1370.81)">D</text><text class="cls-3" transform="translate(517.66 1370.81)">igiccy</text><text
+          class="cls-2" transform="translate(1203.38 1370.81)">A</text><text class="cls-3" transform="translate(1383.06 1370.32)">tm</text>
+        <line class="cls-4" x1="334" y1="1399.99" x2="1666" y2="1399.99" /><text class="cls-5" transform="translate(419.02 1474.74)">ant
+          mine smart machine</text><text class="cls-6" transform="translate(1539.15 1452.09)">TM</text>
+      </svg>
+      <h1>DIGICCY ATM CONSOLE</h1>
 
       <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
         <nz-form-item>
           <nz-form-control>
             <nz-input-group nzPrefixIcon="anticon anticon-user">
-              <input type="text" nz-input formControlName="username" [placeholder]="'login.username' | translate">
+              <input type="text" nz-input [nzSize]="large" formControlName="username" [placeholder]="'login.username' | translate">
             </nz-input-group>
-            <nz-form-explain *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors">{{ 'login.username_input_tip' | translate }}</nz-form-explain>
+            <nz-form-explain *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors">{{
+              'login.username_input_tip' | translate }}</nz-form-explain>
           </nz-form-control>
         </nz-form-item>
+
         <nz-form-item>
           <nz-form-control>
             <nz-input-group nzPrefixIcon="anticon anticon-lock">
-              <input type="password" nz-input formControlName="password" [placeholder]="'login.password' | translate">
+              <input type="password" nz-input [nzSize]="large" formControlName="password" [placeholder]="'login.password' | translate">
             </nz-input-group>
-            <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">{{ 'login.password_input_tip' | translate }}</nz-form-explain>
+            <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">
+              {{ 'login.password_input_tip' | translate }}
+            </nz-form-explain>
           </nz-form-control>
         </nz-form-item>
+
         <nz-form-item>
           <nz-form-control>
-            <button nz-button class="login-form-button" [nzType]="'primary'">{{ 'login.login' | translate }}</button>
+            <div style="width:calc(100% - 84px);float: left;line-height: 32px">
+              <nz-input-group nzPrefixIcon="anticon anticon-edit">
+                <input type="text" id="captcha" [nzSize]="large" nz-input formControlName="captcha" [placeholder]="'login.code' | translate"
+                  AUTOCOMPLETE="off">
+              </nz-input-group>
+            </div>
+            <div style="width:80px;float: right;line-height: 32px;background: white;" (click)="refresh()">
+              <img [src]='codeImg'/>
+            </div>
+            <nz-form-explain *ngIf="validateForm.get('captcha').dirty && validateForm.get('captcha').errors">{{
+              'login.code_input_tip' | translate }}</nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item style="margin: 0">
+          <nz-form-control>
+            <button nz-button class="login-form-button" style="width:100%" [nzType]="'primary'">{{ 'login.login' |
+              translate }}</button>
           </nz-form-control>
         </nz-form-item>
       </form>
+    </div>
+    <div nz-col nzSpan="24" style="text-align:center;width:100vw;position: absolute; bottom: 0;">
+      <p>广州蚁矿智能装备有限公司Guangzhou Ant Mine Smart Machine Co.,Ltd- 版权所有2018</p>
     </div>
   </div>
 </div>

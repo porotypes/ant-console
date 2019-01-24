@@ -11,6 +11,7 @@ import { CompanyService } from '../../core/system/company.service';
 import { AccountService } from '../../core/system/account.service';
 import { LanguageService } from '../../core/language.service';
 import { AuthService } from '../../core/auth/auth.service';
+import { LoginService } from '../../core/auth/login.service';
 
 import { HttpResponseData } from 'src/app/common/http-response-data';
 import { Pagination } from '../../common/pagination';
@@ -32,6 +33,7 @@ export class AccountFormComponent implements OnInit {
   companies: Company[];
   roles: Role[];
   isSaving = false;
+  isAdd = true;
 
   constructor(
     private fb: FormBuilder,
@@ -42,7 +44,8 @@ export class AccountFormComponent implements OnInit {
     private route: ActivatedRoute,
     public authService: AuthService,
     private router: Router,
-    private languageService: LanguageService
+    private loginService: LoginService,
+    private languageService: LanguageService,
   ) { }
 
   private createForm() {
@@ -69,6 +72,7 @@ export class AccountFormComponent implements OnInit {
     this.currentAccountId = this.route.params['value'].id;
     if (this.currentAccountId) {
       this.getAccount();
+      this.isAdd = false;
     }
   }
 
@@ -82,6 +86,9 @@ export class AccountFormComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -92,6 +99,7 @@ export class AccountFormComponent implements OnInit {
   }
 
   getAllCompanies() {
+    if (!this.authService.isAdmin()) { return; }
     this.pagination.size = 9999999;
     this.companyService.getCompanyList(this.pagination).subscribe(
       (res: HttpResponseData<Pagination<Company>>) => {
@@ -102,6 +110,9 @@ export class AccountFormComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -122,6 +133,9 @@ export class AccountFormComponent implements OnInit {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -171,6 +185,9 @@ export class AccountFormComponent implements OnInit {
         },
         error => {
           this.isSaving = false;
+          if (error.error.status === 401) {
+            this.loginService.loginOut();
+          }
           if (this.languageService.currentLang === 'zh_CN') {
             this.messageService.error(error.error.msg || '响应超时！');
           } else {
@@ -181,8 +198,8 @@ export class AccountFormComponent implements OnInit {
     } else {
       for (const i in this.accountForm.controls) {
         if (this.accountForm.controls.hasOwnProperty(i)) {
-          this.accountForm.controls[ i ].markAsDirty();
-          this.accountForm.controls[ i ].updateValueAndValidity();
+          this.accountForm.controls[i].markAsDirty();
+          this.accountForm.controls[i].updateValueAndValidity();
         }
       }
     }
@@ -203,6 +220,9 @@ export class AccountFormComponent implements OnInit {
         },
         error => {
           this.isSaving = false;
+          if (error.error.status === 401) {
+            this.loginService.loginOut();
+          }
           if (this.languageService.currentLang === 'zh_CN') {
             this.messageService.error(error.error.msg || '响应超时！');
           } else {
@@ -213,8 +233,8 @@ export class AccountFormComponent implements OnInit {
     } else {
       for (const i in this.accountForm.controls) {
         if (this.accountForm.controls.hasOwnProperty(i)) {
-          this.accountForm.controls[ i ].markAsDirty();
-          this.accountForm.controls[ i ].updateValueAndValidity();
+          this.accountForm.controls[i].markAsDirty();
+          this.accountForm.controls[i].updateValueAndValidity();
         }
       }
     }

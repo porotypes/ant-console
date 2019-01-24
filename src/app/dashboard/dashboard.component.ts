@@ -31,6 +31,8 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   langSub: any;
   timer: any;
   selectedLanguage = 'zh_CN';
+  username: string;
+  binding: string;
 
   get loginStatus(): boolean {
     return this.storageService.hasStorage('USER_TOKEN')
@@ -46,7 +48,7 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
     private router: Router,
     private chatInformationService: ChatInformationService,
     private languageService: LanguageService
-  ) {}
+  ) { }
 
   createForm() {
     this.changePswForm = this.fb.group({
@@ -57,8 +59,10 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngOnInit() {
     this.createForm();
-    this.getUnreadChatInformationNum();
-    this.selectedLanguage = this.storageService.readStorage('language');
+    if (this.authService.isCanShowChatReceiveList()) {
+      this.getUnreadChatInformationNum();
+    }
+    this.selectedLanguage = this.storageService.readStorage('language') || 'zh_CN';
     this.sub = this.chatInformationService.getList.subscribe((total: number) => {
       this.getUnreadChatInformationNum();
     });
@@ -70,6 +74,7 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
   ngAfterContentInit() {
     if (this.storageService.hasStorage('USER_TOKEN')) {
       this.authService.user = this.authService.decodeToken();
+      this.username = this.authService.user['nickname'] || this.authService.user['username'];
     } else {
       this.router.navigate(['/login']);
     }
@@ -95,6 +100,9 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
         }
       },
       error => {
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {
@@ -138,6 +146,9 @@ export class DashboardComponent implements OnInit, AfterContentInit, OnDestroy {
       },
       error => {
         this.isSaving = false;
+        if (error.error.status === 401) {
+          this.loginService.loginOut();
+        }
         if (this.languageService.currentLang === 'zh_CN') {
           this.messageService.error(error.error.msg || '响应超时！');
         } else {

@@ -20,4 +20,9 @@ export class TradingRecordService extends HttpService<HttpResponseData<Paginatio
     return super.download(url, pagination);
   }
 
+  getStatus(id: number) {
+    const url = `${this.URL}/transactionFailed/${id}`;
+    return super.get(url);
+  }
+
 }

@@ -1,5 +1,5 @@
 {
-  "system_title": "ATM-CONSOLE",
+  "system_title": "Digiccy ATM CONSOLE",
   "edit_password": "change password",
   "old_password": "old password",
   "old_password_tip": "Please input old password!",
@@ -14,6 +14,7 @@
   "search": "search",
   "operation": "operation",
   "login_out": "login out",
+  "action": "action",
   "menu": {
     "equipment": {
       "equipment_management": "management",
@@ -29,6 +30,7 @@
       "statistics": "statistics",
       "equipment_statistics": "equipment",
       "company_statistics": "company",
+      "asset_statistics": "asset statistics",
       "fault_statistics": "fault"
     },
     "setting": {
@@ -43,18 +45,31 @@
     "username": "username",
     "username_input_tip": "Please input your username!",
     "password": "password",
+    "code": "captcha",
     "password_input_tip": "Please input your password!",
+    "code_input_tip": "Please input your captcha!",
     "login": "log in"
   },
   "trading": {
     "transaction_flow_number": "transaction flow number",
     "export_excel": "export excel",
     "equipment_id": "equipment id",
+    "coin_type": "coin type",
     "number_of_transaction": "number of transaction",
     "transaction_currency": "transaction currency",
     "transaction_amount": "transaction amount($)",
     "transaction_type": "transaction type",
-    "transaction_time": "transaction time"
+    "fee": "service charge",
+    "transaction_time": "transaction time",
+    "status": "status",
+    "failed": {
+      "id": "ID",
+      "msg": "msg",
+      "address": "Address",
+      "amount": "Amount",
+      "coinType": "Coin Type",
+      "failedTime": "Failed Time"
+    }
   },
   "account": {
     "login_name": "login name",
@@ -87,7 +102,7 @@
     "email_tip": "Please input company email!",
     "port": "port",
     "port_tip": "Please input company port!",
-    "delete_company_tip": "Make sure to delete the company?"
+    "delete_company_tip": "Make sure to delete the company and its account?"
   },
   "custom_service": {
     "contact_customer_service": "contact customer service",
@@ -105,6 +120,33 @@
     "create_role": "create role",
     "delete_role_tip": "Make sure to delete the role?"
   },
+  "exchange": {
+    "assets": "assets",
+    "transaction": "transaction",
+    "transactions": {
+      "id": "ID",
+      "fieldAmount": "field amount",
+      "amount": "amount",
+      "type": "type",
+      "finishedAt": "finished at",
+      "state": "state"
+    },
+    "symbol": "symbol",
+    "balance": "balance",
+    "state": "state",
+    "type": "type",
+    "withdrawals": "withdrawals",
+    "buy": "buy",
+    "sell": "sell",
+    "extract": "extract",
+    "search": "search",
+    "cancel": "cancel",
+    "numberOfFinds": "Please enter the number of finds",
+    "enterStartId": "Please enter the starting id",
+    "walletAddress": "Please enter the wallet to extract the address",
+    "selectCurrency": "Please select the transaction currency",
+    "enterNumber": "Please enter the number of transactions"
+  },
   "statistics": {
     "company": {
       "date_rang": "date rang",
@@ -118,15 +160,34 @@
       "transaction_num": "transaction num",
       "currency_type": "currency type",
       "transaction_amount": "transaction amount",
+      "fee": "service charge",
       "unlimited": "unlimited"
     },
+    "asset": {
+      "titleStatistics": "Statistics log",
+      "titleWdrawals": "Wdrawals log",
+      "currency": "currency",
+      "start_id": "start id",
+      "size": "size",
+      "id": "ID",
+      "address": "address",
+      "amount": "amount",
+      "created_at": "created_at",
+      "fee": "fee",
+      "state": "state",
+      "type": "type",
+      "updated_at": "update at"
+    },
     "fault": {
+      "fault_list": "fault list",
       "search_type": "search type",
       "query_by_device": "query by device",
       "query_by_company": "query by company",
       "company": "company name",
       "equipment_type": "equipment type",
-      "error_count": "error count"
+      "status_code": "status code",
+      "error_count": "error count",
+      "receive_time": "receive time"
     }
   },
   "equipment": {

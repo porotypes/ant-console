@@ -25,6 +25,9 @@ export class AppComponent implements OnInit, OnDestroy {
     translate.addLangs(['zh_CN', 'en-US']);
     translate.setDefaultLang('zh_CN');
     translate.use('zh_CN');
+    if (!this.storageService.readStorage('language')) {
+      this.storageService.writeStorage('language', 'zh_CN');
+    }
   }
 
   ngOnInit() {
